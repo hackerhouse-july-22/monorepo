@@ -1,0 +1,5 @@
+@openzeppelin/=../../node_modules/@openzeppelin/
+forge-std/=lib/forge-std/src/
+ds-test=lib/ds-test/src/
+gnosis-safe=lib/gnosis-safe/
+zodiac-guard-scope=lib/zodiac-guard-scope/contracts
