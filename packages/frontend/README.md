@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# monolith
 
-## Getting Started
+This node web server is bundled with Next.JS and accomplishes almost all web2 functions.
 
-First, run the development server:
+## development
 
-```bash
-npm run dev
-# or
-yarn dev
+Ensure you have Node 14+, docker, and yarn installed. Then run
+
+```sh
+~/path/to/monorepo > yarn
+~/path/to/monorepo > yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+It is important that you run this in the root. This ensures the local database instance is started as well.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Adding a dependency
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```sh
+monorepo/packages/frontend > yarn add dependency
+monorepo/packages/frontend > yarn add -D dependency # for dev dependencies
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Pay attention to any errors yarn throws.
 
-## Learn More
+### Prisma
 
-To learn more about Next.js, take a look at the following resources:
+To mess with our database in a gui, run
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+yarn prisma studio
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+After modifying the prima schema, be sure to run
 
-## Deploy on Vercel
+```sh
+yarn prisma generate
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
