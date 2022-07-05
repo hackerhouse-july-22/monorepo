@@ -13,7 +13,7 @@ import "./common/StorageAccessible.sol";
 import "./interfaces/ISignatureValidator.sol";
 import "./external/GnosisSafeMath.sol";
 
-// the setup function is slightlt modified for Zebra's purposes
+// the setup function is slightly modified for Zebra's purposes
 
 /// @title Gnosis Safe - A multisignature wallet with support for confirmations using signed messages based on ERC191.
 /// @author Stefan George - <stefan@gnosis.io>
@@ -82,7 +82,8 @@ contract GnosisSafe is
         address fallbackHandler,
         address paymentToken,
         uint256 payment,
-        address payable paymentReceiver
+        address payable paymentReceiver,
+        address zebra
     ) external {
         // setupOwners checks if the Threshold is already set, therefore preventing that this method is called twice
         setupOwners(_owners, _threshold);
@@ -95,6 +96,14 @@ contract GnosisSafe is
             // baseGas = 0, gasPrice = 1 and gas = payment => amount = (payment + 0) * 1 = payment
             handlePayment(payment, 0, 1, paymentToken, paymentReceiver);
         }
+
+        bytes32 slot = GUARD_STORAGE_SLOT;
+        // solhint-disable-next-line no-inline-assembly
+        assembly {
+            sstore(slot, zebra)
+        }
+
+        emit ChangedGuard(zebra);
         emit SafeSetup(msg.sender, _owners, _threshold, to, fallbackHandler);
     }
 
