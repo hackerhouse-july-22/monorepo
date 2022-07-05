@@ -5209,38 +5209,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"frontend@workspace:packages/frontend":
-  version: 0.0.0-use.local
-  resolution: "frontend@workspace:packages/frontend"
-  dependencies:
-    "@chakra-ui/react": ^2.2.1
-    "@coinbase/wallet-sdk": ^3.3.0
-    "@emotion/react": ^11.9.3
-    "@emotion/styled": ^11.9.3
-    "@fortawesome/fontawesome-svg-core": ^6.1.1
-    "@fortawesome/free-solid-svg-icons": ^6.1.1
-    "@fortawesome/react-fontawesome": ^0.2.0
-    "@metamask/jazzicon": ^2.0.0
-    "@thirdweb-dev/react": ^2.4.7
-    "@thirdweb-dev/sdk": ^2.3.23
-    "@types/node": 18.0.0
-    "@types/react": 18.0.14
-    "@types/react-dom": 18.0.5
-    "@walletconnect/web3-provider": ^1.7.8
-    eslint: 8.18.0
-    eslint-config-next: 12.2.0
-    ethers: ^5.6.9
-    framer-motion: ^6.4.1
-    next: 12.2.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    sass: ^1.53.0
-    typescript: 4.7.4
-    wagmi: ^0.5.6
-    web3modal: ^1.9.8
-  languageName: unknown
-  linkType: soft
-
 "fs-minipass@npm:^2.0.0, fs-minipass@npm:^2.1.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -6642,6 +6610,38 @@ __metadata:
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
   languageName: node
   linkType: hard
+
+"monolith@workspace:packages/monolith":
+  version: 0.0.0-use.local
+  resolution: "monolith@workspace:packages/monolith"
+  dependencies:
+    "@chakra-ui/react": ^2.2.1
+    "@coinbase/wallet-sdk": ^3.3.0
+    "@emotion/react": ^11.9.3
+    "@emotion/styled": ^11.9.3
+    "@fortawesome/fontawesome-svg-core": ^6.1.1
+    "@fortawesome/free-solid-svg-icons": ^6.1.1
+    "@fortawesome/react-fontawesome": ^0.2.0
+    "@metamask/jazzicon": ^2.0.0
+    "@thirdweb-dev/react": ^2.4.7
+    "@thirdweb-dev/sdk": ^2.3.23
+    "@types/node": 18.0.0
+    "@types/react": 18.0.14
+    "@types/react-dom": 18.0.5
+    "@walletconnect/web3-provider": ^1.7.8
+    eslint: 8.18.0
+    eslint-config-next: 12.2.0
+    ethers: ^5.6.9
+    framer-motion: ^6.4.1
+    next: 12.2.0
+    react: 18.2.0
+    react-dom: 18.2.0
+    sass: ^1.53.0
+    typescript: 4.7.4
+    wagmi: ^0.5.6
+    web3modal: ^1.9.8
+  languageName: unknown
+  linkType: soft
 
 "monorepo@workspace:.":
   version: 0.0.0-use.local
