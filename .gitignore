@@ -15,3 +15,5 @@ node_modules
 #.pnp.*
 
 out
+packages/contracts/cache
+packages/contracts/cache/solidity-files-cache.json

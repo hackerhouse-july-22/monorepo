@@ -1,0 +1,4 @@
+@openzeppelin/=node_modules/@openzeppelin/
+forge-std/=packages/contracts/lib/forge-std/src/
+ds-test=packages/contracts/lib/ds-test/src/
+zodiac-guard-scope=packages/contracts/lib/zodiac-guard-scope/contracts

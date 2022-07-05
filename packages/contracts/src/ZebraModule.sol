@@ -2,7 +2,7 @@
 pragma solidity 0.8.15;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "gnosis-safe/common/Enum.sol";
+import "./gnosis-safe/common/Enum.sol";
 
 interface IGnosisSafe {
     /// @dev Allows a Module to execute a Safe transaction without any further confirmations.

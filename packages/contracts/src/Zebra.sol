@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED   
 pragma solidity 0.8.15;
 
-import "gnosis-safe/base/GuardManager.sol";
-import "gnosis-safe/base/ModuleManager.sol";
-import "gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
-import "gnosis-safe/GnosisSafe.sol";
+import "./gnosis-safe/base/GuardManager.sol";
+import "./gnosis-safe/base/ModuleManager.sol";
+import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
+import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
 error UnauthorizedGuardOrModuleUpdate();
@@ -84,4 +84,9 @@ contract Zebra is BaseGuard {
     }
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
+
+    fallback() external {
+        // We don't revert on fallback to avoid issues in case of a Safe upgrade
+        // E.g. The expected check method might change and then the Safe would be locked.
+    }
 }
