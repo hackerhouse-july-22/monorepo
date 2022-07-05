@@ -41,10 +41,11 @@ contract DeployTest is Test {
     function testSafeExecTx() public {
         bytes memory emptyBytes;
         RandoContract rando = new RandoContract();
+        bytes32 owner32 = bytes32(bytes.concat(bytes12(emptyBytes),bytes20(address(owner))));
         bytes memory signature = bytes.concat(
-            bytes32(abi.encodePacked(owner)),
-            bytes32(uint256(1)),
-            bytes1(uint8(1))
+            owner32,             // r
+            bytes32(uint256(1)), // s
+            bytes1(uint8(1))     // v
         );
         bytes32 txHash = GnosisSafe(payable(proxy)).getTransactionHash(
             address(rando),

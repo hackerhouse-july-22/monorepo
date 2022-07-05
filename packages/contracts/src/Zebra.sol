@@ -7,11 +7,13 @@ import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
+import "forge-std/Test.sol";
+
 error UnauthorizedGuardOrModuleUpdate();
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @author tobou.eth
-contract Zebra is BaseGuard {
+contract Zebra is BaseGuard, Test {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
 
     GnosisSafe immutable ZEBRA_SAFE_SINGLETON;
@@ -71,8 +73,12 @@ contract Zebra is BaseGuard {
         address payable refundReceiver,
         bytes memory signatures,
         address msgSender
-    ) external {
+    ) external view {
+        console.log("bef");
         (bytes4 selector, ) = abi.decode(data, (bytes4, bytes));
+
+        console.log("aft");
+        // console.log(selector);
 
         // disallow modification of guard or module (could result in asset theft)
         if (to == msg.sender && (

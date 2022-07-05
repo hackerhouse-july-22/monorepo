@@ -181,8 +181,8 @@
       }
     },
     "packages/contracts/lib/forge-std/src/Test.sol": {
-      "lastModificationDate": 1656947033143,
-      "contentHash": "1a62a754b8afb18c5cf88e481f70bd3d",
+      "lastModificationDate": 1657044295447,
+      "contentHash": "adda574ef53cb30afda008ea43fbb506",
       "sourceName": "packages/contracts/lib/forge-std/src/Test.sol",
       "solcConfig": {
         "settings": {
@@ -360,8 +360,8 @@
       }
     },
     "packages/contracts/src/Zebra.sol": {
-      "lastModificationDate": 1657037450751,
-      "contentHash": "a25da96e0c672052ca3a9e7c8867ccba",
+      "lastModificationDate": 1657046067724,
+      "contentHash": "0496bb175321f2265cab370e382709dc",
       "sourceName": "packages/contracts/src/Zebra.sol",
       "solcConfig": {
         "settings": {
@@ -395,6 +395,12 @@
       "imports": [
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/ds-test/src/test.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Test.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
@@ -2131,8 +2137,8 @@
       }
     },
     "packages/contracts/src/test/DeployTest.sol": {
-      "lastModificationDate": 1657043998860,
-      "contentHash": "6b2e80590ab427f908c7c749b2e6a1ba",
+      "lastModificationDate": 1657045922117,
+      "contentHash": "63a50354f5e3186f7b8b698017e226f8",
       "sourceName": "packages/contracts/src/test/DeployTest.sol",
       "solcConfig": {
         "settings": {
