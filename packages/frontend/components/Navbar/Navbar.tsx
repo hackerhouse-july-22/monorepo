@@ -12,6 +12,7 @@ import {
 // import UserSidebar from "../UserSidebar";
 // import ConnectModal from "../ConnectModal";
 // import ConnectButton from "../ConnectButton";
+import ConnectButton from "../ConnectButton/ConnectButton";
 
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ const Navbar = () => (
       <Link href="/">
         {/* <TeamIcon w={20} h="auto" color="white" />
          */}
-         <p>FILL ZEBRA</p>
+         <p>ZEBRA</p>
       </Link>
       <Box placeSelf="center">
         {/* <LinkButton
@@ -47,9 +48,7 @@ const Navbar = () => (
         </LinkButton> */}
       </Box>
       <HStack alignItems="center" justifyContent="flex-end">
-        {/* <MockCountryPicker h="20px" w="68px" margin="18px" />
-        <ConnectButton /> */}
-        <p>CONNECT BUTTON HERE</p>
+        <ConnectButton />
       </HStack>
     </Grid>
   </>

@@ -4,5 +4,8 @@
   "private": true,
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "resolutions": {
+    "eth-sig-util": "3.0.1"
+  }
 }
