@@ -7,7 +7,11 @@ import "../gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "../Zebra.sol";
 
 contract RandoContract {
-    function doSomething() public {}
+    bool public somethingHasBeenDone;
+
+    function doSomething() public {
+        somethingHasBeenDone = true;
+    }
 }
 
 /// @notice will create valid signatures as owner of the safe
@@ -41,6 +45,13 @@ contract DeployTest is Test {
     function testSafeExecTx() public {
         bytes memory emptyBytes;
         RandoContract rando = new RandoContract();
+        bytes memory randoCall = abi.encodeWithSelector(RandoContract.doSomething.selector, emptyBytes);
+        execCall(address(rando), randoCall);
+        require(rando.somethingHasBeenDone(), "nothing has been done :(");
+    }
+
+    function execCall(address to, bytes memory call) internal {
+        bytes memory emptyBytes;
         bytes32 owner32 = bytes32(bytes.concat(bytes12(emptyBytes),bytes20(address(owner))));
         bytes memory signature = bytes.concat(
             owner32,             // r
@@ -48,9 +59,9 @@ contract DeployTest is Test {
             bytes1(uint8(1))     // v
         );
         bytes32 txHash = GnosisSafe(payable(proxy)).getTransactionHash(
-            address(rando),
+            to,
             0, 
-            emptyBytes,
+            call,
             Enum.Operation.Call,
             0, 
             0, 
@@ -62,9 +73,9 @@ contract DeployTest is Test {
         GnosisSafe(payable(proxy)).approveHash(txHash);
         vm.prank(address(owner));
         GnosisSafe(payable(proxy)).execTransaction(
-            address(rando),
+            to,
             0, 
-            emptyBytes,
+            call,          /// @param data Data payload of Safe transaction.
             Enum.Operation.Call,
             0, 
             0, 
