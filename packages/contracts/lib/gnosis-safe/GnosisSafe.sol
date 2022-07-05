@@ -74,6 +74,8 @@ contract GnosisSafe is
     /// @param paymentToken Token that should be used for the payment (0 is ETH)
     /// @param payment Value that should be paid
     /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
+    /// @param zebra main zebra protocol contract
+    /// @param zebraModule zebra module used to keep token allowance
     function setup(
         address[] calldata _owners,
         uint256 _threshold,
@@ -83,7 +85,8 @@ contract GnosisSafe is
         address paymentToken,
         uint256 payment,
         address payable paymentReceiver,
-        address zebra
+        address zebra,
+        address zebraModule
     ) external {
         // setupOwners checks if the Threshold is already set, therefore preventing that this method is called twice
         setupOwners(_owners, _threshold);
@@ -97,13 +100,19 @@ contract GnosisSafe is
             handlePayment(payment, 0, 1, paymentToken, paymentReceiver);
         }
 
+        // setGuard
         bytes32 slot = GUARD_STORAGE_SLOT;
         // solhint-disable-next-line no-inline-assembly
         assembly {
             sstore(slot, zebra)
         }
-
         emit ChangedGuard(zebra);
+
+        // enableModule
+        modules[zebraModule] = modules[SENTINEL_MODULES];
+        modules[SENTINEL_MODULES] = zebraModule;
+        emit EnabledModule(zebraModule); 
+
         emit SafeSetup(msg.sender, _owners, _threshold, to, fallbackHandler);
     }
 

@@ -3,12 +3,51 @@ pragma solidity 0.8.15;
 
 import "gnosis-safe/base/GuardManager.sol";
 import "gnosis-safe/base/ModuleManager.sol";
+import "gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
+import "gnosis-safe/GnosisSafe.sol";
+import "./ZebraModule.sol";
 
 error UnauthorizedGuardOrModuleUpdate();
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @author tobou.eth
 contract Zebra is BaseGuard {
+    event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
+
+    GnosisSafe immutable ZEBRA_SAFE_SINGLETON;
+    GnosisSafeProxyFactory immutable FACTORY;
+    ZebraModule immutable ZEBRA_MODULE;
+
+    mapping(GnosisSafeProxy => bool) isZebraAllowed;
+
+    constructor(GnosisSafeProxyFactory factory) {
+        ZEBRA_SAFE_SINGLETON = new GnosisSafe();
+        FACTORY = factory;
+        ZEBRA_MODULE = new ZebraModule();
+    }
+
+    /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
+    function createZebraSafe() external returns(GnosisSafeProxy safe) {
+        bytes memory emptyData;
+        address[] memory owners = new address[](1);
+        owners[0] = msg.sender;
+        bytes memory data = abi.encodeWithSelector(GnosisSafe.setup.selector, 
+            owners,                  /// @param _owners List of Safe owners.
+            1,                       /// @param _threshold Number of required confirmations for a Safe transaction.
+            address(0),              /// @param to Contract address for optional delegate call.
+            emptyData,               /// @param data Data payload for optional delegate call.
+            address(0),              /// @param fallbackHandler Handler for fallback calls to this contract
+            address(0),              /// @param paymentToken Token that should be used for the payment (0 is ETH)
+            0,                       /// @param payment Value that should be paid
+            address(0),              /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
+            address(this),           /// @param zebra main zebra protocol contract
+            address(ZEBRA_MODULE));  /// @param zebraModule zebra module used to keep token allowance
+        safe = FACTORY.createProxy(address(ZEBRA_SAFE_SINGLETON), data);
+        isZebraAllowed[safe] = true;
+
+        emit ZebraSafeDeploy(safe);
+    }
+
     /// @notice called on execTransaction(), enforces the rules of renting
     /// @param to Destination address of Safe transaction.
     /// @param value Ether value of Safe transaction.
