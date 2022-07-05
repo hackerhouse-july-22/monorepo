@@ -3,6 +3,7 @@ pragma solidity 0.8.15;
 
 import "forge-std/Test.sol";
 import "../gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
+import "../gnosis-safe/GnosisSafe.sol";
 
 import "../Zebra.sol";
 
@@ -50,6 +51,26 @@ contract DeployTest is Test {
         require(rando.somethingHasBeenDone(), "nothing has been done :(");
     }
 
+    // should fail due to guard unauthorized ops
+    function testExecTxThatFail() public {
+        bytes memory moduleUpdate = abi.encodeWithSelector(ModuleManager.enableModule.selector, address(1));
+        bytes memory disableModule = abi.encodeWithSelector(ModuleManager.disableModule.selector, address(1), address(2));
+        bytes memory guardUpdate = abi.encodeWithSelector(GuardManager.setGuard.selector, address(1));
+
+        execCallShouldRevert(
+            address(proxy), 
+            moduleUpdate, 
+            UnauthorizedGuardOrModuleUpdate.selector);
+        execCallShouldRevert(
+            address(proxy), 
+            disableModule, 
+            UnauthorizedGuardOrModuleUpdate.selector);
+        execCallShouldRevert(
+            address(proxy), 
+            guardUpdate, 
+            UnauthorizedGuardOrModuleUpdate.selector);
+    }
+ 
     function execCall(address to, bytes memory call) internal {
         bytes memory emptyBytes;
         bytes32 owner32 = bytes32(bytes.concat(bytes12(emptyBytes),bytes20(address(owner))));
@@ -83,5 +104,41 @@ contract DeployTest is Test {
             address(0), 
             payable(0), 
             signature);
+    }
+
+    function execCallShouldRevert(address to, bytes memory call, bytes4 errorSelector) internal {
+        bytes memory emptyBytes;
+        bytes32 owner32 = bytes32(bytes.concat(bytes12(emptyBytes),bytes20(address(owner))));
+        bytes memory signature = bytes.concat(
+            owner32,             // r
+            bytes32(uint256(1)), // s
+            bytes1(uint8(1))     // v
+        );
+        bytes32 txHash = GnosisSafe(payable(proxy)).getTransactionHash(
+            to,
+            0, 
+            call,
+            Enum.Operation.Call,
+            0, 
+            0, 
+            0,
+            address(0), 
+            payable(0),
+            1);
+        vm.startPrank(address(owner));
+        GnosisSafe(payable(proxy)).approveHash(txHash);
+        vm.expectRevert(errorSelector);
+        GnosisSafe(payable(proxy)).execTransaction(
+            to,
+            0, 
+            call,          /// @param data Data payload of Safe transaction.
+            Enum.Operation.Call,
+            0, 
+            0, 
+            0,
+            address(0), 
+            payable(0), 
+            signature);
+        vm.stopPrank();
     }
 }
