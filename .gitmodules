@@ -7,6 +7,3 @@
 [submodule "packages/contracts/lib/zodiac-guard-scope"]
 	path = packages/contracts/lib/zodiac-guard-scope
 	url = git@github.com:gnosis/zodiac-guard-scope.git
-[submodule "packages/contracts/lib/gnosis-safe"]
-	path = packages/contracts/lib/gnosis-safe
-	url = git@github.com:safe-global/safe-contracts.git
