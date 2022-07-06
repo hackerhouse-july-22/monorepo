@@ -2,7 +2,6 @@
 pragma solidity 0.8.15;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "./deps/IWEth.sol";
 import "./gnosis-safe/proxies/GnosisSafeProxy.sol";
@@ -11,36 +10,15 @@ import "./gnosis-safe/base/ModuleManager.sol";
 import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
+import "./utils/Utils.sol";
 
 // dev P2 : 
 // - reduce uint size when possible
 // - handle payment in weth
 
-error UnauthorizedGuardOrModuleUpdate();
-error UnauthorizedDuration(uint256 duration);
-error IncorrectPayment(uint256 payment);
-error UnregisteredRenter(GnosisSafeProxy renter);
-
-/// @notice Offer to rent a NFT to anyone paying upfront in ETH
-/// @dev no supplier param here, use ecrecover to identify the account
-/// @param NFT implementation address
-/// @param tokenId identifies the NFT
-/// @param pricePerSecond ETH amount to pay for each second rented, in wei
-/// @param maxRentalDuration asset cannot be rented for longer in one go, in seconds
-/// @param nonce used to manage offer list update, has to equal supplier's current nonce for the offer to be valid
-struct Offer {
-    IERC721 NFT;
-    uint256 tokenId;
-    uint256 pricePerSecond;
-    uint256 maxRentalDuration;
-    uint256 nonce;
-}
-
-bytes32 constant OfferStructHash = keccak256("Offer(address NFT,uint256 tokenId,uint256 pricePerSecond,uint256 maxRentalDuration,uint256 nonce)");
-
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @author tobou.eth
-contract Zebra is BaseGuard, EIP712, ReentrancyGuard {
+contract Zebra is BaseGuard, ReentrancyGuard, Utils {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
 
     GnosisSafe immutable ZEBRA_SAFE_SINGLETON;
@@ -50,16 +28,18 @@ contract Zebra is BaseGuard, EIP712, ReentrancyGuard {
 
     // config
     uint256 public minRentalDuration;
+    uint256 public minRentalPricePerSecond;
 
     mapping(GnosisSafeProxy => bool) isZebraRegistered;
 
     /// @param WEth WETH9-like contract for the chain deployed on
-    constructor(GnosisSafeProxyFactory factory, IWEth WEth) EIP712("Zebra", "1.0") {
+    constructor(GnosisSafeProxyFactory factory, IWEth WEth) {
         ZEBRA_SAFE_SINGLETON = new GnosisSafe();
         FACTORY = factory;
         ZEBRA_MODULE = new ZebraModule();
         minRentalDuration = 1 hours;
         WETH = WEth;
+        minRentalPricePerSecond = 57870370370370; // 25cts/day with $MATIC @ 0.5$
     }
 
     /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
@@ -121,6 +101,7 @@ contract Zebra is BaseGuard, EIP712, ReentrancyGuard {
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
 
+
     /// @notice rent an NFT, pay by sending ETH in msg.value
     function rent(
         IERC721 NFT,
@@ -130,10 +111,7 @@ contract Zebra is BaseGuard, EIP712, ReentrancyGuard {
         Offer memory offer,
         bytes memory signature)
     payable external nonReentrant {
-        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(
-            OfferStructHash,
-            offer.NFT, offer.tokenId, offer.pricePerSecond, offer.maxRentalDuration, offer.nonce
-        )));
+        bytes32 digest = getOfferDigest(offer);
         address signer = ECDSA.recover(digest, signature);
         
         if (duration < minRentalDuration || duration > offer.maxRentalDuration) {
@@ -145,7 +123,9 @@ contract Zebra is BaseGuard, EIP712, ReentrancyGuard {
         WETH.deposit{value: msg.value}();
         // gnosis safes are not NFT receivers by default
         NFT.transferFrom(signer, address(safe), tokenId);
+        ZEBRA_MODULE.giveAllowanceToZebra(NFT, tokenId, IGnosisSafe(address(safe)));
 
+        // todo check for nonce
         // todo handle loan register logic
     }
 
