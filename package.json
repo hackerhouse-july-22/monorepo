@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.2.1",
   "private": true,
   "scripts": {
-    "dev": "docker-compose up -d db && yarn workspace frontend run dev"
+    "dev": "docker-compose up -d db && yarn workspace monolith run dev"
   },
   "workspaces": [
     "packages/*"
