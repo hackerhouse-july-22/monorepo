@@ -14,6 +14,8 @@ import "./interfaces/ISignatureValidator.sol";
 import "./external/GnosisSafeMath.sol";
 
 // the setup function is slightly modified for Zebra's purposes
+// dev P2 : 
+// - add on receive NFT hook
 
 /// @title Gnosis Safe - A multisignature wallet with support for confirmations using signed messages based on ERC191.
 /// @author Stefan George - <stefan@gnosis.io>

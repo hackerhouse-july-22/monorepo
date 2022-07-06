@@ -4,6 +4,7 @@ pragma solidity 0.8.15;
 import "forge-std/Test.sol";
 import "../gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "../gnosis-safe/GnosisSafe.sol";
+import "../deps/WEth.sol";
 
 import "../Zebra.sol";
 
@@ -28,6 +29,7 @@ contract DeployTest is Test {
     uint256 constant ownerPrivateKey = 0xA11CE;
     Owner immutable owner;
     GnosisSafeProxyFactory immutable factory;
+    WEth immutable WETH;
     
     GnosisSafeProxy proxy;
     Zebra zebra;
@@ -35,10 +37,11 @@ contract DeployTest is Test {
     constructor() {
         owner = new Owner();
         factory = new GnosisSafeProxyFactory();
+        WETH = new WEth();
     }
 
     function setUp() public {
-        zebra = new Zebra(factory);
+        zebra = new Zebra(factory, WETH);
         vm.prank(address(owner));
         proxy = zebra.createZebraSafe();
     }
