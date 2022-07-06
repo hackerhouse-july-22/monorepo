@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from "apollo-server-micro";
+import { PrismaClient } from "@prisma/client";
 
 const typeDefs = gql`
   type Query {
@@ -15,4 +16,7 @@ const resolvers = {
 export const apolloServer: ApolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: {
+    prisma: new PrismaClient(),
+  },
 });
