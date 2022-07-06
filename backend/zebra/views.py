@@ -51,14 +51,34 @@ class CreateZebraNFTView(APIView):
         maxRentDuration = request.data['maxRentDuration']
         nonce = request.data['nonce']
 
+        rentalContractInstance = sdk.get_contract(nftAddress)
+
+
         signature = request.data['signature']
-        
+
+        # Check if sender signature is valid
         if not recoverAddress(signature, nonce):
             return Response(
                 {"error": "Invalid signature"},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        senderAddress = recoverAddress(signature, nonce)
 
+        # Check if sender is owner of the NFT
+        if not rentalContractInstance.owner_of(tokenId):
+            return Response(
+                {"error": "Sender is not owner of the NFT"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Check if tokenId is approved by the protocol contract
+        # if not zebraContract.call("isApproved", tokenId):
+        # if not zebraContract.call("isApproved", senderAddress):
+        if not zebraContract.call("isApproved", senderAddress, tokenId):
+            return Response(
+                {"error": "TokenId is not approved by the protocol contract"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
 
         try:
