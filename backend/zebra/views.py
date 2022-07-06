@@ -1,4 +1,5 @@
 
+from inspect import signature
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -53,42 +54,51 @@ class CreateZebraNFTView(APIView):
 
         rentalContractInstance = sdk.get_contract(nftAddress)
 
-
+        senderAddress = request.data['senderAddress']
         signature = request.data['signature']
 
         # Check if sender signature is valid
-        if not recoverAddress(signature, nonce):
+        if not recoverAddress(signature, nonce) == senderAddress:
             return Response(
                 {"error": "Invalid signature"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        senderAddress = recoverAddress(signature, nonce)
+        # signer has to be owner of nft
+        # signer has to be approved by the protocol contract
 
         # Check if sender is owner of the NFT
-        if not rentalContractInstance.owner_of(tokenId):
+        if not rentalContractInstance.owner_of(tokenId) == senderAddress:
             return Response(
                 {"error": "Sender is not owner of the NFT"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
-        # Check if tokenId is approved by the protocol contract
-        # if not zebraContract.call("isApproved", tokenId):
-        # if not zebraContract.call("isApproved", senderAddress):
-        if not zebraContract.call("isApproved", senderAddress, tokenId):
+
+        if not rentalContractInstance.is_approved(tokenId) == ZEBRA_PROTOCOL_ADDRESS:
             return Response(
                 {"error": "TokenId is not approved by the protocol contract"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
 
         try:
-            serializer = ZebraNFTSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(
-                    {"message": "ZebraNFT created successfully"},
-                    status=status.HTTP_201_CREATED
-                )
+            zebraNFT = ZebraNFT.objects.create(
+                nftAddress=nftAddress,
+                tokenId=tokenId,
+                pricePerSecond=pricePerSecond,
+                maxRentDuration=maxRentDuration,
+                nonce=nonce,
+            )
+            zebraNFT.save()
+            return Response(
+                {"message": "ZebraNFT created successfully"},
+                status=status.HTTP_201_CREATED
+            )
+            # serializer = ZebraNFTSerializer(data=request.data, partial=True)
+            # if serializer.is_valid():
+            #     serializer.save()
+            #     return Response(
+            #         {"message": "ZebraNFT created successfully"},
+            #         status=status.HTTP_201_CREATED
+            #     )
         except Exception as e:
             return Response(
                 {"error": str(e)},
@@ -118,29 +128,90 @@ class UpdateZebraNFTView(APIView):
     Update a ZebraNFT
     """
     def put(self, request, pk):
-        nft = ZebraNFT.objects.get(pk=pk)
-        serializer = ZebraNFTSerializer(nft, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+
+        nftAddress = request.data['nftAddress']
+        tokenId = request.data['tokenId']
+        pricePerSecond = request.data['pricePerSecond']
+        maxRentDuration = request.data['maxRentDuration']
+        nonce = request.data['nonce']
+
+        senderAddress = request.data['senderAddress']
+        signature = request.data['signature']
+
+        rentalContractInstance = sdk.get_contract(nftAddress)
+
+        if not rentalContractInstance.owner_of(tokenId) == senderAddress:
             return Response(
-                {"message": "NFT updated successfully"},
+                {"error": "Sender is not owner of the NFT"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not rentalContractInstance.is_approved(tokenId) == ZEBRA_PROTOCOL_ADDRESS:
+            return Response(
+                {"error": "TokenId is not approved by the protocol contract"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not ZebraNFT.objects.get(pk=pk).exists():
+            return Response(
+                {"error": "ZebraNFT does not exist"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # grab the nft instance we have stored
+        nft = ZebraNFT.objects.get(pk=pk)
+
+        # if new nonce < old nonce, reject
+        if nonce < nft.nonce:
+            return Response(
+                {"error": "Invalid nonce, too low"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # if new nonce == old nonce, check price
+        if nonce == nft.nonce:
+            if pricePerSecond < nft.pricePerSecond:
+                nft.pricePerSecond = pricePerSecond
+                nft.save()
+                return Response(
+                    {"message": "ZebraNFT updated successfully"},
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    {"error": "New offer too low, old offer kept. Update nonce, or lower the price"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        # if new nonce > old nonce, update all fields
+        if nonce > nft.nonce:
+            nft.nftAddress = nftAddress
+            nft.tokenId = tokenId
+            nft.pricePerSecond = pricePerSecond
+            nft.maxRentDuration = maxRentDuration
+            nft.nonce = nonce
+            nft.save()
+            return Response(
+                {"message": "ZebraNFT updated successfully"},
                 status=status.HTTP_200_OK
             )
-        return Response(
-            {"error": f'NFT update failed {serializer.errors or "error"}'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
 
 class DeleteZebraNFTView(APIView):
     """
-    Delete a ZebraNFT
+    Delete a ZebraNFT. \n
+    Delete operation is 2 steps:
+        1. 
+        2.
     """
     def delete(self, request, pk):
+
+        
+
         try:
             nft = ZebraNFT.objects.get(pk=pk)
         except Exception as e:
             return Response(
-                {"error": str(e)},
+                {"error": f'Issue grabbing NFT instance to be deleted: {str(e)}'},
                 status=status.HTTP_404_NOT_FOUND
             )
         try:    
@@ -152,5 +223,5 @@ class DeleteZebraNFTView(APIView):
         except Exception as e:
             return Response(
                 {"error": f'Unable to delete entry {str(e)}'},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
