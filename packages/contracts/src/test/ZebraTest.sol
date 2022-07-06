@@ -43,11 +43,11 @@ contract MyToken is ERC721, Ownable {
     }
 }
 
-contract ZebraTest is Test, Utils {
+contract ZebraTest is Test {
     uint256 constant alicePrivateKey = 0xA11CE;
+    address immutable alice;
     Owner immutable owner; // treat as EOA
     address NFTHolder;
-    address immutable alice;
     GnosisSafeProxyFactory immutable factory;
     WEth immutable WETH;
     MyToken internal myNFT;
@@ -78,7 +78,7 @@ contract ZebraTest is Test, Utils {
     /// @dev returns signature of digest by alice's private key
     function sign(bytes32 digest) internal returns(bytes memory signature) {
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(alicePrivateKey, digest);
-        return bytes.concat(r,s,bytes1(v));
+        return bytes.concat(r, s, bytes1(v));
     }
 
     function execCall(address to, bytes memory call) internal {

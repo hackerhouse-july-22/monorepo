@@ -10,11 +10,15 @@ contract Rent is ZebraTest {
             tokenId : 1,
             pricePerSecond : 200000 gwei,
             maxRentalDuration : 4 weeks,
-            nonce : 1
+            nonce : 0
         });
-        bytes memory signature = sign(getOfferDigest(offer));
+        bytes memory signature = sign(zebra.getOfferDigest(offer));
         vm.prank(address(alice));
         myNFT.approve(address(zebra), 1);
+
+        uint256 aliceBalanceBefore = myNFT.balanceOf(alice);
+        uint256 safeBalanceBefore = myNFT.balanceOf(address(proxy));
+
         zebra.rent{value: offer.pricePerSecond * 10 days}(
             myNFT,
             1,
@@ -23,5 +27,12 @@ contract Rent is ZebraTest {
             offer,
             signature
         );
+
+        uint256 aliceBalanceAfter = myNFT.balanceOf(alice);
+        uint256 safeBalanceAfter = myNFT.balanceOf(address(proxy));
+
+        assertEq(aliceBalanceAfter, aliceBalanceBefore - 1);
+        assertEq(safeBalanceAfter, safeBalanceBefore + 1);
+        assertEq(address(zebra), myNFT.getApproved(offer.tokenId));
     }
 }

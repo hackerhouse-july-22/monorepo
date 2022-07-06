@@ -3,6 +3,9 @@ pragma solidity 0.8.15;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "./DataStructure.sol";
 import "./deps/IWEth.sol";
 import "./gnosis-safe/proxies/GnosisSafeProxy.sol";
 import "./gnosis-safe/base/GuardManager.sol";
@@ -10,7 +13,6 @@ import "./gnosis-safe/base/ModuleManager.sol";
 import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
-import "./utils/Utils.sol";
 
 // dev P2 : 
 // - reduce uint size when possible
@@ -18,7 +20,7 @@ import "./utils/Utils.sol";
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @author tobou.eth
-contract Zebra is BaseGuard, ReentrancyGuard, Utils {
+contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
 
     GnosisSafe immutable ZEBRA_SAFE_SINGLETON;
@@ -29,17 +31,23 @@ contract Zebra is BaseGuard, ReentrancyGuard, Utils {
     // config
     uint256 public minRentalDuration;
     uint256 public minRentalPricePerSecond;
+    uint256 public devCut; // in basis points
 
-    mapping(GnosisSafeProxy => bool) isZebraRegistered;
+    uint256 public devClaimable;
+
+    mapping(GnosisSafeProxy => bool) public isZebraRegistered;
+    mapping(address => uint256) public supplierNonce;
+    mapping(address => uint256) public claimableBy;
 
     /// @param WEth WETH9-like contract for the chain deployed on
-    constructor(GnosisSafeProxyFactory factory, IWEth WEth) {
+    constructor(GnosisSafeProxyFactory factory, IWEth WEth) EIP712("Zebra", "1.0") {
         ZEBRA_SAFE_SINGLETON = new GnosisSafe();
         FACTORY = factory;
         ZEBRA_MODULE = new ZebraModule();
         minRentalDuration = 1 hours;
         WETH = WEth;
         minRentalPricePerSecond = 57870370370370; // 25cts/day with $MATIC @ 0.5$
+        devCut = 500;
     }
 
     /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
@@ -101,6 +109,12 @@ contract Zebra is BaseGuard, ReentrancyGuard, Utils {
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
 
+    function getOfferDigest(Offer memory offer) view public returns(bytes32 digest) {
+        digest = _hashTypedDataV4(keccak256(abi.encode(
+            OFFER_TYPEHASH,
+            offer.NFT, offer.tokenId, offer.pricePerSecond, offer.maxRentalDuration, offer.nonce
+        )));
+    }
 
     /// @notice rent an NFT, pay by sending ETH in msg.value
     function rent(
@@ -119,15 +133,43 @@ contract Zebra is BaseGuard, ReentrancyGuard, Utils {
         }
         if (msg.value != offer.pricePerSecond * duration) {revert IncorrectPayment(msg.value);}
         if (!isZebraRegistered[safe]) {revert UnregisteredRenter(safe);}
+        if (offer.nonce != supplierNonce[signer]) {revert OfferDeleted(offer.nonce);}
         
         WETH.deposit{value: msg.value}();
+        uint256 supplierRevenue = (msg.value * (MAX_BASIS_POINTS - devCut)) / MAX_BASIS_POINTS;
+        claimableBy[signer] += supplierRevenue;
+        devClaimable += msg.value - supplierRevenue;
         // gnosis safes are not NFT receivers by default
         NFT.transferFrom(signer, address(safe), tokenId);
         ZEBRA_MODULE.giveAllowanceToZebra(NFT, tokenId, IGnosisSafe(address(safe)));
 
-        // todo check for nonce
         // todo handle loan register logic
     }
+
+    // back office
+
+    /// @notice call to delete all previously signed offer
+    /// @dev always sign with the current nonce of supplier
+    function updateOffers() external {
+        supplierNonce[msg.sender]++;
+    }
+
+    /// @notice call to claim what you gained as a supplier (sent in WETH)
+    function claim() external {
+        uint256 toSend = claimableBy[msg.sender];
+        claimableBy[msg.sender] = 0;
+        require(WETH.transferFrom(address(this), msg.sender, toSend));
+    }
+
+    // admin
+
+    function claimDevFees() external onlyOwner {
+        uint256 toSend = devClaimable;
+        devClaimable = 0;
+        require(WETH.transferFrom(address(this), owner(), toSend));
+    }
+
+    // fallback
 
     fallback() external {
         // We don't revert on fallback to avoid issues in case of a Safe upgrade
