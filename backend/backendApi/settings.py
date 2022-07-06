@@ -37,9 +37,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # 3rd-party
+    'rest_framework',
+    'corsheaders',
+    'drf_yasg',
+    # 'storages',
+
+    # Project
+    'zebra.apps.ZebraConfig',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    # 'http://localhost:8000', # default django port
+    'http://localhost:3000', # default react port
+    'http://127.0.0.1:3000',
+    # '*', # all
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # add for cors headers
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
