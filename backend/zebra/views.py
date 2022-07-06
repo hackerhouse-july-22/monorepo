@@ -8,6 +8,16 @@ from .utils import recoverAddress, isValidEthereumAddress
 from .models import ZebraNFT
 from .serializers import ZebraNFTSerializer
 
+from thirdweb import ThirdwebSDK
+
+sdk = ThirdwebSDK("mumbai")
+
+ZEBRA_PROTOCOL_ADDRESS = '0x0000000000000000000000000000000000000001'
+zebraContract = sdk.get_contract(ZEBRA_PROTOCOL_ADDRESS)
+# Can also use abi
+# zebraProtocolAbi = # insert abi here
+# zebraContractFromAbi = sdk.get_contract_from_abi(zebraProtocolAbi)
+
 class ZebraNFTListView(APIView):
     """
     List all ZebraNFTs
@@ -28,7 +38,11 @@ class ZebraNFTListView(APIView):
 
 class CreateZebraNFTView(APIView):
     """
-    Create a ZebraNFT
+    Create a ZebraNFT.
+    Validation functionality:
+        1. Check if signature passed by the user is valid
+        2. Check if the address is owner
+        3. Check if the tokenId is approved by the protocol contract
     """
     def post(self, request):
         nftAddress = request.data['nftAddress']
@@ -44,6 +58,8 @@ class CreateZebraNFTView(APIView):
                 {"error": "Invalid signature"},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+        
 
         try:
             serializer = ZebraNFTSerializer(data=request.data)
