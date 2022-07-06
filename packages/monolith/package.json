@@ -20,10 +20,12 @@
     "@thirdweb-dev/react": "^2.4.7",
     "@thirdweb-dev/sdk": "^2.3.23",
     "@walletconnect/web3-provider": "^1.7.8",
-    "apollo-server": "^3.9.0",
+    "apollo-server-micro": "^3.9.0",
     "ethers": "^5.6.9",
     "framer-motion": "^6.4.1",
     "graphql": "^16.5.0",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -32,6 +34,7 @@
     "web3modal": "^1.9.8"
   },
   "devDependencies": {
+    "@types/micro-cors": "^0.1.2",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
