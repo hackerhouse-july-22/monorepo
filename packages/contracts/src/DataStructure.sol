@@ -9,6 +9,8 @@ error UnauthorizedDuration(uint256 duration);
 error IncorrectPayment(uint256 payment);
 error UnregisteredRenter(GnosisSafeProxy renter);
 error OfferDeleted(uint256 nonce);  // I.e incorrect nonce
+error AssetUnavailable(Loan loan); // I.e already rented
+error OrderOnNotOwnedAsset(address caller); // claiming or signing an offer on not owned asset
 
 /// @notice Offer to rent a NFT to anyone paying upfront in ETH
 /// @dev no supplier param here, use ecrecover to identify the account
@@ -27,10 +29,10 @@ struct Offer {
 
 /// @notice issued Loan
 /// @param renter zebra safe account
-/// @param rentalEndDate in seconds
+/// @param endDate in seconds
 struct Loan {
     GnosisSafeProxy renter;
-    uint256 rentalEndDate;
+    uint256 endDate;
 }
 
 bytes32 constant OFFER_TYPEHASH = keccak256("Offer(address NFT,uint256 tokenId,uint256 pricePerSecond,uint256 maxRentalDuration,uint256 nonce)");

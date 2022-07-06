@@ -14,9 +14,12 @@ import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
+// todo : take into account original owner
+
 // dev P2 : 
 // - reduce uint size when possible
 // - handle payment in weth
+// - optis on load twice same data
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @author tobou.eth
@@ -38,6 +41,8 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     mapping(GnosisSafeProxy => bool) public isZebraRegistered;
     mapping(address => uint256) public supplierNonce;
     mapping(address => uint256) public claimableBy;
+    mapping(IERC721 => mapping(uint256 => Loan)) public loan;
+    mapping(IERC721 => mapping(uint256 => address)) public supplierOf;
 
     /// @param WEth WETH9-like contract for the chain deployed on
     constructor(GnosisSafeProxyFactory factory, IWEth WEth) EIP712("Zebra", "1.0") {
@@ -47,7 +52,7 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         minRentalDuration = 1 hours;
         WETH = WEth;
         minRentalPricePerSecond = 57870370370370; // 25cts/day with $MATIC @ 0.5$
-        devCut = 500;
+        devCut = 500; // 5%
     }
 
     /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
@@ -118,8 +123,6 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
 
     /// @notice rent an NFT, pay by sending ETH in msg.value
     function rent(
-        IERC721 NFT,
-        uint256 tokenId,
         uint256 duration,
         GnosisSafeProxy safe,
         Offer memory offer,
@@ -128,37 +131,56 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         bytes32 digest = getOfferDigest(offer);
         address signer = ECDSA.recover(digest, signature);
         
-        if (duration < minRentalDuration || duration > offer.maxRentalDuration) {
-            revert UnauthorizedDuration(duration);
-        }
+        if (duration < minRentalDuration || duration > offer.maxRentalDuration) {revert UnauthorizedDuration(duration);}
         if (msg.value != offer.pricePerSecond * duration) {revert IncorrectPayment(msg.value);}
         if (!isZebraRegistered[safe]) {revert UnregisteredRenter(safe);}
         if (offer.nonce != supplierNonce[signer]) {revert OfferDeleted(offer.nonce);}
+        Loan memory currentLoan = loan[offer.NFT][offer.tokenId];
+        if (currentLoan.endDate >= block.timestamp) {revert AssetUnavailable(currentLoan);}
+        address assetHolder = offer.NFT.ownerOf(offer.tokenId);
+        if (assetHolder == signer) {
+            supplierOf[offer.NFT][offer.tokenId] = signer;
+        } else {
+            if (signer != supplierOf[offer.NFT][offer.tokenId]) {revert OrderOnNotOwnedAsset(signer);}
+        }
         
         WETH.deposit{value: msg.value}();
         uint256 supplierRevenue = (msg.value * (MAX_BASIS_POINTS - devCut)) / MAX_BASIS_POINTS;
         claimableBy[signer] += supplierRevenue;
         devClaimable += msg.value - supplierRevenue;
-        // gnosis safes are not NFT receivers by default
-        NFT.transferFrom(signer, address(safe), tokenId);
-        ZEBRA_MODULE.giveAllowanceToZebra(NFT, tokenId, IGnosisSafe(address(safe)));
 
-        // todo handle loan register logic
+        // gnosis safes are not NFT receivers by default
+        offer.NFT.transferFrom(signer, address(safe), offer.tokenId);
+        ZEBRA_MODULE.giveAllowanceToZebra(offer.NFT, offer.tokenId, IGnosisSafe(address(safe)));
+        loan[offer.NFT][offer.tokenId] = Loan({
+            renter: safe,
+            endDate: block.timestamp + duration
+        });
     }
 
     // back office
 
     /// @notice call to delete all previously signed offer
     /// @dev always sign with the current nonce of supplier
-    function updateOffers() external {
+    function revokeOffers() external {
         supplierNonce[msg.sender]++;
     }
 
     /// @notice call to claim what you gained as a supplier (sent in WETH)
-    function claim() external {
+    function claimRents() external {
         uint256 toSend = claimableBy[msg.sender];
         claimableBy[msg.sender] = 0;
         require(WETH.transferFrom(address(this), msg.sender, toSend));
+    }
+
+    /// @notice call to get back an asset, you will have to give allowance again if you want to keep your offers active
+    /// @notice call will revert if your asset is being rented
+    function claimAsset(IERC721 NFT, uint256 tokenId) external {
+        Loan memory currentLoan = loan[NFT][tokenId];
+        address assetHolder = NFT.ownerOf(tokenId);
+        if (currentLoan.endDate >= block.timestamp) {revert AssetUnavailable(currentLoan);}
+        if (msg.sender != supplierOf[NFT][tokenId]) {revert OrderOnNotOwnedAsset(msg.sender);}
+        NFT.transferFrom(assetHolder, msg.sender, tokenId);
     }
 
     // admin
