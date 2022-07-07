@@ -1,24 +1,19 @@
 import React from "react";
-import { Box, Button, Flex, Radio, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Radio, Tag, Text, Tooltip } from "@chakra-ui/react";
 
-type SelectableImageProps = {
-  isSelected?: boolean;
-  onClick?: () => void;
+type NftCardProps = {
   imageUrl: string;
+  isRented?: boolean;
 };
 
-const SelectableImage: React.FC<SelectableImageProps> = ({
-  isSelected,
-  onClick,
-  imageUrl,
-}) => (
+const NftCard: React.FC<NftCardProps> = ({ imageUrl, isRented }) => (
   <Box backgroundColor="blackAlpha.700" borderRadius={12} overflow="hidden">
     <Box p={4}>
       <Flex
         transition="all 0.2s ease"
         direction="column"
         background={`${
-          isSelected
+          isRented
             ? "linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.8)), "
             : "linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0)), "
         }url("${imageUrl}")`}
@@ -28,12 +23,11 @@ const SelectableImage: React.FC<SelectableImageProps> = ({
         height="300px"
       >
         <Flex justifyContent="flex-end">
-          <Radio
-            isChecked={isSelected}
-            onClick={onClick}
-            size="lg"
-            colorScheme="pink"
-          />
+          {isRented && (
+            <Tooltip label="6hrs left">
+              <Tag colorScheme="red">Rented</Tag>
+            </Tooltip>
+          )}
         </Flex>
         <Box flex={1} />
         <Flex
@@ -42,18 +36,23 @@ const SelectableImage: React.FC<SelectableImageProps> = ({
           p={4}
           borderRadius={12}
           alignItems="center"
-          opacity={isSelected ? 1 : 0}
-          transition="all 0.2s ease"
         >
-          <Text color="gray.900" fontSize="lg" fontWeight="bold">
-            ETH 0.99
-          </Text>
+          <Box>
+            <Text color="gray.900" fontSize="lg" fontWeight="bold">
+              0.012 ETH / Day
+            </Text>
+            <Text color="gray.600" fontSize="xs" mt={1}>
+              2hrs min, 4hrs max
+            </Text>
+          </Box>
           <Box flex={1} />
-          <Button colorScheme="pink">Edit Price</Button>
+          <Button colorScheme="pink" isDisabled={isRented}>
+            Edit
+          </Button>
         </Flex>
       </Flex>
     </Box>
   </Box>
 );
 
-export default SelectableImage;
+export default NftCard;

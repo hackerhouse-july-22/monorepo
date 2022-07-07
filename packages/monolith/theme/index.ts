@@ -70,6 +70,18 @@ const theme = extendTheme({
         textDecoration: "underline",
       },
     },
+    Stat: {
+      baseStyle: {
+        container: {
+          backgroundColor: "gray.800",
+          borderColor: "pink.700",
+          borderWidth: 2,
+          borderRadius: 8,
+          p: 5,
+          fontSize: "4xl",
+        },
+      },
+    },
     Button: {
       baseStyle: {
         height: "32px",

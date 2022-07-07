@@ -43,7 +43,9 @@ const PageContainer: React.FC<PageContainerProps> = ({
       </Head>
 
       <Navbar />
-      <Box as="main">{account ? children : <DisconnectedScreen />}</Box>
+      <Box as="main" pb={8}>
+        {account ? children : <DisconnectedScreen />}
+      </Box>
     </>
   );
 };
