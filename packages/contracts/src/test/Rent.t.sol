@@ -130,23 +130,23 @@ contract Rent is ZebraTest {
             callData,
             abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));
 
-        // callData = abi.encodeWithSelector(safeTransferFromSelector, address(proxy), alice, 1);
-        // execCallShouldRevert( // 3
-        //     address(myNFT),
-        //     callData,
-        //     abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));
+        callData = abi.encodeWithSelector(safeTransferFromSelector, address(proxy), alice, 1);
+        execCallShouldRevert( // 3
+            address(myNFT),
+            callData,
+            abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));
 
-        // callData = abi.encodeWithSelector(myNFT.transferFrom.selector,  address(proxy), alice, 1);
-        // execCallShouldRevert( // 4
-        //     address(myNFT),
-        //     callData,
-        //     abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));
+        callData = abi.encodeWithSelector(myNFT.transferFrom.selector,  address(proxy), alice, 1);
+        execCallShouldRevert( // 4
+            address(myNFT),
+            callData,
+            abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));
 
-        // callData = abi.encodeWithSelector(safeTransferFromPlusDataSelector,  address(proxy), alice, 1, emptyBytes);
-        // execCallShouldRevert( // 5
-        //     address(myNFT),
-        //     callData,
-        //     abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));       
+        callData = abi.encodeWithSelector(safeTransferFromPlusDataSelector,  address(proxy), alice, 1, emptyBytes);
+        execCallShouldRevert( // 5
+            address(myNFT),
+            callData,
+            abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));       
     }
 
     /// @dev Alice supplies a loan on myNFT #1 of 10 days to address(this)

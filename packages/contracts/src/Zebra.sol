@@ -14,8 +14,6 @@ import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
-import "forge-std/Test.sol";
-
 // dev P2 : 
 // - reduce uint size when possible
 // - handle payment in weth
@@ -94,7 +92,7 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     function checkTransaction(
         address to,
         uint256 value,
-        bytes memory data,
+        bytes calldata data,
         Enum.Operation operation,
         uint256 safeTxGas,
         uint256 baseGas,
@@ -120,21 +118,18 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         if (selector == IERC721.setApprovalForAll.selector) { // 1
             revert UnauthorizedOperation(to, data);
         } else if (selector == IERC721.approve.selector) { // 2
-            console.log("ha");
-            ( , ,uint256 tokenId) = abi.decode(data, (bytes4, address, uint256));
-            console.log("ha");
+            ( ,uint256 tokenId) = abi.decode(data[4:], (address, uint256));
             if (assetIsRented(NFT, tokenId)){
                 revert UnauthorizedOperation(to, data);
             }
-            console.log("ha");
         } else if (selector == safeTransferFromSelector ||
                    selector == IERC721.transferFrom.selector) { // 4
-            ( , , ,uint256 tokenId) = abi.decode(data, (bytes4, address, address, uint256));
+            ( , ,uint256 tokenId) = abi.decode(data[4:], (address, address, uint256));
             if (assetIsRented(NFT, tokenId)){
                 revert UnauthorizedOperation(to, data);
             }
         } else if (selector == safeTransferFromPlusDataSelector) { // 5
-            ( , , ,uint256 tokenId, ) = abi.decode(data, (bytes4, address, address, uint256, bytes));
+            ( , ,uint256 tokenId, ) = abi.decode(data[4:], (address, address, uint256, bytes));
             if (assetIsRented(NFT, tokenId)){
                 revert UnauthorizedOperation(to, data);
             }
