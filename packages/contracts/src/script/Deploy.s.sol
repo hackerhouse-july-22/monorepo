@@ -12,5 +12,6 @@ contract Deploy is Script {
         GnosisSafeProxyFactory factory = new GnosisSafeProxyFactory();
         WEth weth = new WEth(); 
         Zebra zebra = new Zebra(factory, weth);
+        console.log("zebra", address(zebra));
     }
 }
