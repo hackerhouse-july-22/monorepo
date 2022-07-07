@@ -38,3 +38,7 @@ struct Loan {
 bytes32 constant OFFER_TYPEHASH = keccak256("Offer(address NFT,uint256 tokenId,uint256 pricePerSecond,uint256 maxRentalDuration,uint256 nonce)");
 
 uint256 constant MAX_BASIS_POINTS = 10_000;
+
+bytes4 constant safeTransferFromSelector = bytes4(keccak256("safeTransferFrom(address,address,uint256)"));
+bytes4 constant safeTransferFromPlusDataSelector = bytes4(keccak256("safeTransferFrom(address,address,uint256,bytes)"));
+        

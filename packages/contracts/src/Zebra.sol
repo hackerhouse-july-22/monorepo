@@ -22,6 +22,7 @@ import "./ZebraModule.sol";
 // - optis on load twice same data
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
+/// @notice don't use with non-standard NFTs !
 /// @author tobou.eth
 contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
@@ -56,6 +57,7 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     }
 
     /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
+    /// @return safe created zebra-registered gnosis safe
     function createZebraSafe() external returns(GnosisSafeProxy safe) {
         bytes memory emptyData;
         address[] memory owners = new address[](1);
@@ -110,6 +112,24 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
             selector == ModuleManager.disableModule.selector)){
             revert UnauthorizedGuardOrModuleUpdate();
         }
+
+        // IERC721 NFT = IERC721(to);
+        // uint256 dataLength = data.length;
+        // if (selector == IERC721.setApprovalForAll.selector && dataLength >= 21) {
+
+        // }
+
+        
+        
+        // // disallow any action on NFT if rent date is passed
+
+        // // disallow actions on rented NFTs that could lead to a transfer
+        // if (selectorIsUnsafe(selector)){
+        //     IERC721 NFT = IERC721(to);
+        //     if (isATransferSelector(selector)) {
+
+        //     }
+        // }
     }
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
@@ -189,6 +209,21 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         uint256 toSend = devClaimable;
         devClaimable = 0;
         require(WETH.transferFrom(address(this), owner(), toSend));
+    }
+
+    // internal
+
+    /// @dev selector can lead to the transfer of a rented asset
+    function selectorIsUnsafe(bytes4 selector) internal pure returns(bool) {
+        return (isATransferSelector(selector) ||
+                selector == IERC721.approve.selector ||
+                selector == IERC721.setApprovalForAll.selector);
+    }
+
+    function isATransferSelector(bytes4 selector) internal pure returns(bool) {
+        return (selector == safeTransferFromSelector || 
+                selector == safeTransferFromPlusDataSelector ||
+                selector == IERC721.transferFrom.selector);
     }
 
     // fallback
