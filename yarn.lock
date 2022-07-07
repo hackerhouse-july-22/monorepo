@@ -618,6 +618,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chakra-ui/icons@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@chakra-ui/icons@npm:2.0.2"
+  dependencies:
+    "@chakra-ui/icon": 3.0.2
+    "@types/react": ^18.0.1
+  peerDependencies:
+    "@chakra-ui/system": ">=2.0.0-next.0"
+    react: ">=18"
+  checksum: a78c3e7894288864490552a0b90be10238de133241d9a28d23cba3096bbc8a1971b690928055735efd22e6c37dd7726b54feaad136410703f3f92eba61710ae2
+  languageName: node
+  linkType: hard
+
 "@chakra-ui/image@npm:2.0.3":
   version: 2.0.3
   resolution: "@chakra-ui/image@npm:2.0.3"
@@ -2732,7 +2745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react@npm:*, @types/react@npm:^18.0.1":
   version: 18.0.15
   resolution: "@types/react@npm:18.0.15"
   dependencies:
@@ -7710,6 +7723,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monolith@workspace:packages/monolith"
   dependencies:
+    "@chakra-ui/icons": ^2.0.2
     "@chakra-ui/react": ^2.2.1
     "@coinbase/wallet-sdk": ^3.3.0
     "@emotion/react": ^11.9.3
