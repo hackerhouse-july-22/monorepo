@@ -1,7 +1,7 @@
-import Head from 'next/head';
-import React from 'react';
-import { Box } from '@chakra-ui/react';
-import Navbar from '../Navbar/Navbar';
+import Head from "next/head";
+import React from "react";
+import { Box } from "@chakra-ui/react";
+import Navbar from "../Navbar/Navbar";
 
 type LayoutProps = {
   title?: string;
@@ -11,8 +11,8 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({
   children,
-  title = 'GuildJoinSoulbound',
-  content = 'DreamTeamGuildStuff',
+  title = "GuildJoinSoulbound",
+  content = "DreamTeamGuildStuff",
 }) => (
   <>
     <Head>

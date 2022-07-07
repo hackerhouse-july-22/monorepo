@@ -35,7 +35,7 @@ const Onboarding: NextPage = () => (
 
       <Box
         p={6}
-        bgColor="#0A0A0A"
+        bgColor="cardBackground"
         borderColor="pink.500"
         borderWidth={2}
         borderRadius={8}

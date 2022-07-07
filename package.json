@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "docker-compose up -d db && yarn workspace monolith run dev",
-    "lint": "npx eslint --fix"
+    "lint": "npx eslint . --fix",
+    "prettier": "npx prettier ./packages/* --write ",
+    "postinstall": "husky install"
   },
   "workspaces": [
     "packages/*"
@@ -28,6 +30,12 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*.ts": "yarn run lint && yarn run prettier",
+    "*.tsx": "yarn run lint && yarn run prettier"
   }
 }
