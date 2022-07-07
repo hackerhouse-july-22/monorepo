@@ -65,6 +65,11 @@ const theme = extendTheme({
         color: "white",
       },
     },
+    Link: {
+      baseStyle: {
+        textDecoration: "underline",
+      },
+    },
     Button: {
       baseStyle: {
         height: "32px",
