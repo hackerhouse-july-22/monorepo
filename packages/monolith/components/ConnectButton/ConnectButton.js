@@ -24,7 +24,7 @@ export default function ConnectButton() {
     }
   }, [address])
 
-  
+
   return (
     <>
       {address ? (
@@ -34,7 +34,7 @@ export default function ConnectButton() {
           <h6>
             {truncateAddress(address)}
           </h6>
-          <IconButton 
+          <IconButton
             icon={<FontAwesomeIcon className={styles.disconnectIcon} icon={faBan} onClick={disconnect} />}
             colorScheme={'red'}
             onClick={disconnect}
@@ -45,7 +45,6 @@ export default function ConnectButton() {
       ) : (
         <>
         <Button
-          colorScheme={"blue"}
           size="lg"
           variant="outline"
           onClick={connectWithMetaMask}
@@ -53,7 +52,6 @@ export default function ConnectButton() {
           Connect MetaMask
         </Button>
         <Button
-          colorScheme={"blue"}
           size="lg"
           variant="outline"
           onClick={connectWithCoinbaseWallet}
@@ -61,7 +59,7 @@ export default function ConnectButton() {
           Connect Coinbase
         </Button>
         </>
-        
+
       )}
     </>
   )

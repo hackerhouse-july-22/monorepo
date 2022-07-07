@@ -8,7 +8,7 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   colors: {
-    background: "linear-gradient(117.56deg, #1B2037 42.84%, #0F1221 98.45%)",
+    background: "url('/background.svg')",
     primaryFontColor: {
       darkMode: "gray.50",
     },
@@ -40,6 +40,9 @@ const theme = extendTheme({
         color: "white",
         background: "background",
         height: "100vh",
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       },
     },
   },
