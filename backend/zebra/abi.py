@@ -1,6 +1,6 @@
 
 ZEBRA_TEST_ABI = """
-"abi" : [
+[
     {
       "inputs": [
         {

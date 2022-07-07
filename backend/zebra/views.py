@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+import web3
+
 # from .utils import recoverAddress, isValidEthereumAddress
 
 from .models import ZebraNFT
@@ -10,13 +12,20 @@ from .abi import ZEBRA_TEST_ABI
 
 from thirdweb import ThirdwebSDK
 
-sdk = ThirdwebSDK("mumbai")
+testPrivateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
+# sdk = ThirdwebSDK("mumbai")
+# sdk = ThirdwebSDK("127.0.0.1:8545")
+# sdk = ThirdwebSDK.from_private_key(testPrivateKey, "127.0.0.1:8545")
 
-# ZEBRA_PROTOCOL_ADDRESS = '0x0000000000000000000000000000000000000001'
+# connect sdk to local foundry node running on localhost:8545
+sdk = ThirdwebSDK.from_private_key(testPrivateKey, "http://127.0.0.1:8545")
+
+ZEBRA_PROTOCOL_ADDRESS  = '0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0'
+checksummedAddress      = web3.Web3.toChecksumAddress(ZEBRA_PROTOCOL_ADDRESS)
 # zebraContract = sdk.get_contract(ZEBRA_PROTOCOL_ADDRESS)
 # Can also use abi
-
-zebraContractFromAbi = sdk.get_contract_from_abi(ZEBRA_TEST_ABI)
+# zebraContractFromAbi = sdk.get_contract_from_abi(ZEBRA_PROTOCOL_ADDRESS, ZEBRA_TEST_ABI)
+zebraContractFromAbi = sdk.get_contract_from_abi(checksummedAddress, ZEBRA_TEST_ABI)
 
 class EthereumAuth(APIView):
     def post(self, request):
