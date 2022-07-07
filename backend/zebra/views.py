@@ -1,10 +1,8 @@
-
-from inspect import signature
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .utils import recoverAddress, isValidEthereumAddress
+# from .utils import recoverAddress, isValidEthereumAddress
 
 from .models import ZebraNFT
 from .serializers import ZebraNFTSerializer
@@ -18,6 +16,28 @@ zebraContract = sdk.get_contract(ZEBRA_PROTOCOL_ADDRESS)
 # Can also use abi
 # zebraProtocolAbi = # insert abi here
 # zebraContractFromAbi = sdk.get_contract_from_abi(zebraProtocolAbi)
+
+class EthereumAuth(APIView):
+    def post(self, request):
+        payload = request.data['payload']
+
+        token = sdk.auth.generate_auth_token("localhost:3000/", payload)
+
+        # https://portal.thirdweb.com/python/wallet-authenticator
+
+        # on the frontend, you need to call the sdk.auth.login(domain) function,
+        # call it payload, and then send to the backend
+
+        response = Response()
+        response.set_cookie('cookie', token, 
+            httponly=True,
+            secure=True,
+            samesite='Strict',
+            path='/',
+            # max_age=60*60*24*7 # defaults to 5 hours per signature
+        )
+        response.status_code = status.HTTP_200_OK
+        return response
 
 class ZebraNFTListView(APIView):
     """
@@ -52,17 +72,14 @@ class CreateZebraNFTView(APIView):
         maxRentDuration = request.data['maxRentDuration']
         nonce = request.data['nonce']
 
+        # jwt = request.data['jwt'] # unsecure, set as HttpOnly Cookie
+        
+        # the authenticate person returns
+        jwt = request.COOKIES['cookie']
+        senderAddress = sdk.auth.authenticate(jwt) # this will return the wanted address
+
         rentalContractInstance = sdk.get_contract(nftAddress)
 
-        senderAddress = request.data['senderAddress']
-        signature = request.data['signature']
-
-        # Check if sender signature is valid
-        if not recoverAddress(signature, nonce) == senderAddress:
-            return Response(
-                {"error": "Invalid signature"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
         # signer has to be owner of nft
         # signer has to be approved by the protocol contract
 
@@ -92,13 +109,6 @@ class CreateZebraNFTView(APIView):
                 {"message": "ZebraNFT created successfully"},
                 status=status.HTTP_201_CREATED
             )
-            # serializer = ZebraNFTSerializer(data=request.data, partial=True)
-            # if serializer.is_valid():
-            #     serializer.save()
-            #     return Response(
-            #         {"message": "ZebraNFT created successfully"},
-            #         status=status.HTTP_201_CREATED
-            #     )
         except Exception as e:
             return Response(
                 {"error": str(e)},
@@ -135,8 +145,12 @@ class UpdateZebraNFTView(APIView):
         maxRentDuration = request.data['maxRentDuration']
         nonce = request.data['nonce']
 
-        senderAddress = request.data['senderAddress']
-        signature = request.data['signature']
+        # senderAddress = request.data['senderAddress']
+        # signature = request.data['signature']
+        
+        # the authenticate person returns
+        jwt = request.COOKIES['cookie']
+        senderAddress = sdk.auth.authenticate(jwt) # this will return the wanted address
 
         rentalContractInstance = sdk.get_contract(nftAddress)
 
@@ -200,12 +214,34 @@ class DeleteZebraNFTView(APIView):
     """
     Delete a ZebraNFT. \n
     Delete operation is 2 steps:
-        1. 
-        2.
+        1. frontend is going to call revokeOffers() onc-chain to revoke all offers
+        2. backend will only get called if this operation is successful on the front end
+    Now, check authentication and delete
     """
     def delete(self, request, pk):
 
-        
+        nftAddress = request.data['nftAddress']
+        tokenId = request.data['tokenId']
+        pricePerSecond = request.data['pricePerSecond']
+        maxRentDuration = request.data['maxRentDuration']
+        nonce = request.data['nonce']
+
+        # the authenticate person returns
+        jwt = request.COOKIES['cookie']
+        senderAddress = sdk.auth.authenticate(jwt) # this will return the wanted address
+
+        rentalContractInstance = sdk.get_contract(nftAddress)
+
+        # some way to check if the revoke operation was successful
+        # based on the nonce. so if at this point, there are no offers that hold the current nonce,
+        # then that should be an indicator that the revoke operation was successful.
+        # otherwise, there would be at least 1 offer that holds the current nonce.
+
+        if not rentalContractInstance.owner_of(tokenId) == senderAddress:
+            return Response(
+                {"error": "Sender is not owner of the NFT"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         try:
             nft = ZebraNFT.objects.get(pk=pk)

@@ -28,10 +28,37 @@ class ZebraNFT(models.Model):
     maxRentDuration = models.IntegerField(blank=False, null=False)
     nonce = models.IntegerField(blank=False, null=False)
 
-    addressCheckerMessage = models.CharField(max_length=50, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"NFT Address: {self.nftAddress}"
+
+
+class Supplier(models.Model):
+    """
+    Supplier model
+    """
+    address = models.CharField(max_length=42, blank=False, null=False)
+    nonce = models.IntegerField(blank=False, null=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Address: {self.address}"
+
+
+class Offers(models.Model):
+    """
+    Offers model
+    """
+    offer = models.ForeignKey(ZebraNFT, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Offer: {self.offer}"
