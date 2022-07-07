@@ -2541,9 +2541,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@thirdweb-dev/sdk@npm:^2.3.23":
-  version: 2.3.23
-  resolution: "@thirdweb-dev/sdk@npm:2.3.23"
+"@thirdweb-dev/sdk@npm:^2.3.24":
+  version: 2.3.24
+  resolution: "@thirdweb-dev/sdk@npm:2.3.24"
   dependencies:
     "@thirdweb-dev/contracts": 2.4.3
     "@web-std/file": ^3.0.0
@@ -2558,7 +2558,7 @@ __metadata:
     zod: ^3.11.6
   peerDependencies:
     ethers: ^5
-  checksum: bd3f5aab7e9acde78f3a840c99fee06b985399729e64a05f2def8886e0bc4154cfd018c2be956c45de241633fca15a8b1936c7dd7cf1dcaf0224ed0cd5fc0a21
+  checksum: 011d89407562a8b52773c2d3bbfb66b19dc21bf89aa5f533a7c0c8b278bd07f73468fc45addec3f97d50a4bfa64fd1ef5ef4c187a8a4c1bdbd996ae0d0ff0495
   languageName: node
   linkType: hard
 
@@ -2864,9 +2864,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wagmi/core@npm:^0.4.6":
-  version: 0.4.6
-  resolution: "@wagmi/core@npm:0.4.6"
+"@wagmi/core@npm:^0.4.7":
+  version: 0.4.7
+  resolution: "@wagmi/core@npm:0.4.7"
   dependencies:
     eventemitter3: ^4.0.7
     zustand: ^4.0.0-rc.1
@@ -2879,7 +2879,7 @@ __metadata:
       optional: true
     "@walletconnect/ethereum-provider":
       optional: true
-  checksum: cc71f0839f7cb48ce3d2e4bb33eeb72a682ea7882579339a4b2b279a26cc1717a4b4f056b63449209d60f03276c04b977147c83cb0abd62080cf8566f67a9672
+  checksum: 8ccb40f0c14e36082d1332c3277d02d46347a135c2972c09b96e90ece4b37d71a1b3075a10a44f8fdb310ff0524a75726bb30ca605ebccbcb5273bc0b2d6fa34
   languageName: node
   linkType: hard
 
@@ -7672,7 +7672,7 @@ __metadata:
     "@metamask/jazzicon": ^2.0.0
     "@prisma/client": ^4.0.0
     "@thirdweb-dev/react": ^2.4.7
-    "@thirdweb-dev/sdk": ^2.3.23
+    "@thirdweb-dev/sdk": ^2.3.24
     "@types/micro-cors": ^0.1.2
     "@types/node": 18.0.0
     "@types/react": 18.0.14
@@ -7690,9 +7690,11 @@ __metadata:
     prisma: ^4.0.0
     react: 18.2.0
     react-dom: 18.2.0
+    react-icons: ^4.4.0
+    react-jazzicon: ^1.0.4
     sass: ^1.53.0
     typescript: 4.7.4
-    wagmi: ^0.5.6
+    wagmi: ^0.5.9
     web3modal: ^1.9.8
   languageName: unknown
   linkType: soft
@@ -8639,10 +8641,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "react-icons@npm:4.4.0"
+  peerDependencies:
+    react: "*"
+  checksum: dd93a1dcc8ac8a3cf46a2b33e80b586fa967331fa5fcb90d061abf276155a8363a331643e203d67cb9bab4261d00a757da854bcce1fce2c6e4258bf3e33f711b
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-jazzicon@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "react-jazzicon@npm:1.0.4"
+  dependencies:
+    mersenne-twister: ^1.1.0
+  peerDependencies:
+    react: ">=17.0.0"
+    react-dom: ">=17.0.0"
+  checksum: e975b143b001f6e06bf6269498749e174550a86dfd85c255c64750f2adfa0b94d5ac8d79e04eb8b136f94067ee30ce47dae06312f9f1d37219319dc2c658d671
   languageName: node
   linkType: hard
 
@@ -10100,19 +10123,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wagmi@npm:^0.5.6":
-  version: 0.5.8
-  resolution: "wagmi@npm:0.5.8"
+"wagmi@npm:^0.5.9":
+  version: 0.5.9
+  resolution: "wagmi@npm:0.5.9"
   dependencies:
     "@coinbase/wallet-sdk": ^3.3.0
-    "@wagmi/core": ^0.4.6
+    "@wagmi/core": ^0.4.7
     "@walletconnect/ethereum-provider": ^1.7.8
     react-query: ^4.0.0-beta.23
     use-sync-external-store: ^1.1.0
   peerDependencies:
     ethers: ">=5.5.1"
     react: ">=17.0.0"
-  checksum: bcef4d241f0e66d8baa9988dcac8c130eab08a80e5b92e180283717cada5a150c2f01f7069dce8b9c5398143e896db7b54ae806f94d33435783197de57994c72
+  checksum: d8aaec1c26fa4faca523758ccc4dc17c51bdf6e2f5649d546f2c704883bd667a0841c27a35b836a3bf67666349a8d39ca7258d54c8ca030a46b6330d4b4e9fb0
   languageName: node
   linkType: hard
 
