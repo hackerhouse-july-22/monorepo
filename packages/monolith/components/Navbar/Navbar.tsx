@@ -17,21 +17,21 @@ import ConnectButton from "../ConnectButton/ConnectButton";
 import Link from "next/link";
 
 const Navbar = () => (
-  <>
-    <Grid
-      w="100%"
-      color="white"
-      gridTemplateColumns="1fr 1fr 1fr"
-      px="27px"
-      my={18}
-    >
-      <Link href="/">
-        {/* <TeamIcon w={20} h="auto" color="white" />
-         */}
-         <p>ZEBRA</p>
-      </Link>
-      <Box placeSelf="center">
-        {/* <LinkButton
+  <Grid
+    as="nav"
+    w="100%"
+    color="white"
+    gridTemplateColumns="1fr 1fr 1fr"
+    px="27px"
+    my={18}
+  >
+    <Link href="/">
+      {/* <TeamIcon w={20} h="auto" color="white" />
+       */}
+      <p>ZEBRA</p>
+    </Link>
+    <Box placeSelf="center">
+      {/* <LinkButton
           href="/"
           variant="text"
           mr="2"
@@ -46,12 +46,11 @@ const Navbar = () => (
         >
           Documentation
         </LinkButton> */}
-      </Box>
-      <HStack alignItems="center" justifyContent="flex-end">
-        <ConnectButton />
-      </HStack>
-    </Grid>
-  </>
+    </Box>
+    <HStack alignItems="center" justifyContent="flex-end">
+      <ConnectButton />
+    </HStack>
+  </Grid>
 );
 
 export default Navbar;

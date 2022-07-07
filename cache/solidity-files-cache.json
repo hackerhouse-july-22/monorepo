@@ -5,9 +5,7 @@
     "sources": "packages/contracts/src",
     "tests": "packages/contracts/srctest",
     "scripts": "script",
-    "libraries": [
-      "packages/contracts/lib"
-    ]
+    "libraries": ["packages/contracts/lib"]
   },
   "files": {
     "node_modules/@openzeppelin/contracts/access/Ownable.sol": {
@@ -159,9 +157,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -624,9 +620,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -665,9 +659,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -706,9 +698,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -751,9 +741,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -807,9 +795,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -848,9 +834,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -889,9 +873,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -930,9 +912,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1044,9 +1024,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1176,9 +1154,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1233,9 +1209,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1291,9 +1265,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1335,9 +1307,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1353,9 +1323,7 @@
           "libraries": {}
         }
       },
-      "imports": [
-        "packages/contracts/src/gnosis-safe/common/Enum.sol"
-      ],
+      "imports": ["packages/contracts/src/gnosis-safe/common/Enum.sol"],
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "Executor": {
@@ -1378,9 +1346,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1421,9 +1387,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1472,9 +1436,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1517,9 +1479,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1560,9 +1520,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1601,9 +1559,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1642,9 +1598,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1683,9 +1637,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1724,9 +1676,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1765,9 +1715,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1806,9 +1754,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1847,9 +1793,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1905,9 +1849,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -1963,9 +1905,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2021,9 +1961,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2064,9 +2002,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2105,9 +2041,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2146,9 +2080,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2192,9 +2124,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2233,9 +2163,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2274,9 +2202,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2315,9 +2241,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2356,9 +2280,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2397,9 +2319,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2441,9 +2361,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2482,9 +2400,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2523,9 +2439,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2564,9 +2478,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2605,9 +2517,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2646,9 +2556,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2705,9 +2613,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2749,9 +2655,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2793,9 +2697,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",
@@ -2836,9 +2738,7 @@
           },
           "outputSelection": {
             "*": {
-              "": [
-                "ast"
-              ],
+              "": ["ast"],
               "*": [
                 "abi",
                 "evm.bytecode",

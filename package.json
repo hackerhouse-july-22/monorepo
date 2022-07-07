@@ -3,12 +3,39 @@
   "packageManager": "yarn@3.2.1",
   "private": true,
   "scripts": {
-    "dev": "docker-compose up -d db && yarn workspace monolith run dev"
+    "dev": "docker-compose up -d db && yarn workspace monolith run dev",
+    "lint": "npx eslint . --fix",
+    "prettier": "npx prettier ./packages/* --write ",
+    "postinstall": "husky install"
   },
   "workspaces": [
     "packages/*"
   ],
   "resolutions": {
     "eth-sig-util": "3.0.1"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*.ts": "yarn run lint && yarn run prettier",
+    "*.tsx": "yarn run lint && yarn run prettier"
   }
 }

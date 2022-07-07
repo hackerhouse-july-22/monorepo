@@ -35,4 +35,3 @@ After modifying the prima schema, be sure to run
 ```sh
 yarn prisma generate
 ```
-
