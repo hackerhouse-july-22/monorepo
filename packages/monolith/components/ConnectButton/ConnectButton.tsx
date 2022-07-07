@@ -12,14 +12,12 @@ import {
   useAddress,
   useDisconnect,
   useMetamask,
-  useCoinbaseWallet,
 } from "@thirdweb-dev/react";
 import Jazzicon from "react-jazzicon";
 import truncateAddress from "../../utils/truncateAddress";
 
 export default function ConnectButton() {
   const connectWithMetaMask = useMetamask();
-  const connectWithCoinbaseWallet = useCoinbaseWallet();
   const disconnect = useDisconnect();
   const address = useAddress();
 

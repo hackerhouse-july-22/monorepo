@@ -11,13 +11,11 @@ import {
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import LinkButton from "../LinkButton";
-import { useRouter } from "next/router";
 import { ZebraText } from "../Icons";
 import ConnectButton from '@/components/ConnectButton';
 import EthIcon from "cryptocurrency-icons/svg/color/eth.svg";
 
 const Navbar = () => {
-  const router = useRouter();
   return (
     <>
       <Grid

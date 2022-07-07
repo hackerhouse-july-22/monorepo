@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ButtonProps } from "@chakra-ui/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 type LinkButtonProps = {
