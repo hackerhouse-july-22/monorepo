@@ -148,24 +148,4 @@ contract Rent is ZebraTest {
             callData,
             abi.encodeWithSelector(UnauthorizedOperation.selector, address(myNFT), callData));       
     }
-
-    /// @dev Alice supplies a loan on myNFT #1 of 10 days to address(this)
-    function startALoan() internal {
-        Offer memory offer = Offer({
-            NFT : myNFT,
-            tokenId : 1,
-            pricePerSecond : 200000 gwei,
-            maxRentalDuration : 4 weeks,
-            nonce : 0
-        });
-        bytes memory signature = sign(zebra.getOfferDigest(offer));
-        vm.prank(address(alice));
-        myNFT.approve(address(zebra), 1);
-        zebra.rent{value: offer.pricePerSecond * 10 days}(
-            10 days,
-            proxy,
-            offer,
-            signature
-        );
-    }
 }

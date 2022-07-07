@@ -19,6 +19,7 @@ import "./ZebraModule.sol";
 // - handle payment in weth
 // - optis on load twice same data
 // - better handle operator for collection
+// - derive time of loan from payment
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @notice don't use with non-standard NFTs !
