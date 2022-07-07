@@ -9,6 +9,8 @@ import {
   StatHelpText,
   StatLabel,
   StatNumber,
+  Tag,
+  Tooltip,
 } from "@chakra-ui/react";
 import NftCard from "@/components/NftCard";
 
@@ -50,10 +52,22 @@ const Lending: React.FC = () => (
         Snook
       </Heading>
       <SimpleGrid columns={4} mt={4} spacing={6}>
-        <NftCard imageUrl="https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600" />
         <NftCard
           imageUrl="https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600"
-          isRented
+          primaryText="0.012 ETH / Day"
+          secondaryText="2hrs min, 4hrs max"
+        />
+        <NftCard
+          imageUrl="https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600"
+          isDisabled
+          buttonText="Edit"
+          topRightItem={
+            <Tooltip label="6hrs left">
+              <Tag colorScheme="red">Rented</Tag>
+            </Tooltip>
+          }
+          primaryText="0.012 ETH / Day"
+          secondaryText="2hrs min, 4hrs max"
         />
       </SimpleGrid>
     </Container>

@@ -3847,6 +3847,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/qrcode-svg@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@types/qrcode-svg@npm:1.1.1"
+  checksum: 4da63890f33fee6a449fddebd9ba75b788ac2d4c76e2048b178fe18c2bd109627c5fdbc093bb8c72234c00a04830b86b016dd22b528b8c319ae2df36bd44c659
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:18.0.5":
   version: 18.0.5
   resolution: "@types/react-dom@npm:18.0.5"
@@ -9051,6 +9058,7 @@ __metadata:
     "@thirdweb-dev/react": ^2.4.7
     "@thirdweb-dev/sdk": ^2.3.24
     "@types/node": 18.0.0
+    "@types/qrcode-svg": ^1.1.1
     "@types/react": 18.0.14
     "@types/react-dom": 18.0.5
     "@walletconnect/web3-provider": ^1.7.8
@@ -9066,6 +9074,7 @@ __metadata:
     react-dom: 18.2.0
     react-icons: ^4.4.0
     react-jazzicon: ^1.0.4
+    react-qrcode-svg: ^0.1.0
     react-redux: ^8.0.2
     redux-persist: ^6.0.0
     typescript: 4.7.4
@@ -9915,6 +9924,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qr-image@npm:3.2.0":
+  version: 3.2.0
+  resolution: "qr-image@npm:3.2.0"
+  checksum: 9d22d9425234b8dfbcf954cff334d1594aa7391f999b15cf3e07d554c99341e7c2303646ddf58237fc498455c11d505b8803a995ff22d8385ddd05f58b3259b5
+  languageName: node
+  linkType: hard
+
 "qrcode@npm:1.4.4":
   version: 1.4.4
   resolution: "qrcode@npm:1.4.4"
@@ -10080,6 +10096,17 @@ __metadata:
     react: ">=17.0.0"
     react-dom: ">=17.0.0"
   checksum: e975b143b001f6e06bf6269498749e174550a86dfd85c255c64750f2adfa0b94d5ac8d79e04eb8b136f94067ee30ce47dae06312f9f1d37219319dc2c658d671
+  languageName: node
+  linkType: hard
+
+"react-qrcode-svg@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "react-qrcode-svg@npm:0.1.0"
+  dependencies:
+    qr-image: 3.2.0
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0
+  checksum: 124ed91a600e1cc9759b14620461c46f8222307fe43384d1bb9131a2c06970d77972f4e95353f2a7a4b2f56df553a38621d2ab270b758331bbacb045219dcf31
   languageName: node
   linkType: hard
 

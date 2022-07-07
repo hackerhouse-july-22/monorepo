@@ -1,19 +1,30 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Box, Button, Flex, Radio, Tag, Text, Tooltip } from "@chakra-ui/react";
 
 type NftCardProps = {
   imageUrl: string;
-  isRented?: boolean;
+  topRightItem?: ReactNode;
+  buttonText?: string;
+  isDisabled?: boolean;
+  primaryText?: string;
+  secondaryText?: string;
 };
 
-const NftCard: React.FC<NftCardProps> = ({ imageUrl, isRented }) => (
+const NftCard: React.FC<NftCardProps> = ({
+  imageUrl,
+  topRightItem,
+  isDisabled,
+  buttonText,
+  primaryText,
+  secondaryText,
+}) => (
   <Box backgroundColor="blackAlpha.700" borderRadius={12} overflow="hidden">
     <Box p={4}>
       <Flex
         transition="all 0.2s ease"
         direction="column"
         background={`${
-          isRented
+          isDisabled
             ? "linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.8)), "
             : "linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 0)), "
         }url("${imageUrl}")`}
@@ -22,13 +33,7 @@ const NftCard: React.FC<NftCardProps> = ({ imageUrl, isRented }) => (
         backgroundRepeat="no-repeat"
         height="300px"
       >
-        <Flex justifyContent="flex-end">
-          {isRented && (
-            <Tooltip label="6hrs left">
-              <Tag colorScheme="red">Rented</Tag>
-            </Tooltip>
-          )}
-        </Flex>
+        <Flex justifyContent="flex-end">{topRightItem}</Flex>
         <Box flex={1} />
         <Flex
           background="gray.300"
@@ -39,16 +44,18 @@ const NftCard: React.FC<NftCardProps> = ({ imageUrl, isRented }) => (
         >
           <Box>
             <Text color="gray.900" fontSize="lg" fontWeight="bold">
-              0.012 ETH / Day
+              {primaryText}
             </Text>
             <Text color="gray.600" fontSize="xs" mt={1}>
-              2hrs min, 4hrs max
+              {secondaryText}
             </Text>
           </Box>
           <Box flex={1} />
-          <Button colorScheme="pink" isDisabled={isRented}>
-            Edit
-          </Button>
+          {Boolean(buttonText) && (
+            <Button colorScheme="pink" isDisabled={isDisabled}>
+              {buttonText}
+            </Button>
+          )}
         </Flex>
       </Flex>
     </Box>
