@@ -28,7 +28,7 @@ const Navbar = () => (
       <Link href="/">
         {/* <TeamIcon w={20} h="auto" color="white" />
          */}
-         <p>ZEBRA</p>
+        <p>ZEBRA</p>
       </Link>
       <Box placeSelf="center">
         {/* <LinkButton
