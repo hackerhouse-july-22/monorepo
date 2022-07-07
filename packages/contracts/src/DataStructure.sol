@@ -11,6 +11,8 @@ error UnregisteredRenter(GnosisSafeProxy renter);
 error OfferDeleted(uint256 nonce);  // I.e incorrect nonce
 error AssetUnavailable(Loan loan); // I.e already rented
 error OrderOnNotOwnedAsset(address caller); // claiming or signing an offer on not owned asset
+error UnauthorizedOperation(address contractCalled, bytes call);
+error UnauthorizedDelegateCall();
 
 /// @notice Offer to rent a NFT to anyone paying upfront in ETH
 /// @dev no supplier param here, use ecrecover to identify the account

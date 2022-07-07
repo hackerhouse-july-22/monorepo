@@ -14,12 +14,11 @@ import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
-// todo : take into account original owner
-
 // dev P2 : 
 // - reduce uint size when possible
 // - handle payment in weth
 // - optis on load twice same data
+// - better handle operator for collection
 
 /// @notice manager of the Zebra protocol, guard of all registered safes
 /// @notice don't use with non-standard NFTs !
@@ -104,6 +103,7 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         address msgSender
     ) external view {
         bytes4 selector = bytes4(data);
+        IERC721 NFT = IERC721(to);
 
         // disallow modification of guard or module (could result in asset theft)
         if (to == msg.sender && (
@@ -112,25 +112,33 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
             selector == ModuleManager.disableModule.selector)){
             revert UnauthorizedGuardOrModuleUpdate();
         }
-
-        // IERC721 NFT = IERC721(to);
-        // uint256 dataLength = data.length;
-        // if (selector == IERC721.setApprovalForAll.selector && dataLength >= 21) {
-
-        // }
-
         
-        
-        // // disallow any action on NFT if rent date is passed
+        // disallow any action that can lead to an asset transfer
+        if (operation == Enum.Operation.DelegateCall) {revert UnauthorizedDelegateCall();}
+        if (selector == IERC721.setApprovalForAll.selector) { // 1
+            revert UnauthorizedOperation(to, data);
+        } else if (selector == IERC721.approve.selector) { // 2
+            ( , ,uint256 tokenId) = abi.decode(data, (bytes4, address, uint256));
+            if (assetIsRented(NFT, tokenId)){
+                revert UnauthorizedOperation(to, data);
+            }
+        } else if (selector == safeTransferFromSelector ||
+                   selector == IERC721.transferFrom.selector) { // 4
+            ( , , ,uint256 tokenId) = abi.decode(data, (bytes4, address, address, uint256));
+            if (assetIsRented(NFT, tokenId)){
+                revert UnauthorizedOperation(to, data);
+            }
+        } else if (selector == safeTransferFromPlusDataSelector) { // 5
+            ( , , ,uint256 tokenId, ) = abi.decode(data, (bytes4, address, address, uint256, bytes));
+            if (assetIsRented(NFT, tokenId)){
+                revert UnauthorizedOperation(to, data);
+            }
+        }
 
-        // // disallow actions on rented NFTs that could lead to a transfer
-        // if (selectorIsUnsafe(selector)){
-        //     IERC721 NFT = IERC721(to);
-        //     if (isATransferSelector(selector)) {
-
-        //     }
-        // }
+        // V1 design choice : after rental period, user can still use the asset as long as the owner doesn't
+        // reclaim it or another user doesn't rent it
     }
+
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
 
@@ -200,6 +208,7 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         address assetHolder = NFT.ownerOf(tokenId);
         if (currentLoan.endDate >= block.timestamp) {revert AssetUnavailable(currentLoan);}
         if (msg.sender != supplierOf[NFT][tokenId]) {revert OrderOnNotOwnedAsset(msg.sender);}
+        supplierOf[NFT][tokenId] = address(0);
         NFT.transferFrom(assetHolder, msg.sender, tokenId);
     }
 
@@ -224,6 +233,10 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         return (selector == safeTransferFromSelector || 
                 selector == safeTransferFromPlusDataSelector ||
                 selector == IERC721.transferFrom.selector);
+    }
+
+    function assetIsRented(IERC721 NFT, uint256 tokenId) internal view returns(bool) {
+        return supplierOf[NFT][tokenId] != address(0);
     }
 
     // fallback
