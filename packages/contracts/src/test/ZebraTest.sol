@@ -32,6 +32,8 @@ contract Owner is ERC721Holder {
 contract MyToken is ERC721, Ownable {
     using Counters for Counters.Counter;
 
+    uint256 private plays;
+
     Counters.Counter private _tokenIdCounter;
 
     constructor() ERC721("MyToken", "MTK") {}
@@ -40,6 +42,11 @@ contract MyToken is ERC721, Ownable {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
+    }
+
+    function play(uint256 tokenId) external {
+        require(ownerOf(tokenId) == msg.sender);
+        plays++;
     }
 }
 
@@ -138,6 +145,42 @@ contract ZebraTest is Test {
         vm.startPrank(address(owner));
         GnosisSafe(payable(proxy)).approveHash(txHash);
         vm.expectRevert(errorSelector);
+        GnosisSafe(payable(proxy)).execTransaction(
+            to,
+            0, 
+            call,          /// @param data Data payload of Safe transaction.
+            Enum.Operation.Call,
+            0, 
+            0, 
+            0,
+            address(0), 
+            payable(0), 
+            signature);
+        vm.stopPrank();
+    }
+
+    function execCallShouldRevert(address to, bytes memory call, bytes memory errorData) internal {
+        bytes memory emptyBytes;
+        bytes32 owner32 = bytes32(bytes.concat(bytes12(emptyBytes),bytes20(address(owner))));
+        bytes memory signature = bytes.concat(
+            owner32,             // r
+            bytes32(uint256(1)), // s
+            bytes1(uint8(1))     // v
+        );
+        bytes32 txHash = GnosisSafe(payable(proxy)).getTransactionHash(
+            to,
+            0, 
+            call,
+            Enum.Operation.Call,
+            0, 
+            0, 
+            0,
+            address(0), 
+            payable(0),
+            1);
+        vm.startPrank(address(owner));
+        GnosisSafe(payable(proxy)).approveHash(txHash);
+        vm.expectRevert(errorData);
         GnosisSafe(payable(proxy)).execTransaction(
             to,
             0, 

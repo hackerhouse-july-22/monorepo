@@ -14,6 +14,8 @@ import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
 import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
 
+import "forge-std/Test.sol";
+
 // dev P2 : 
 // - reduce uint size when possible
 // - handle payment in weth
@@ -118,10 +120,13 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         if (selector == IERC721.setApprovalForAll.selector) { // 1
             revert UnauthorizedOperation(to, data);
         } else if (selector == IERC721.approve.selector) { // 2
+            console.log("ha");
             ( , ,uint256 tokenId) = abi.decode(data, (bytes4, address, uint256));
+            console.log("ha");
             if (assetIsRented(NFT, tokenId)){
                 revert UnauthorizedOperation(to, data);
             }
+            console.log("ha");
         } else if (selector == safeTransferFromSelector ||
                    selector == IERC721.transferFrom.selector) { // 4
             ( , , ,uint256 tokenId) = abi.decode(data, (bytes4, address, address, uint256));
@@ -138,7 +143,6 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
         // V1 design choice : after rental period, user can still use the asset as long as the owner doesn't
         // reclaim it or another user doesn't rent it
     }
-
 
     function checkAfterExecution(bytes32 txHash, bool success) external {}
 
