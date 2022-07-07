@@ -15,7 +15,6 @@ const LinkButton: React.FC<LinkButtonProps> = ({
   ...props
 }) => {
   const router = useRouter();
-  console.log(router);
   return (
     <Button
       {...props}

@@ -30,11 +30,8 @@ export default function ConnectButton() {
           <Menu>
             <MenuButton
               as={Button}
-              variant="outline"
+              variant="secondary"
               rightIcon={<BiChevronDown />}
-              _hover={{
-                bgColor: "whiteAlpha.200",
-              }}
             >
               <Flex alignItems="center">
                 <Jazzicon
@@ -53,11 +50,8 @@ export default function ConnectButton() {
         </>
       ) : (
         <>
-          <Button variant="outline" onClick={connectWithMetaMask}>
+          <Button variant="secondary" onClick={connectWithMetaMask}>
             Connect MetaMask
-          </Button>
-          <Button variant="outline" onClick={connectWithCoinbaseWallet}>
-            Connect Coinbase
           </Button>
         </>
       )}

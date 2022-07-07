@@ -7,12 +7,14 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Icon,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { BiChevronDown } from "react-icons/bi";
 import LinkButton from "../LinkButton";
 import { useRouter } from "next/router";
 import { ZebraText } from "../Icons";
-import EthereumIcon from "../Icons/EthereumIcon";
+import ConnectButton from '@/components/ConnectButton';
+import EthIcon from "cryptocurrency-icons/svg/color/eth.svg";
 
 const Navbar = () => {
   const router = useRouter();
@@ -58,7 +60,7 @@ const Navbar = () => {
               as={Button}
               leftIcon="🇺🇸"
               rightIcon={
-                <ChevronDownIcon transform="scale(1.3) translate(0, 1px)" />
+                <BiChevronDown transform="scale(1.3) translate(0, 1px)" />
               }
             >
               US
@@ -71,22 +73,20 @@ const Navbar = () => {
             <MenuButton
               variant="unstyled"
               as={Button}
-              leftIcon={<EthereumIcon />}
+              leftIcon={<Icon as={EthIcon} h="16px" w="16px" transform="translate(0,1.5px)" />}
               rightIcon={
-                <ChevronDownIcon transform="scale(1.3) translate(0, 1px)" />
+                <BiChevronDown transform="scale(1.3) translate(0, 1px)" />
               }
             >
               ETH
             </MenuButton>
             <MenuList>
               <MenuItem>
-                <EthereumIcon /> ETH
+                ETH
               </MenuItem>
             </MenuList>
           </Menu>
-          <Button marginLeft="20px" variant="secondary">
-            Connect
-          </Button>
+          <ConnectButton />
         </HStack>
       </Grid>
     </>
