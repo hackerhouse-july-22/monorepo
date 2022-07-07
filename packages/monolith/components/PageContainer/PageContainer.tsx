@@ -3,6 +3,8 @@ import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import { useRouter } from "next/router";
+import { useAccount } from "@thirdweb-dev/react";
+import DisconnectedScreen from "@/components/DisconnectedScreen";
 
 type PageContainerProps = {
   title?: string;
@@ -17,6 +19,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
   imageUrl = "",
   children,
 }) => {
+  const account = useAccount();
   const { asPath } = useRouter();
   const url = `http://localhost:3000/${asPath}`;
   return (
@@ -40,7 +43,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
       </Head>
 
       <Navbar />
-      <Box as="main">{children}</Box>
+      <Box as="main">{account ? children : <DisconnectedScreen />}</Box>
     </>
   );
 };

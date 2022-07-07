@@ -3,13 +3,23 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import theme from "../theme";
 
+import { WagmiConfig, createClient } from "wagmi";
+import { getDefaultProvider } from "ethers";
+
+const client = createClient({
+  autoConnect: true,
+  provider: getDefaultProvider(),
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThirdwebProvider desiredChainId={ChainId.Polygon}>
-      <ChakraProvider theme={theme} resetCSS>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </ThirdwebProvider>
+    <WagmiConfig client={client}>
+      <ThirdwebProvider desiredChainId={ChainId.Polygon} autoConnect>
+        <ChakraProvider theme={theme} resetCSS>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </ThirdwebProvider>
+    </WagmiConfig>
   );
 }
 

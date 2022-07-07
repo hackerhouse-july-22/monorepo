@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/ConnectButton/ConnectButton.js"
+    "components/ConnectButton/ConnectButton"
   ],
   "exclude": ["node_modules"]
 }

@@ -75,12 +75,23 @@ const theme = extendTheme({
         height: "32px",
       },
       variants: {
+        outline: {
+          _hover: {
+            bgColor: "whiteAlpha.200",
+          },
+          _focused: {
+            bgColor: "whiteAlpha.200",
+          },
+          _selected: {
+            bgColor: "whiteAlpha.200",
+          },
+          _active: {
+            bgColor: "whiteAlpha.200",
+          },
+        },
         primary: {
           background: "blue.200",
           color: "blue.800",
-          _hover: {
-            background: "blue.300",
-          },
         },
         secondary: {
           background: "transparent",
@@ -94,9 +105,6 @@ const theme = extendTheme({
         text: {
           background: "transparent",
           color: "white",
-          _hover: {
-            background: "gray.700",
-          },
         },
       },
     },
