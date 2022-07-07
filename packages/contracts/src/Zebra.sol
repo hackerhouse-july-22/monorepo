@@ -27,10 +27,10 @@ import "./ZebraModule.sol";
 contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
 
-    GnosisSafe immutable ZEBRA_SAFE_SINGLETON;
-    GnosisSafeProxyFactory immutable FACTORY;
-    ZebraModule immutable ZEBRA_MODULE;
-    IWEth immutable WETH;
+    GnosisSafe immutable public ZEBRA_SAFE_SINGLETON;
+    GnosisSafeProxyFactory immutable public FACTORY;
+    ZebraModule immutable public ZEBRA_MODULE;
+    IWEth immutable public WETH;
 
     // config
     uint256 public minRentalDuration;

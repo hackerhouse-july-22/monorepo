@@ -20,8 +20,6 @@ contract Rent is ZebraTest {
         uint256 safeBalanceBefore = myNFT.balanceOf(address(proxy));
 
         zebra.rent{value: offer.pricePerSecond * 10 days}(
-            myNFT,
-            1,
             10 days,
             proxy,
             offer,
