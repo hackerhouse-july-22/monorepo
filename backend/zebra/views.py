@@ -6,16 +6,17 @@ from rest_framework import status
 
 from .models import ZebraNFT
 from .serializers import ZebraNFTSerializer
+from .abi import ZEBRA_TEST_ABI
 
 from thirdweb import ThirdwebSDK
 
 sdk = ThirdwebSDK("mumbai")
 
-ZEBRA_PROTOCOL_ADDRESS = '0x0000000000000000000000000000000000000001'
-zebraContract = sdk.get_contract(ZEBRA_PROTOCOL_ADDRESS)
+# ZEBRA_PROTOCOL_ADDRESS = '0x0000000000000000000000000000000000000001'
+# zebraContract = sdk.get_contract(ZEBRA_PROTOCOL_ADDRESS)
 # Can also use abi
-# zebraProtocolAbi = # insert abi here
-# zebraContractFromAbi = sdk.get_contract_from_abi(zebraProtocolAbi)
+
+zebraContractFromAbi = sdk.get_contract_from_abi(ZEBRA_TEST_ABI)
 
 class EthereumAuth(APIView):
     def post(self, request):
@@ -259,5 +260,23 @@ class DeleteZebraNFTView(APIView):
         except Exception as e:
             return Response(
                 {"error": f'Unable to delete entry {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class ZebraNFTListViewByPrice(APIView):
+    """
+    Grab all Zebra NFTs, and list by price
+    """
+    def get(self, request):
+        try:
+            nfts = ZebraNFT.objects.all().order_by('-pricePerSecond')
+            serializer = ZebraNFTSerializer(nfts, many=True)
+            return Response(
+                {"nfts": serializer.data},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

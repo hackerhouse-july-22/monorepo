@@ -28,7 +28,6 @@ class ZebraNFT(models.Model):
     maxRentDuration = models.IntegerField(blank=False, null=False)
     nonce = models.IntegerField(blank=False, null=False)
 
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -41,7 +40,6 @@ class Supplier(models.Model):
     Supplier model
     """
     address = models.CharField(max_length=42, blank=False, null=False)
-    nonce = models.IntegerField(blank=False, null=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
