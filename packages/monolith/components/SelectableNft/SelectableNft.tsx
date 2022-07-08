@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Button, Flex, Radio, Text } from "@chakra-ui/react";
 
-type SelectableImageProps = {
+type SelectableNftProps = {
   isSelected?: boolean;
   onClick?: () => void;
   imageUrl: string;
 };
 
-const SelectableImage: React.FC<SelectableImageProps> = ({
+const SelectableNft: React.FC<SelectableNftProps> = ({
   isSelected,
   onClick,
   imageUrl,
@@ -56,4 +56,4 @@ const SelectableImage: React.FC<SelectableImageProps> = ({
   </Box>
 );
 
-export default SelectableImage;
+export default SelectableNft;

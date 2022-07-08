@@ -5,6 +5,7 @@ import theme from "../theme";
 
 import { WagmiConfig, createClient } from "wagmi";
 import { getDefaultProvider } from "ethers";
+import Navbar from '@/components/Navbar';
 
 const client = createClient({
   autoConnect: true,
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig client={client}>
       <ThirdwebProvider desiredChainId={ChainId.Polygon} autoConnect>
         <ChakraProvider theme={theme} resetCSS>
+          <Navbar />
           <Component {...pageProps} />
         </ChakraProvider>
       </ThirdwebProvider>
