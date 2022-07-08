@@ -408,3 +408,5 @@ dist
 cache/solidity-files-cache.json
 
 broadcast
+deploy-rinkeby.sh
+create-safe-rinkeby.sh

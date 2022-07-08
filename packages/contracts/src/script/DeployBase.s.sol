@@ -6,11 +6,8 @@ import "forge-std/Script.sol";
 import "../Zebra.sol";
 import "../deps/WEth.sol";
 
-contract Deploy is Script {
-    function run() external {
-        vm.startBroadcast();
-        GnosisSafeProxyFactory factory = new GnosisSafeProxyFactory();
-        WEth weth = new WEth(); 
+contract DeployBase is Script {
+    function deploy(GnosisSafeProxyFactory factory, WEth weth) internal {
         Zebra zebra = new Zebra(factory, weth);
         console.log("zebra", address(zebra));
     }
