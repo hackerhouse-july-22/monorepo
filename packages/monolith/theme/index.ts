@@ -48,9 +48,11 @@ const theme = extendTheme({
     },
   },
   components: {
-    ModalContent: {
+    Modal: {
       baseStyle: {
-        background: "gray.800",
+        dialog: {
+          background: "gray.900",
+        },
       },
     },
     Container: {

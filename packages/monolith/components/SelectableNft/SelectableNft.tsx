@@ -5,12 +5,14 @@ type SelectableNftProps = {
   isSelected?: boolean;
   onClick?: () => void;
   imageUrl: string;
+  onEdit?: () => void;
 };
 
 const SelectableNft: React.FC<SelectableNftProps> = ({
   isSelected,
   onClick,
   imageUrl,
+  onEdit,
 }) => (
   <Box backgroundColor="blackAlpha.700" borderRadius={12} overflow="hidden">
     <Box p={4}>
@@ -49,7 +51,9 @@ const SelectableNft: React.FC<SelectableNftProps> = ({
             ETH 0.99
           </Text>
           <Box flex={1} />
-          <Button colorScheme="pink">Edit Price</Button>
+          <Button colorScheme="pink" onClick={onEdit}>
+            Edit Price
+          </Button>
         </Flex>
       </Flex>
     </Box>

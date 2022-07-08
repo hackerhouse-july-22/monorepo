@@ -9182,6 +9182,7 @@ __metadata:
     next-svgr: ^0.0.2
     react: 18.2.0
     react-dom: 18.2.0
+    react-hook-form: ^7.33.1
     react-icons: ^4.4.0
     react-jazzicon: ^1.0.4
     react-qrcode-svg: ^0.1.0
@@ -10172,6 +10173,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 4dbc2166ac397d9e9340bd0722c6165c23f21629515f13e9cb96eaff82aa1543a2f7f3cccf15689821f19166e3a3ce59f380c43643099eb119b5f9c529b23181
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.33.1":
+  version: 7.33.1
+  resolution: "react-hook-form@npm:7.33.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: ec8f938b5af32148956edc9a87b6a0a99cc305617925608961cf4352ad1a786daea9fdc4d15106aea2821937d27367a69ab525882f07c0bb7ea45fba5dbf8ff2
   languageName: node
   linkType: hard
 

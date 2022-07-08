@@ -8,6 +8,7 @@ type NftCardProps = {
   isDisabled?: boolean;
   primaryText?: string;
   secondaryText?: string;
+  onButtonClick?: () => void;
 };
 
 const NftCard: React.FC<NftCardProps> = ({
@@ -17,6 +18,7 @@ const NftCard: React.FC<NftCardProps> = ({
   buttonText,
   primaryText,
   secondaryText,
+  onButtonClick,
 }) => (
   <Box backgroundColor="blackAlpha.700" borderRadius={12} overflow="hidden">
     <Box p={4}>
@@ -52,7 +54,11 @@ const NftCard: React.FC<NftCardProps> = ({
           </Box>
           <Box flex={1} />
           {Boolean(buttonText) && (
-            <Button colorScheme="pink" isDisabled={isDisabled}>
+            <Button
+              colorScheme="pink"
+              isDisabled={isDisabled}
+              onClick={onButtonClick}
+            >
               {buttonText}
             </Button>
           )}
