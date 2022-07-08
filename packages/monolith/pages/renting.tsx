@@ -22,7 +22,7 @@ import NftCard from "@/components/NftCard";
 const RentingDashboard: NextPage = () => (
   <PageContainer>
     <Container>
-      <Heading as="h1" size="2xl">
+      <Heading as="h1" size="2xl" mt={12}>
         Borrowing
       </Heading>
       <SimpleGrid columns={3} spacing={4} mt={8}>

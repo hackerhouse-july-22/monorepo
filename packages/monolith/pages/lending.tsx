@@ -17,7 +17,7 @@ import NftCard from "@/components/NftCard";
 const Lending: React.FC = () => (
   <PageContainer>
     <Container>
-      <Heading as="h1" size="2xl">
+      <Heading as="h1" size="2xl" mt={12}>
         Supplied NFTs
       </Heading>
       <SimpleGrid columns={3} spacing={4} mt={8}>

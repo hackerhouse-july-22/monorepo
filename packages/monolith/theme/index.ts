@@ -102,8 +102,8 @@ const theme = extendTheme({
           },
         },
         primary: {
-          background: "blue.200",
-          color: "blue.800",
+          background: "pink.200",
+          color: "pink.800",
         },
         secondary: {
           background: "transparent",
@@ -113,6 +113,20 @@ const theme = extendTheme({
             background: "gray.700",
           },
           color: "white",
+        },
+        ghost: {
+          _hover: {
+            bg: "blackAlpha.200",
+          },
+          _focused: {
+            bg: "blackAlpha.200",
+          },
+          _selected: {
+            bg: "blackAlpha.200",
+          },
+          _active: {
+            bg: "blackAlpha.200",
+          },
         },
         text: {
           background: "transparent",

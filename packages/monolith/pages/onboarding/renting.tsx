@@ -5,7 +5,7 @@ import PageContainer from "@/components/PageContainer";
 const OnboardingRenting: NextPage = () => (
   <PageContainer>
     <Container textAlign="center" mx="auto">
-      <Heading as="h1" size="2xl">
+      <Heading as="h1" size="2xl" mt={12}>
         Let's setup your renting account...
       </Heading>
       <Text mt={4} maxW="600px" mx="auto">

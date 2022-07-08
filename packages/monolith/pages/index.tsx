@@ -1,17 +1,32 @@
 import type { NextPage } from "next";
-import Head from "next/head";
+import { Container, Heading, SimpleGrid } from "@chakra-ui/react";
+import React from "react";
+import PageContainer from "@/components/PageContainer";
+import GameCard from "@/components/GameCard";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Head>
-        <title>Zebra</title>
-        <meta name="description" content="NFT Rentals" />
-      </Head>
-      <div>
-        <h1>Welcome to Zebra (HOME FILL)</h1>
-      </div>
-    </>
+    <PageContainer>
+      <Container>
+        <Heading as="h1" size="2xl" textAlign="center" mt={12}>
+          Games 🎮
+        </Heading>
+        <SimpleGrid columns={2} mt={12} spacing={8}>
+          <GameCard
+            name="Snook"
+            numAssets={18}
+            imageUrl="https://www.esports.net/wp-content/uploads/2022/02/snook-game-review.jpg"
+            url="test"
+          />
+          <GameCard
+            name="Snook"
+            numAssets={18}
+            imageUrl="https://www.esports.net/wp-content/uploads/2022/02/snook-game-review.jpg"
+            url="snook"
+          />
+        </SimpleGrid>
+      </Container>
+    </PageContainer>
   );
 };
 
