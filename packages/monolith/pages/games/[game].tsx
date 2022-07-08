@@ -17,9 +17,14 @@ import { BsChevronRight } from "react-icons/bs";
 import GameNftCard from "@/components/GameNftCard";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { useAppDispatch } from 'store';
+import UseNftModal from '@/components/UseNftModal';
+import {show} from "@/slices/useNftModalSlice"
 
 const Game: NextPage = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
   return (
     <PageContainer px={8}>
       <Breadcrumb
@@ -66,8 +71,10 @@ const Game: NextPage = () => {
           price={123}
           minTime={12}
           maxTime={24}
+          onClick={() => dispatch(show("Snook Basic Snek"))}
         />
       </SimpleGrid>
+      <UseNftModal />
     </PageContainer>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Flex, Heading, Spacer, Tag, Text } from "@chakra-ui/react";
+import { BoxProps, Button, Flex, Heading, Spacer, Tag, Text } from "@chakra-ui/react";
 
 type GameNftCardProps = {
   imageUrl: string;
@@ -9,7 +9,7 @@ type GameNftCardProps = {
   price: number;
   minTime: number;
   maxTime: number;
-};
+} & BoxProps;
 
 const GameNftCard: React.FC<GameNftCardProps> = ({
   price,
@@ -19,6 +19,7 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
   minTime,
   canSupply,
   imageUrl,
+  ...props
 }) => (
   <Flex
     transition="all 0.2s ease"
@@ -30,6 +31,7 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
     height="400px"
     p={4}
     borderRadius={8}
+    {...props}
   >
     <Flex>
       {canSupply && <Button colorScheme="pink">Supply your NFT</Button>}
