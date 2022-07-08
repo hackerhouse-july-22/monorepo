@@ -74,7 +74,7 @@ const theme = extendTheme({
       baseStyle: {
         container: {
           backgroundColor: "gray.800",
-          borderColor: "pink.700",
+          borderColor: "pink.900",
           borderWidth: 2,
           borderRadius: 8,
           p: 5,
