@@ -11,8 +11,8 @@ import "./gnosis-safe/proxies/GnosisSafeProxy.sol";
 import "./gnosis-safe/base/GuardManager.sol";
 import "./gnosis-safe/base/ModuleManager.sol";
 import "./gnosis-safe/proxies/GnosisSafeProxyFactory.sol";
-import "./gnosis-safe/GnosisSafe.sol";
 import "./ZebraModule.sol";
+import "./ZebraInstaller.sol";
 
 // dev P2 : 
 // - reduce uint size when possible
@@ -27,10 +27,11 @@ import "./ZebraModule.sol";
 contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
 
-    GnosisSafe immutable public ZEBRA_SAFE_SINGLETON;
+    GnosisSafeL2 immutable public GNOSIS_SAFE_SINGLETON;
     GnosisSafeProxyFactory immutable public FACTORY;
     ZebraModule immutable public ZEBRA_MODULE;
     IWEth immutable public WETH;
+    ZebraInstaller immutable public INSTALLER;
 
     // config
     uint256 public minRentalDuration;
@@ -46,34 +47,33 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     mapping(IERC721 => mapping(uint256 => address)) public supplierOf;
 
     /// @param WEth WETH9-like contract for the chain deployed on
-    constructor(GnosisSafeProxyFactory factory, IWEth WEth) EIP712("Zebra", "1.0") {
-        ZEBRA_SAFE_SINGLETON = new GnosisSafe();
+    constructor(GnosisSafeProxyFactory factory, IWEth WEth, GnosisSafeL2 singleton) EIP712("Zebra", "1.0") {
+        GNOSIS_SAFE_SINGLETON = singleton;
         FACTORY = factory;
         ZEBRA_MODULE = new ZebraModule();
         minRentalDuration = 1 hours;
         WETH = WEth;
         minRentalPricePerSecond = 57870370370370; // 25cts/day with $MATIC @ 0.5$
         devCut = 500; // 5%
+        INSTALLER = new ZebraInstaller();
     }
 
     /// @notice deploys a zebra-allowed gnosis safe owned by `msg.sender`
     /// @return safe created zebra-registered gnosis safe
     function createZebraSafe() external returns(GnosisSafeProxy safe) {
-        bytes memory emptyData;
         address[] memory owners = new address[](1);
         owners[0] = msg.sender;
+        bytes memory installerDelegateCall = abi.encodeWithSelector(ZebraInstaller.install.selector, this, ZEBRA_MODULE);
         bytes memory data = abi.encodeWithSelector(GnosisSafe.setup.selector, 
             owners,                  /// @param _owners List of Safe owners.
             1,                       /// @param _threshold Number of required confirmations for a Safe transaction.
-            address(0),              /// @param to Contract address for optional delegate call.
-            emptyData,               /// @param data Data payload for optional delegate call.
+            address(INSTALLER),      /// @param to Contract address for optional delegate call.
+            installerDelegateCall,   /// @param data Data payload for optional delegate call.
             address(0),              /// @param fallbackHandler Handler for fallback calls to this contract
             address(0),              /// @param paymentToken Token that should be used for the payment (0 is ETH)
             0,                       /// @param payment Value that should be paid
-            address(0),              /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
-            address(this),           /// @param zebra main zebra protocol contract
-            address(ZEBRA_MODULE));  /// @param zebraModule zebra module used to keep token allowance
-        safe = FACTORY.createProxy(address(ZEBRA_SAFE_SINGLETON), data);
+            address(0));             /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
+        safe = FACTORY.createProxy(address(GNOSIS_SAFE_SINGLETON), data);
         isZebraRegistered[safe] = true;
 
         emit ZebraSafeDeploy(safe);
@@ -81,27 +81,20 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
 
     /// @notice called on execTransaction(), enforces the rules of renting
     /// @param to Destination address of Safe transaction.
-    /// @param value Ether value of Safe transaction.
     /// @param data Data payload of Safe transaction.
     /// @param operation Operation type of Safe transaction.
-    /// @param safeTxGas Gas that should be used for the Safe transaction.
-    /// @param baseGas Gas costs that are independent of the transaction execution(e.g. base transaction fee, signature check, payment of the refund)
-    /// @param gasPrice Gas price that should be used for the payment calculation.
-    /// @param gasToken Token address (or 0 if ETH) that is used for the payment.
-    /// @param refundReceiver Address of receiver of gas payment (or 0 if tx.origin).
-    /// @param signatures Packed signature data ({bytes32 r}{bytes32 s}{uint8 v})
     function checkTransaction(
         address to,
-        uint256 value,
+        uint256,
         bytes calldata data,
         Enum.Operation operation,
-        uint256 safeTxGas,
-        uint256 baseGas,
-        uint256 gasPrice,
-        address gasToken,
-        address payable refundReceiver,
-        bytes memory signatures,
-        address msgSender
+        uint256,
+        uint256,
+        uint256,
+        address,
+        address payable,
+        bytes memory,
+        address
     ) external view {
         bytes4 selector = bytes4(data);
         IERC721 NFT = IERC721(to);

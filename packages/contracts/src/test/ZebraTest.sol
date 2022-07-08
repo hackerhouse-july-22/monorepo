@@ -24,7 +24,7 @@ contract RandoContract {
 contract Owner is ERC721Holder {
     bytes4 constant internal MAGICVALUE = bytes4(keccak256("isValidSignature(bytes32,bytes)"));
 
-    function isValidSignature(bytes32 _hash, bytes memory _signature) public pure returns (bytes4 magicValue) {
+    function isValidSignature(bytes32, bytes memory) public pure returns (bytes4) {
         return MAGICVALUE;
     }
 }
@@ -56,6 +56,7 @@ contract ZebraTest is Test {
     Owner immutable owner; // treat as EOA
     address NFTHolder;
     GnosisSafeProxyFactory immutable factory;
+    GnosisSafeL2 immutable singleton;
     WEth immutable WETH;
     MyToken internal myNFT;
     
@@ -67,10 +68,11 @@ contract ZebraTest is Test {
         factory = new GnosisSafeProxyFactory();
         WETH = new WEth();
         alice = vm.addr(alicePrivateKey);
+        singleton = new GnosisSafeL2();
     }
 
     function setUp() public {
-        zebra = new Zebra(factory, WETH);
+        zebra = new Zebra(factory, WETH, singleton);
         vm.prank(address(owner));
         proxy = zebra.createZebraSafe();
         NFTHolder = address(new Owner());

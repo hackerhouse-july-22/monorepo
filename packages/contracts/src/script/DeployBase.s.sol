@@ -7,8 +7,8 @@ import "../Zebra.sol";
 import "../deps/WEth.sol";
 
 contract DeployBase is Script {
-    function deploy(GnosisSafeProxyFactory factory, WEth weth) internal {
-        Zebra zebra = new Zebra(factory, weth);
+    function deploy(GnosisSafeProxyFactory factory, WEth weth, GnosisSafeL2 singleton) internal {
+        Zebra zebra = new Zebra(factory, weth, singleton);
         console.log("zebra", address(zebra));
     }
 }

@@ -8,6 +8,7 @@ contract DeployRinkeby is DeployBase {
         vm.startBroadcast();
         GnosisSafeProxyFactory factory = GnosisSafeProxyFactory(0x76E2cFc1F5Fa8F6a5b3fC4c8F4788F0116861F9B);
         WEth weth = WEth(payable(0xDf032Bc4B9dC2782Bb09352007D4C57B75160B15)); 
-        deploy(factory, weth);
+        GnosisSafeL2 singleton = GnosisSafeL2(payable(0x3E5c63644E683549055b9Be8653de26E0B4CD36E));
+        deploy(factory, weth, singleton);
     }
 }

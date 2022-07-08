@@ -13,10 +13,6 @@ import "./common/StorageAccessible.sol";
 import "./interfaces/ISignatureValidator.sol";
 import "./external/GnosisSafeMath.sol";
 
-// the setup function is slightly modified for Zebra's purposes
-// dev P2 : 
-// - add on receive NFT hook
-
 /// @title Gnosis Safe - A multisignature wallet with support for confirmations using signed messages based on ERC191.
 /// @author Stefan George - <stefan@gnosis.io>
 /// @author Richard Meissner - <richard@gnosis.io>
@@ -76,8 +72,6 @@ contract GnosisSafe is
     /// @param paymentToken Token that should be used for the payment (0 is ETH)
     /// @param payment Value that should be paid
     /// @param paymentReceiver Address that should receive the payment (or 0 if tx.origin)
-    /// @param zebra main zebra protocol contract
-    /// @param zebraModule zebra module used to keep token allowance
     function setup(
         address[] calldata _owners,
         uint256 _threshold,
@@ -86,9 +80,7 @@ contract GnosisSafe is
         address fallbackHandler,
         address paymentToken,
         uint256 payment,
-        address payable paymentReceiver,
-        address zebra,
-        address zebraModule
+        address payable paymentReceiver
     ) external {
         // setupOwners checks if the Threshold is already set, therefore preventing that this method is called twice
         setupOwners(_owners, _threshold);
@@ -101,20 +93,6 @@ contract GnosisSafe is
             // baseGas = 0, gasPrice = 1 and gas = payment => amount = (payment + 0) * 1 = payment
             handlePayment(payment, 0, 1, paymentToken, paymentReceiver);
         }
-
-        // setGuard
-        bytes32 slot = GUARD_STORAGE_SLOT;
-        // solhint-disable-next-line no-inline-assembly
-        assembly {
-            sstore(slot, zebra)
-        }
-        emit ChangedGuard(zebra);
-
-        // enableModule
-        modules[zebraModule] = modules[SENTINEL_MODULES];
-        modules[SENTINEL_MODULES] = zebraModule;
-        emit EnabledModule(zebraModule); 
-
         emit SafeSetup(msg.sender, _owners, _threshold, to, fallbackHandler);
     }
 

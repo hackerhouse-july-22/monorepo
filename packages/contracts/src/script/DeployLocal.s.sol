@@ -6,8 +6,9 @@ import "./DeployBase.s.sol";
 contract DeployLocal is DeployBase {
     function run() external {
         vm.startBroadcast();
+        GnosisSafeL2 singleton = new GnosisSafeL2();
         GnosisSafeProxyFactory factory = new GnosisSafeProxyFactory();
         WEth weth = new WEth(); 
-        deploy(factory, weth);
+        deploy(factory, weth, singleton);
     }
 }
