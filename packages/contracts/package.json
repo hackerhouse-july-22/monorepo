@@ -1,7 +1,13 @@
 {
   "name": "contracts",
   "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "build": "forge build && yarn generate:types",
+    "generate:types": "typechain --target=ethers-v5 --out-dir ../shared/types 'out/**/*.json'"
+  },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.7.0"
+    "@openzeppelin/contracts": "^4.7.0",
+    "@typechain/ethers-v5": "^10.1.0",
+    "typechain": "^8.1.0"
   }
 }
