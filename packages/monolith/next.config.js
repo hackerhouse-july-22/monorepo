@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withSvgr = require("next-svgr");
+
+const nextConfig = withSvgr({
   reactStrictMode: true,
-};
+});
 
 module.exports = nextConfig;
