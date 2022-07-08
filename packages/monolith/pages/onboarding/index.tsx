@@ -13,7 +13,7 @@ import PageContainer from "../../components/PageContainer/PageContainer";
 const Onboarding: NextPage = () => (
   <PageContainer>
     <Container>
-      <Heading as="h1" size="2xl" textAlign="center">
+      <Heading as="h1" size="2xl" textAlign="center" mt={12}>
         Welcome to Zebra!
       </Heading>
       <HStack mt={16} maxW={800} mx="auto" spacing={8}>

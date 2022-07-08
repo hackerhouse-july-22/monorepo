@@ -21,7 +21,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
         onClick && onClick(e);
         router.push(href);
       }}
-      {...(router.asPath.indexOf(href) === 0 ? activeProps : {})}
+      {...(router.asPath === href ? activeProps : {})}
     />
   );
 };
