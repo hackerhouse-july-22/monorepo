@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import { useRouter } from "next/router";
 import { useAccount } from "@thirdweb-dev/react";
@@ -11,13 +11,14 @@ type PageContainerProps = {
   description?: string;
   imageUrl?: string;
   children?: ReactNode;
-};
+} & BoxProps;
 
 const PageContainer: React.FC<PageContainerProps> = ({
   title = "Zebra",
   description = "Zebra Time",
   imageUrl = "",
   children,
+  ...props
 }) => {
   const account = useAccount();
   const { asPath } = useRouter();
@@ -43,7 +44,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
       </Head>
 
       <Navbar />
-      <Box as="main" pb={8}>
+      <Box as="main" pb={8} {...props}>
         {account ? children : <DisconnectedScreen />}
       </Box>
     </>
