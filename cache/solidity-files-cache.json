@@ -12,7 +12,7 @@
   },
   "files": {
     "node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1657038299056,
+      "lastModificationDate": 1657151507108,
       "contentHash": "e436cea06129be2c73cda4b1acc848b5",
       "sourceName": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -50,12 +50,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "Ownable": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Ownable.sol/Ownable.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Ownable.sol/Ownable.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol": {
-      "lastModificationDate": 1657038299232,
+      "lastModificationDate": 1657151507263,
       "contentHash": "92f9448b23a90ea3bb932ee55cc3ccce",
       "sourceName": "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
       "solcConfig": {
@@ -91,12 +91,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "ReentrancyGuard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ReentrancyGuard.sol/ReentrancyGuard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ReentrancyGuard.sol/ReentrancyGuard.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1657038299164,
+      "lastModificationDate": 1657151507171,
       "contentHash": "79ff1a7eb801a525aa315fb7a679eede",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -141,12 +141,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "ERC721": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC721.sol/ERC721.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC721.sol/ERC721.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1657038299168,
+      "lastModificationDate": 1657151507174,
       "contentHash": "ec99d946db3685a3630554aa6055bd7f",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -184,12 +184,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "IERC721": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IERC721.sol/IERC721.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IERC721.sol/IERC721.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1657038299168,
+      "lastModificationDate": 1657151507175,
       "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -225,12 +225,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "IERC721Receiver": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IERC721Receiver.sol/IERC721Receiver.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IERC721Receiver.sol/IERC721Receiver.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1657038299164,
+      "lastModificationDate": 1657151507169,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -269,12 +269,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "IERC721Metadata": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IERC721Metadata.sol/IERC721Metadata.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IERC721Metadata.sol/IERC721Metadata.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol": {
-      "lastModificationDate": 1657038299164,
+      "lastModificationDate": 1657151507172,
       "contentHash": "54062ff887823a306b33ea6494a220bc",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol",
       "solcConfig": {
@@ -312,12 +312,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "ERC721Holder": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC721Holder.sol/ERC721Holder.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC721Holder.sol/ERC721Holder.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1657038299060,
+      "lastModificationDate": 1657151507109,
       "contentHash": "c476b3895a94798b88a4bb97399e6dfe",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -353,12 +353,12 @@
       "versionRequirement": "^0.8.1",
       "artifacts": {
         "Address": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Address.sol/Address.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Address.sol/Address.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1657038299076,
+      "lastModificationDate": 1657151507117,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -394,12 +394,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "Context": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Context.sol/Context.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Context.sol/Context.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1657038299076,
+      "lastModificationDate": 1657151507118,
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
@@ -435,12 +435,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "Counters": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Counters.sol/Counters.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Counters.sol/Counters.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1657038299112,
+      "lastModificationDate": 1657151507130,
       "contentHash": "cf46906c4035f51639a22265066a9e78",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -476,12 +476,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "Strings": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Strings.sol/Strings.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Strings.sol/Strings.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol": {
-      "lastModificationDate": 1657038299080,
+      "lastModificationDate": 1657151507120,
       "contentHash": "1dfb7cf7c7e2edae73403d50a59cc967",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
       "solcConfig": {
@@ -519,12 +519,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "ECDSA": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ECDSA.sol/ECDSA.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ECDSA.sol/ECDSA.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol": {
-      "lastModificationDate": 1657038299080,
+      "lastModificationDate": 1657151507119,
       "contentHash": "161aae4dc1450371d0f324488f66a9cf",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
       "solcConfig": {
@@ -563,12 +563,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "EIP712": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "draft-EIP712.sol/EIP712.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "draft-EIP712.sol/EIP712.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1657038299092,
+      "lastModificationDate": 1657151507123,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -606,12 +606,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "ERC165": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC165.sol/ERC165.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC165.sol/ERC165.json"
         }
       }
     },
     "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1657038299104,
+      "lastModificationDate": 1657151507125,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -647,12 +647,12 @@
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "IERC165": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IERC165.sol/IERC165.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IERC165.sol/IERC165.json"
         }
       }
     },
     "packages/contracts/lib/ds-test/src/test.sol": {
-      "lastModificationDate": 1657157737142,
+      "lastModificationDate": 1657315867532,
       "contentHash": "962996f0e05d5218857a538a62d7c47e",
       "sourceName": "packages/contracts/lib/ds-test/src/test.sol",
       "solcConfig": {
@@ -688,12 +688,12 @@
       "versionRequirement": ">=0.5.0",
       "artifacts": {
         "DSTest": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "test.sol/DSTest.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "test.sol/DSTest.json"
         }
       }
     },
     "packages/contracts/lib/forge-std/src/Script.sol": {
-      "lastModificationDate": 1657157737158,
+      "lastModificationDate": 1657315867663,
       "contentHash": "a24c6682dfdd459618422202d7b97fec",
       "sourceName": "packages/contracts/lib/forge-std/src/Script.sol",
       "solcConfig": {
@@ -733,12 +733,12 @@
       "versionRequirement": ">=0.6.0, <0.9.0",
       "artifacts": {
         "Script": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Script.sol/Script.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Script.sol/Script.json"
         }
       }
     },
     "packages/contracts/lib/forge-std/src/Test.sol": {
-      "lastModificationDate": 1657157737158,
+      "lastModificationDate": 1657315867664,
       "contentHash": "adda574ef53cb30afda008ea43fbb506",
       "sourceName": "packages/contracts/lib/forge-std/src/Test.sol",
       "solcConfig": {
@@ -780,21 +780,21 @@
       "versionRequirement": ">=0.6.0, <0.9.0",
       "artifacts": {
         "Test": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Test.sol/Test.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Test.sol/Test.json"
         },
         "stdError": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Test.sol/stdError.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Test.sol/stdError.json"
         },
         "stdMath": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Test.sol/stdMath.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Test.sol/stdMath.json"
         },
         "stdStorage": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Test.sol/stdStorage.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Test.sol/stdStorage.json"
         }
       }
     },
     "packages/contracts/lib/forge-std/src/Vm.sol": {
-      "lastModificationDate": 1657157737158,
+      "lastModificationDate": 1657315867664,
       "contentHash": "ce6987d09e4a6deea5f6b05da69fc042",
       "sourceName": "packages/contracts/lib/forge-std/src/Vm.sol",
       "solcConfig": {
@@ -830,12 +830,12 @@
       "versionRequirement": ">=0.6.0",
       "artifacts": {
         "Vm": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Vm.sol/Vm.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Vm.sol/Vm.json"
         }
       }
     },
     "packages/contracts/lib/forge-std/src/console.sol": {
-      "lastModificationDate": 1657157737158,
+      "lastModificationDate": 1657315867665,
       "contentHash": "100b8a33b917da1147740d7ab8b0ded3",
       "sourceName": "packages/contracts/lib/forge-std/src/console.sol",
       "solcConfig": {
@@ -871,12 +871,12 @@
       "versionRequirement": ">=0.4.22, <0.9.0",
       "artifacts": {
         "console": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "console.sol/console.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "console.sol/console.json"
         }
       }
     },
     "packages/contracts/lib/forge-std/src/console2.sol": {
-      "lastModificationDate": 1657157737158,
+      "lastModificationDate": 1657315867665,
       "contentHash": "5df91f8e93efbfcccf68973dc1b74a70",
       "sourceName": "packages/contracts/lib/forge-std/src/console2.sol",
       "solcConfig": {
@@ -912,13 +912,13 @@
       "versionRequirement": ">=0.4.22, <0.9.0",
       "artifacts": {
         "console2": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "console2.sol/console2.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "console2.sol/console2.json"
         }
       }
     },
     "packages/contracts/src/DataStructure.sol": {
-      "lastModificationDate": 1657157331306,
-      "contentHash": "e12e585bce76ab4ddc1b4f7e8704f0bf",
+      "lastModificationDate": 1657235791004,
+      "contentHash": "4f7c6b85f323f9523b1a83bebdcb641a",
       "sourceName": "packages/contracts/src/DataStructure.sol",
       "solcConfig": {
         "settings": {
@@ -957,13 +957,13 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "DataStructure": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "DataStructure.sol/DataStructure.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DataStructure.sol/DataStructure.json"
         }
       }
     },
     "packages/contracts/src/Zebra.sol": {
-      "lastModificationDate": 1657157331306,
-      "contentHash": "ef81db9ddc6197adc9e0ad0f52627ff4",
+      "lastModificationDate": 1657315714845,
+      "contentHash": "4e409767bb76b859023ce35ddc096ee9",
       "sourceName": "packages/contracts/src/Zebra.sol",
       "solcConfig": {
         "settings": {
@@ -1004,9 +1004,12 @@
         "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
         "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/deps/IWEth.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
         "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
         "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
@@ -1028,12 +1031,86 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "Zebra": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Zebra.sol/Zebra.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Zebra.sol/Zebra.json"
+        }
+      }
+    },
+    "packages/contracts/src/ZebraInstaller.sol": {
+      "lastModificationDate": 1657315714845,
+      "contentHash": "f030e4e8663364283c74ec86c2533c8e",
+      "sourceName": "packages/contracts/src/ZebraInstaller.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
+        "packages/contracts/src/ZebraModule.sol",
+        "packages/contracts/src/deps/IWEth.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "ZebraInstaller": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraInstaller.sol/ZebraInstaller.json"
         }
       }
     },
     "packages/contracts/src/ZebraModule.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016071,
       "contentHash": "205e11da95d3d8464ed182e04c8b0194",
       "sourceName": "packages/contracts/src/ZebraModule.sol",
       "solcConfig": {
@@ -1073,15 +1150,15 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "IGnosisSafe": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraModule.sol/IGnosisSafe.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraModule.sol/IGnosisSafe.json"
         },
         "ZebraModule": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraModule.sol/ZebraModule.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraModule.sol/ZebraModule.json"
         }
       }
     },
     "packages/contracts/src/deps/IWEth.sol": {
-      "lastModificationDate": 1657157331306,
+      "lastModificationDate": 1657151016071,
       "contentHash": "fc1ee92bfdec5c67b1a04b13b2117f30",
       "sourceName": "packages/contracts/src/deps/IWEth.sol",
       "solcConfig": {
@@ -1117,13 +1194,13 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "IWEth": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IWEth.sol/IWEth.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IWEth.sol/IWEth.json"
         }
       }
     },
     "packages/contracts/src/deps/WEth.sol": {
-      "lastModificationDate": 1657157331306,
-      "contentHash": "f9281f58edbd9aad20af76a4eabcbf15",
+      "lastModificationDate": 1657315714846,
+      "contentHash": "9e764b5ab99ad887d67f43012232944b",
       "sourceName": "packages/contracts/src/deps/WEth.sol",
       "solcConfig": {
         "settings": {
@@ -1160,13 +1237,13 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "WEth": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "WEth.sol/WEth.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "WEth.sol/WEth.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/GnosisSafe.sol": {
-      "lastModificationDate": 1657157331306,
-      "contentHash": "9192b07528a981f599c17efd52eb0d6c",
+      "lastModificationDate": 1657315714846,
+      "contentHash": "de68f8747b0480a923ad6652aa7c2ef3",
       "sourceName": "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
       "solcConfig": {
         "settings": {
@@ -1217,12 +1294,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafe": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafe.sol/GnosisSafe.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafe.sol/GnosisSafe.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "b7617493b9f2a136251658cc880640e9",
       "sourceName": "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
       "solcConfig": {
@@ -1275,12 +1352,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafeL2": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeL2.sol/GnosisSafeL2.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeL2.sol/GnosisSafeL2.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/accessors/SimulateTxAccessor.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "54a9a2ed1655e1b79bfc6651f2e3c032",
       "sourceName": "packages/contracts/src/gnosis-safe/accessors/SimulateTxAccessor.sol",
       "solcConfig": {
@@ -1319,12 +1396,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "SimulateTxAccessor": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "SimulateTxAccessor.sol/SimulateTxAccessor.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "SimulateTxAccessor.sol/SimulateTxAccessor.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/base/Executor.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "5d439865306475654cf018596f1b1061",
       "sourceName": "packages/contracts/src/gnosis-safe/base/Executor.sol",
       "solcConfig": {
@@ -1362,12 +1439,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "Executor": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Executor.sol/Executor.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Executor.sol/Executor.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/base/FallbackManager.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "3247316e45ba683ad526769217c7ab66",
       "sourceName": "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
       "solcConfig": {
@@ -1405,12 +1482,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "FallbackManager": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "FallbackManager.sol/FallbackManager.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "FallbackManager.sol/FallbackManager.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/base/GuardManager.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "067db711a11c71db5dcdc9ffbb0baa4c",
       "sourceName": "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
       "solcConfig": {
@@ -1450,18 +1527,18 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "BaseGuard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GuardManager.sol/BaseGuard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GuardManager.sol/BaseGuard.json"
         },
         "Guard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GuardManager.sol/Guard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GuardManager.sol/Guard.json"
         },
         "GuardManager": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GuardManager.sol/GuardManager.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GuardManager.sol/GuardManager.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/base/ModuleManager.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016072,
       "contentHash": "90b2541c32a7644991f6ec3510dc3776",
       "sourceName": "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
       "solcConfig": {
@@ -1501,12 +1578,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ModuleManager": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ModuleManager.sol/ModuleManager.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ModuleManager.sol/ModuleManager.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/base/OwnerManager.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "53e497cc090cb4931ca5905d7f671cc5",
       "sourceName": "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
       "solcConfig": {
@@ -1544,12 +1621,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "OwnerManager": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "OwnerManager.sol/OwnerManager.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "OwnerManager.sol/OwnerManager.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/Enum.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "70d93d6b3e8b23f419fe3e529a43c17e",
       "sourceName": "packages/contracts/src/gnosis-safe/common/Enum.sol",
       "solcConfig": {
@@ -1585,12 +1662,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "Enum": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Enum.sol/Enum.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Enum.sol/Enum.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "566ab89634daf8e542177b1e7016971e",
       "sourceName": "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
       "solcConfig": {
@@ -1626,12 +1703,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "EtherPaymentFallback": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "EtherPaymentFallback.sol/EtherPaymentFallback.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "EtherPaymentFallback.sol/EtherPaymentFallback.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "80c88034d9e09f88f6853fc707cf03c6",
       "sourceName": "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
       "solcConfig": {
@@ -1667,12 +1744,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "SecuredTokenTransfer": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "SecuredTokenTransfer.sol/SecuredTokenTransfer.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "SecuredTokenTransfer.sol/SecuredTokenTransfer.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "4c773e803298d5521ba60d7fc06df0b3",
       "sourceName": "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
       "solcConfig": {
@@ -1708,12 +1785,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "SelfAuthorized": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "SelfAuthorized.sol/SelfAuthorized.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "SelfAuthorized.sol/SelfAuthorized.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "2284c5df4444ca9b2cf4a38a45d85650",
       "sourceName": "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
       "solcConfig": {
@@ -1749,12 +1826,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "SignatureDecoder": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "SignatureDecoder.sol/SignatureDecoder.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "SignatureDecoder.sol/SignatureDecoder.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/Singleton.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016073,
       "contentHash": "334ef119459ae9a5487c6bd346752778",
       "sourceName": "packages/contracts/src/gnosis-safe/common/Singleton.sol",
       "solcConfig": {
@@ -1790,12 +1867,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "Singleton": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Singleton.sol/Singleton.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Singleton.sol/Singleton.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016074,
       "contentHash": "6fa2dc51af34831e6b0fff6197165ed0",
       "sourceName": "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
       "solcConfig": {
@@ -1831,12 +1908,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "StorageAccessible": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "StorageAccessible.sol/StorageAccessible.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "StorageAccessible.sol/StorageAccessible.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/examples/guards/DebugTransactionGuard.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016074,
       "contentHash": "2029954056fe52fea83f7bcd007a686b",
       "sourceName": "packages/contracts/src/gnosis-safe/examples/guards/DebugTransactionGuard.sol",
       "solcConfig": {
@@ -1889,12 +1966,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "DebugTransactionGuard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "DebugTransactionGuard.sol/DebugTransactionGuard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DebugTransactionGuard.sol/DebugTransactionGuard.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/examples/guards/DelegateCallTransactionGuard.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016074,
       "contentHash": "8eb1cc3d5ccab8c4b7042e28b36c831f",
       "sourceName": "packages/contracts/src/gnosis-safe/examples/guards/DelegateCallTransactionGuard.sol",
       "solcConfig": {
@@ -1947,12 +2024,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "DelegateCallTransactionGuard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "DelegateCallTransactionGuard.sol/DelegateCallTransactionGuard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DelegateCallTransactionGuard.sol/DelegateCallTransactionGuard.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/examples/guards/ReentrancyTransactionGuard.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016074,
       "contentHash": "485dee02cfc88f89548b7920b7664fba",
       "sourceName": "packages/contracts/src/gnosis-safe/examples/guards/ReentrancyTransactionGuard.sol",
       "solcConfig": {
@@ -2005,12 +2082,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ReentrancyTransactionGuard": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ReentrancyTransactionGuard.sol/ReentrancyTransactionGuard.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ReentrancyTransactionGuard.sol/ReentrancyTransactionGuard.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/examples/libraries/Migrate_1_3_0_to_1_2_0.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016074,
       "contentHash": "71f74e4918d7f3b42f05c52f96143bb7",
       "sourceName": "packages/contracts/src/gnosis-safe/examples/libraries/Migrate_1_3_0_to_1_2_0.sol",
       "solcConfig": {
@@ -2048,12 +2125,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "Migration": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Migrate_1_3_0_to_1_2_0.sol/Migration.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Migrate_1_3_0_to_1_2_0.sol/Migration.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016075,
       "contentHash": "0b98e5ff6cd364731017082744cf5706",
       "sourceName": "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
       "solcConfig": {
@@ -2089,140 +2166,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafeMath": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeMath.sol/GnosisSafeMath.json"
-        }
-      }
-    },
-    "packages/contracts/src/gnosis-safe/handler/CompatibilityFallbackHandler.sol": {
-      "lastModificationDate": 1657070836920,
-      "contentHash": "e80fa7977b3542810705014fbfbaab87",
-      "sourceName": "packages/contracts/src/gnosis-safe/handler/CompatibilityFallbackHandler.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs"
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "debug": {
-            "revertStrings": "default"
-          },
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": null,
-      "artifacts": {
-        "CompatibilityFallbackHandler": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "CompatibilityFallbackHandler.sol/CompatibilityFallbackHandler.json"
-        }
-      }
-    },
-    "packages/contracts/src/gnosis-safe/handler/DefaultCallbackHandler.sol": {
-      "lastModificationDate": 1657070836920,
-      "contentHash": "5a4fbd56521d514530c7f6206e8eca89",
-      "sourceName": "packages/contracts/src/gnosis-safe/handler/DefaultCallbackHandler.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs"
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "debug": {
-            "revertStrings": "default"
-          },
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "packages/contracts/src/gnosis-safe/interfaces/ERC1155TokenReceiver.sol",
-        "packages/contracts/src/gnosis-safe/interfaces/ERC721TokenReceiver.sol",
-        "packages/contracts/src/gnosis-safe/interfaces/ERC777TokensRecipient.sol",
-        "packages/contracts/src/gnosis-safe/interfaces/IERC165.sol"
-      ],
-      "versionRequirement": ">=0.7.0, <0.9.0",
-      "artifacts": {
-        "DefaultCallbackHandler": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "DefaultCallbackHandler.sol/DefaultCallbackHandler.json"
-        }
-      }
-    },
-    "packages/contracts/src/gnosis-safe/handler/HandlerContext.sol": {
-      "lastModificationDate": 1657070836920,
-      "contentHash": "600738543f914c11e793b0fef5e705c8",
-      "sourceName": "packages/contracts/src/gnosis-safe/handler/HandlerContext.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs"
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "debug": {
-            "revertStrings": "default"
-          },
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": ">=0.7.0, <0.9.0",
-      "artifacts": {
-        "HandlerContext": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "HandlerContext.sol/HandlerContext.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeMath.sol/GnosisSafeMath.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/interfaces/ERC1155TokenReceiver.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016075,
       "contentHash": "1d63defb083613ac870a97490f3635ba",
       "sourceName": "packages/contracts/src/gnosis-safe/interfaces/ERC1155TokenReceiver.sol",
       "solcConfig": {
@@ -2258,12 +2207,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ERC1155TokenReceiver": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC1155TokenReceiver.sol/ERC1155TokenReceiver.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC1155TokenReceiver.sol/ERC1155TokenReceiver.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/interfaces/ERC721TokenReceiver.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016075,
       "contentHash": "ffac82dd785c225e65d296c1c6596d5a",
       "sourceName": "packages/contracts/src/gnosis-safe/interfaces/ERC721TokenReceiver.sol",
       "solcConfig": {
@@ -2299,12 +2248,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ERC721TokenReceiver": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC721TokenReceiver.sol/ERC721TokenReceiver.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC721TokenReceiver.sol/ERC721TokenReceiver.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/interfaces/ERC777TokensRecipient.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "38601f7aa7b8c19d689915aeda071ef0",
       "sourceName": "packages/contracts/src/gnosis-safe/interfaces/ERC777TokensRecipient.sol",
       "solcConfig": {
@@ -2340,53 +2289,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ERC777TokensRecipient": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ERC777TokensRecipient.sol/ERC777TokensRecipient.json"
-        }
-      }
-    },
-    "packages/contracts/src/gnosis-safe/interfaces/IERC165.sol": {
-      "lastModificationDate": 1657070836920,
-      "contentHash": "2d418698dff7323e4f199ff8633d1a3a",
-      "sourceName": "packages/contracts/src/gnosis-safe/interfaces/IERC165.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "bytecodeHash": "ipfs"
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers"
-              ]
-            }
-          },
-          "evmVersion": "london",
-          "debug": {
-            "revertStrings": "default"
-          },
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": ">=0.7.0, <0.9.0",
-      "artifacts": {
-        "IERC165": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IERC165.sol/IERC165.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ERC777TokensRecipient.sol/ERC777TokensRecipient.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "45be433b79d00dd9f3b8047489c3ff80",
       "sourceName": "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
       "solcConfig": {
@@ -2422,15 +2330,15 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "ISignatureValidator": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ISignatureValidator.sol/ISignatureValidator.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ISignatureValidator.sol/ISignatureValidator.json"
         },
         "ISignatureValidatorConstants": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ISignatureValidator.sol/ISignatureValidatorConstants.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ISignatureValidator.sol/ISignatureValidatorConstants.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/interfaces/ViewStorageAccessible.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "37eefaaae55281b6b8ef1a856078b00c",
       "sourceName": "packages/contracts/src/gnosis-safe/interfaces/ViewStorageAccessible.sol",
       "solcConfig": {
@@ -2466,12 +2374,12 @@
       "versionRequirement": ">=0.5.0, <0.6.0",
       "artifacts": {
         "ViewStorageAccessible": {
-          "0.5.17+commit.d19bba13.Linux.gcc": "ViewStorageAccessible.sol/ViewStorageAccessible.json"
+          "0.5.17+commit.d19bba13.Darwin.appleclang": "ViewStorageAccessible.sol/ViewStorageAccessible.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/libraries/CreateCall.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "5b39e17ce475af78bc0a7cbdc1472c32",
       "sourceName": "packages/contracts/src/gnosis-safe/libraries/CreateCall.sol",
       "solcConfig": {
@@ -2507,12 +2415,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "CreateCall": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "CreateCall.sol/CreateCall.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "CreateCall.sol/CreateCall.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/libraries/GnosisSafeStorage.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "9e010520759c9b177c06c9654c3169a1",
       "sourceName": "packages/contracts/src/gnosis-safe/libraries/GnosisSafeStorage.sol",
       "solcConfig": {
@@ -2548,12 +2456,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafeStorage": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeStorage.sol/GnosisSafeStorage.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeStorage.sol/GnosisSafeStorage.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/libraries/MultiSend.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016076,
       "contentHash": "a7b41ac2932ddd3c1d11c7076ace270d",
       "sourceName": "packages/contracts/src/gnosis-safe/libraries/MultiSend.sol",
       "solcConfig": {
@@ -2589,12 +2497,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "MultiSend": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "MultiSend.sol/MultiSend.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "MultiSend.sol/MultiSend.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/libraries/MultiSendCallOnly.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016077,
       "contentHash": "121202ac209e67a2a6f0cb22f0133a0a",
       "sourceName": "packages/contracts/src/gnosis-safe/libraries/MultiSendCallOnly.sol",
       "solcConfig": {
@@ -2630,12 +2538,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "MultiSendCallOnly": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "MultiSendCallOnly.sol/MultiSendCallOnly.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "MultiSendCallOnly.sol/MultiSendCallOnly.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/libraries/SignMessageLib.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016077,
       "contentHash": "dba0ccb1d62a9e2bcfd354eeb22a505d",
       "sourceName": "packages/contracts/src/gnosis-safe/libraries/SignMessageLib.sol",
       "solcConfig": {
@@ -2689,12 +2597,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "SignMessageLib": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "SignMessageLib.sol/SignMessageLib.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "SignMessageLib.sol/SignMessageLib.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016077,
       "contentHash": "eba113f6899fe142a2081f63aded8c83",
       "sourceName": "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
       "solcConfig": {
@@ -2730,15 +2638,15 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafeProxy": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeProxy.sol/GnosisSafeProxy.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeProxy.sol/GnosisSafeProxy.json"
         },
         "IProxy": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeProxy.sol/IProxy.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeProxy.sol/IProxy.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016077,
       "contentHash": "68e356db0b371d087168fef106757980",
       "sourceName": "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
       "solcConfig": {
@@ -2777,12 +2685,12 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "GnosisSafeProxyFactory": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "GnosisSafeProxyFactory.sol/GnosisSafeProxyFactory.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "GnosisSafeProxyFactory.sol/GnosisSafeProxyFactory.json"
         }
       }
     },
     "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol": {
-      "lastModificationDate": 1657070836920,
+      "lastModificationDate": 1657151016077,
       "contentHash": "e73c0b8a985873c817469f5c6038e233",
       "sourceName": "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol",
       "solcConfig": {
@@ -2820,14 +2728,14 @@
       "versionRequirement": ">=0.7.0, <0.9.0",
       "artifacts": {
         "IProxyCreationCallback": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "IProxyCreationCallback.sol/IProxyCreationCallback.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "IProxyCreationCallback.sol/IProxyCreationCallback.json"
         }
       }
     },
-    "packages/contracts/src/script/Deploy.s.sol": {
-      "lastModificationDate": 1657157331306,
-      "contentHash": "cebbf4c60a3e0cb366067ec446c95505",
-      "sourceName": "packages/contracts/src/script/Deploy.s.sol",
+    "packages/contracts/src/script/DeployAZebraSafeRinkeby.s.sol": {
+      "lastModificationDate": 1657315714847,
+      "contentHash": "1358a26e8ee07633ddfaaa6524e41801",
+      "sourceName": "packages/contracts/src/script/DeployAZebraSafeRinkeby.s.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -2872,10 +2780,11 @@
         "packages/contracts/lib/forge-std/src/console2.sol",
         "packages/contracts/src/DataStructure.sol",
         "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/deps/IWEth.sol",
-        "packages/contracts/src/deps/WEth.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
         "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
         "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
@@ -2896,13 +2805,321 @@
       ],
       "versionRequirement": "=0.8.15",
       "artifacts": {
-        "Deploy": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Deploy.s.sol/Deploy.json"
+        "DeployAZebraSafeRinkeby": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DeployAZebraSafeRinkeby.s.sol/DeployAZebraSafeRinkeby.json"
+        }
+      }
+    },
+    "packages/contracts/src/script/DeployBase.s.sol": {
+      "lastModificationDate": 1657315714847,
+      "contentHash": "920304a7357d15302aba7d2f56a698a5",
+      "sourceName": "packages/contracts/src/script/DeployBase.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
+        "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
+        "packages/contracts/src/ZebraModule.sol",
+        "packages/contracts/src/deps/IWEth.sol",
+        "packages/contracts/src/deps/WEth.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "DeployBase": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DeployBase.s.sol/DeployBase.json"
+        }
+      }
+    },
+    "packages/contracts/src/script/DeployLocal.s.sol": {
+      "lastModificationDate": 1657315714847,
+      "contentHash": "6374c52164238730d70a31ff7231d20b",
+      "sourceName": "packages/contracts/src/script/DeployLocal.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
+        "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
+        "packages/contracts/src/ZebraModule.sol",
+        "packages/contracts/src/deps/IWEth.sol",
+        "packages/contracts/src/deps/WEth.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol",
+        "packages/contracts/src/script/DeployBase.s.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "DeployLocal": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DeployLocal.s.sol/DeployLocal.json"
+        }
+      }
+    },
+    "packages/contracts/src/script/DeployRinkeby.s.sol": {
+      "lastModificationDate": 1657315714848,
+      "contentHash": "82e4fefeba8b29be140c3e1c7dde8a26",
+      "sourceName": "packages/contracts/src/script/DeployRinkeby.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
+        "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
+        "packages/contracts/src/ZebraModule.sol",
+        "packages/contracts/src/deps/IWEth.sol",
+        "packages/contracts/src/deps/WEth.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol",
+        "packages/contracts/src/script/DeployBase.s.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "DeployRinkeby": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "DeployRinkeby.s.sol/DeployRinkeby.json"
+        }
+      }
+    },
+    "packages/contracts/src/script/ExperimentDeployGnosis.s.sol": {
+      "lastModificationDate": 1657315714848,
+      "contentHash": "c022b7335794182d405888466f6070b3",
+      "sourceName": "packages/contracts/src/script/ExperimentDeployGnosis.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "ExperimentDeployGnosis": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ExperimentDeployGnosis.s.sol/ExperimentDeployGnosis.json"
+        },
+        "Intermediaire": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ExperimentDeployGnosis.s.sol/Intermediaire.json"
         }
       }
     },
     "packages/contracts/src/test/Deploy.t.sol": {
-      "lastModificationDate": 1657157331306,
+      "lastModificationDate": 1657151016077,
       "contentHash": "abdbc749a67eb86cade073fccd8a0d52",
       "sourceName": "packages/contracts/src/test/Deploy.t.sol",
       "solcConfig": {
@@ -2958,10 +3175,12 @@
         "packages/contracts/lib/forge-std/src/console2.sol",
         "packages/contracts/src/DataStructure.sol",
         "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/deps/IWEth.sol",
         "packages/contracts/src/deps/WEth.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
         "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
         "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
@@ -2984,13 +3203,102 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "Deploy": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Deploy.t.sol/Deploy.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Deploy.t.sol/Deploy.json"
+        }
+      }
+    },
+    "packages/contracts/src/test/Payment.t.sol": {
+      "lastModificationDate": 1657235791005,
+      "contentHash": "3dd24dbf3f6da2e2bd09b65748fd56ae",
+      "sourceName": "packages/contracts/src/test/Payment.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs"
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "debug": {
+            "revertStrings": "default"
+          },
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Counters.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/ECDSA.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "packages/contracts/lib/ds-test/src/test.sol",
+        "packages/contracts/lib/forge-std/src/Script.sol",
+        "packages/contracts/lib/forge-std/src/Test.sol",
+        "packages/contracts/lib/forge-std/src/Vm.sol",
+        "packages/contracts/lib/forge-std/src/console.sol",
+        "packages/contracts/lib/forge-std/src/console2.sol",
+        "packages/contracts/src/DataStructure.sol",
+        "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
+        "packages/contracts/src/ZebraModule.sol",
+        "packages/contracts/src/deps/IWEth.sol",
+        "packages/contracts/src/deps/WEth.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
+        "packages/contracts/src/gnosis-safe/base/Executor.sol",
+        "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
+        "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
+        "packages/contracts/src/gnosis-safe/base/ModuleManager.sol",
+        "packages/contracts/src/gnosis-safe/base/OwnerManager.sol",
+        "packages/contracts/src/gnosis-safe/common/Enum.sol",
+        "packages/contracts/src/gnosis-safe/common/EtherPaymentFallback.sol",
+        "packages/contracts/src/gnosis-safe/common/SecuredTokenTransfer.sol",
+        "packages/contracts/src/gnosis-safe/common/SelfAuthorized.sol",
+        "packages/contracts/src/gnosis-safe/common/SignatureDecoder.sol",
+        "packages/contracts/src/gnosis-safe/common/Singleton.sol",
+        "packages/contracts/src/gnosis-safe/common/StorageAccessible.sol",
+        "packages/contracts/src/gnosis-safe/external/GnosisSafeMath.sol",
+        "packages/contracts/src/gnosis-safe/interfaces/ISignatureValidator.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxy.sol",
+        "packages/contracts/src/gnosis-safe/proxies/GnosisSafeProxyFactory.sol",
+        "packages/contracts/src/gnosis-safe/proxies/IProxyCreationCallback.sol",
+        "packages/contracts/src/test/ZebraTest.sol"
+      ],
+      "versionRequirement": "=0.8.15",
+      "artifacts": {
+        "Payment": {
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Payment.t.sol/Payment.json"
         }
       }
     },
     "packages/contracts/src/test/Rent.t.sol": {
-      "lastModificationDate": 1657157331310,
-      "contentHash": "12a98d79a3149f2a341480f6a55b1864",
+      "lastModificationDate": 1657235791006,
+      "contentHash": "f310ee842e72ebe53116455caf54bda6",
       "sourceName": "packages/contracts/src/test/Rent.t.sol",
       "solcConfig": {
         "settings": {
@@ -3045,10 +3353,12 @@
         "packages/contracts/lib/forge-std/src/console2.sol",
         "packages/contracts/src/DataStructure.sol",
         "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/deps/IWEth.sol",
         "packages/contracts/src/deps/WEth.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
         "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
         "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
@@ -3071,13 +3381,13 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "Rent": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "Rent.t.sol/Rent.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "Rent.t.sol/Rent.json"
         }
       }
     },
     "packages/contracts/src/test/ZebraTest.sol": {
-      "lastModificationDate": 1657157331310,
-      "contentHash": "7095b390ef53351397d9e0bf7e9cb0f2",
+      "lastModificationDate": 1657315714848,
+      "contentHash": "dfc2fb6272749460a85df2a7bb9f8791",
       "sourceName": "packages/contracts/src/test/ZebraTest.sol",
       "solcConfig": {
         "settings": {
@@ -3132,10 +3442,12 @@
         "packages/contracts/lib/forge-std/src/console2.sol",
         "packages/contracts/src/DataStructure.sol",
         "packages/contracts/src/Zebra.sol",
+        "packages/contracts/src/ZebraInstaller.sol",
         "packages/contracts/src/ZebraModule.sol",
         "packages/contracts/src/deps/IWEth.sol",
         "packages/contracts/src/deps/WEth.sol",
         "packages/contracts/src/gnosis-safe/GnosisSafe.sol",
+        "packages/contracts/src/gnosis-safe/GnosisSafeL2.sol",
         "packages/contracts/src/gnosis-safe/base/Executor.sol",
         "packages/contracts/src/gnosis-safe/base/FallbackManager.sol",
         "packages/contracts/src/gnosis-safe/base/GuardManager.sol",
@@ -3157,16 +3469,16 @@
       "versionRequirement": "=0.8.15",
       "artifacts": {
         "MyToken": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraTest.sol/MyToken.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraTest.sol/MyToken.json"
         },
         "Owner": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraTest.sol/Owner.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraTest.sol/Owner.json"
         },
         "RandoContract": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraTest.sol/RandoContract.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraTest.sol/RandoContract.json"
         },
         "ZebraTest": {
-          "0.8.15+commit.e14f2714.Linux.gcc": "ZebraTest.sol/ZebraTest.json"
+          "0.8.15+commit.e14f2714.Darwin.appleclang": "ZebraTest.sol/ZebraTest.json"
         }
       }
     }
