@@ -17,14 +17,16 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/theme/*": ["theme/*"]
+      "@/slices/*": ["slices/*"],
+      "@/theme/*": ["theme/*"],
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/ConnectButton/ConnectButton"
-, "slices/zebraApi.js"  ],
+    "components/ConnectButton/ConnectButton",
+    // "slices/zebraApi.js"  
+  ],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import {
   useUpdateNftListingMutation,
-} from '../../../slices/zebraApi'
+} from '@/slices/zebraApi';
 
 
 export default function UpdateNFT() {

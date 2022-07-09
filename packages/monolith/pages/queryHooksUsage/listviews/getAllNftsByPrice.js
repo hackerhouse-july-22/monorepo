@@ -1,7 +1,7 @@
 import {
   useGetNftsByPriceQuery,
   useLazyGetNftsByPriceQuery,
-} from '../../../slices/zebraApi'
+} from '@/slices/zebraApi';
 
 
 

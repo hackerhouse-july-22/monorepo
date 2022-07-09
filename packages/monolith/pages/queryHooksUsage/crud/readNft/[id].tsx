@@ -1,9 +1,9 @@
 import { useState } from 'react'
-
+import { useRouter } from 'next/router'
 import {
   useReadNftListingQuery,
   useLazyReadNftListingQuery
-} from '../../../slices/zebraApi'
+} from '@/slices/zebraApi'
 
 
 export default function ReadNFT() {

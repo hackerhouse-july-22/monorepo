@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useDeleteNftListingMutation } from '../../../slices/zebraApi'
+import { useDeleteNftListingMutation } from '@/slices/zebraApi';
 
 
 
