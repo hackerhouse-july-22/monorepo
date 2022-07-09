@@ -3,98 +3,22 @@ import React, { useEffect, useState } from "react";
 import { SnookAbi } from "./UsersSnooks.constants";
 import SelectableNft from "@/components/SelectableNft";
 import { SelectableNftProps } from "@/components/SelectableNft/SelectableNft";
+import UserSnookIdWrapper from "@/components/UsersSnooks/UserSnookIdWrapper";
+import { useDisclosure } from "@chakra-ui/react";
+import EditPriceModal from "@/components/EditPriceModal";
 
-type UserSnookIdWrapperProps = {
-  snookIndex: number;
-} & Omit<SelectableNftProps, "imageUrl">;
-
-type SnookData = {
-  name: string;
-  description: string;
-  external_url: "https://playsnook.com";
-  image: string;
-  inGameImage: string;
-  imageCID: string;
-  inGameImageCID: string;
-  snookObject: {
-    colors: string[];
-    patterns: string[];
-    wearables: string[];
-    skinId: string;
-    stars: string;
-    traits: string[];
-    score: string;
-  };
-};
-
-const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
-  snookIndex,
-}) => {
-  const { address } = useAccount();
-
-  const [snookData, setSnookData] = useState<SnookData>();
-  const { data } = useContractRead({
-    addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
-    contractInterface: SnookAbi,
-    functionName: "tokenOfOwnerByIndex",
-    args: [address, snookIndex],
-  });
-  const { data: tokenIdData, refetch } = useContractRead({
-    addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
-    contractInterface: SnookAbi,
-    functionName: "tokenByIndex",
-    args: [data],
-    enabled: false,
-  });
-  const { data: tokenUriData, refetch: getUri } = useContractRead({
-    addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
-    contractInterface: SnookAbi,
-    functionName: "tokenURI",
-    args: [tokenIdData],
-    enabled: false,
-  });
-
-  useEffect(() => {
-    if (data) {
-      refetch();
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (tokenIdData) {
-      getUri();
-    }
-  }, [tokenIdData]);
-
-  useEffect(() => {
-    if (tokenUriData) {
-      (async () => {
-        const res = await fetch(
-          `https://ipfs.io/ipfs/${tokenUriData
-            .toString()
-            .replace("ipfs://", "")}`
-        );
-        const data = await res.json();
-        setSnookData(data);
-      })();
-    }
-  }, [tokenUriData]);
-
-  return (
-    <SelectableNft
-      isLoading={!snookData}
-      imageUrl={
-        snookData
-          ? `https://ipfs.io/ipfs/${snookData?.image
-              .toString()
-              .replace("ipfs://", "")}`
-          : undefined
-      }
-    />
-  );
+type SelectedData = {
+  id: number;
+  price: number;
+  minTime: number;
+  maxTime: number;
 };
 
 const UsersSnooks = () => {
+  const [editedId, setEditedId] = useState<number>();
+  const [selected, setSelected] = useState<SelectedData[]>([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { address } = useAccount();
   const { data } = useContractRead({
     addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
@@ -103,15 +27,33 @@ const UsersSnooks = () => {
     args: address,
   });
 
-  useEffect(() => {
-    if (!data) return;
-    console.log(Array.from(Array(data?.toNumber()).keys()));
-  }, [data]);
+  const checkIsSelected = (checkId: number): boolean =>
+    Boolean(selected.find(({ id }) => checkId === id));
+
+  const onClick = (id: number) => {
+    if (checkIsSelected(id)) {
+      setSelected((p) => [...p.filter(({ id: cId }) => cId !== id)]);
+    } else {
+      setSelected((p) => [...p, { id, minTime: 12, maxTime: 24, price: 10 }]);
+    }
+  };
+
+  const handleEdit = (id: number) => {
+    setEditedId(id);
+    onOpen();
+  };
 
   return (
     <>
-      {Array.from(Array(data?.toNumber()).keys()).map((i) => (
-        <UserSnookIdWrapper snookIndex={i} key={i} />
+      <EditPriceModal isOpen={isOpen} onClose={onClose} />
+      {Array.from(Array(data?.toNumber()).keys()).map((id) => (
+        <UserSnookIdWrapper
+          snookIndex={id}
+          key={id}
+          onClick={() => onClick(id)}
+          onEdit={() => handleEdit(id)}
+          isSelected={checkIsSelected(id)}
+        />
       ))}
     </>
   );

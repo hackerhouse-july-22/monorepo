@@ -17,21 +17,8 @@ const images = [
 ];
 
 const OnboardingLending: React.FC = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [selected, setSelected] = useState<string[]>([]);
-
-  const onClick = (url: string) => {
-    if (selected.includes(url)) {
-      setSelected((p) => [...p.filter((i) => i !== url)]);
-    } else {
-      setSelected((p) => [...p, url]);
-    }
-  };
-
   return (
     <>
-      <EditPriceModal isOpen={isOpen} onClose={onClose} />
       <PageContainer>
         <Container textAlign="center">
           <Heading as="h1" size="2xl" textAlign="center">
