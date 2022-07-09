@@ -3773,6 +3773,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cookie@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@types/cookie@npm:0.5.1"
+  checksum: 9a8d60fc84797122bc399d6bd330fe5780dc7aab032321de705049ea925339f74658bfa418de483a625d51858770efef58df633ff2e20f1bdf7fbd74a52847e2
+  languageName: node
+  linkType: hard
+
 "@types/hoist-non-react-statics@npm:^3.3.1":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
@@ -3780,6 +3787,13 @@ __metadata:
     "@types/react": "*"
     hoist-non-react-statics: ^3.3.0
   checksum: 2c0778570d9a01d05afabc781b32163f28409bb98f7245c38d5eaf082416fdb73034003f5825eb5e21313044e8d2d9e1f3fe2831e345d3d1b1d20bcd12270719
+  languageName: node
+  linkType: hard
+
+"@types/js-cookie@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/js-cookie@npm:3.0.2"
+  checksum: 7ab964288dd26373e134ed0bcde4a7dbea7e6f5de1805e2d1e48eac847e89a0e7f5fdc9164c37931680ec97c6e6e5a73e3e4039e0d08527c2e21badd7bee62d1
   languageName: node
   linkType: hard
 
@@ -5584,6 +5598,13 @@ __metadata:
   dependencies:
     safe-buffer: ~5.1.1
   checksum: 985d974a2d33e1a2543ada51c93e1ba2f73eaed608dc39f229afc78f71dcc4c8b7d7c684aa647e3c6a3a204027444d69e53e169ce94e8d1fa8d7dee80c9c8fed
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "cookie@npm:0.5.0"
+  checksum: 1f4bd2ca5765f8c9689a7e8954183f5332139eb72b6ff783d8947032ec1fdf43109852c178e21a953a30c0dd42257828185be01b49d1eb1a67fd054ca588a180
   languageName: node
   linkType: hard
 
@@ -8310,6 +8331,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "js-cookie@npm:3.0.1"
+  checksum: bb48de67e2a6bd1ae3dfd6b2d5a167c33dd0c5a37e909206161eb0358c98f17cb55acd55827a58e9eea3630d89444e7479f7938ef4420dda443218b8c434a4c3
+  languageName: node
+  linkType: hard
+
 "js-sha256@npm:0.9.0":
   version: 0.9.0
   resolution: "js-sha256@npm:0.9.0"
@@ -9167,17 +9195,21 @@ __metadata:
     "@reduxjs/toolkit": ^1.8.3
     "@thirdweb-dev/react": ^2.4.7
     "@thirdweb-dev/sdk": ^2.3.24
+    "@types/cookie": ^0.5.1
+    "@types/js-cookie": ^3.0.2
     "@types/node": 18.0.0
     "@types/qrcode-svg": ^1.1.1
     "@types/react": 18.0.14
     "@types/react-dom": 18.0.5
     "@walletconnect/web3-provider": ^1.7.8
+    cookie: ^0.5.0
     cryptocurrency-icons: ^0.18.0
     eslint: 8.18.0
     eslint-config-next: 12.2.0
     eslint-config-prettier: ^8.5.0
     ethers: ^5.6.9
     framer-motion: ^6.4.1
+    js-cookie: ^3.0.1
     next: 12.2.0
     next-svgr: ^0.0.2
     react: 18.2.0

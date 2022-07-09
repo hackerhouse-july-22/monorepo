@@ -4,7 +4,7 @@ export const zebraApi = createApi({
   reducerPath: "zebraApi",
   baseQuery: fetchBaseQuery({
     // baseUrl: `${process.env.API_URL}/api/v0/zebra/`,
-    baseUrl: `http://127.0.0.1:8000/api/v0/zebra/`,
+    baseUrl: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v0/zebra/`,
     prepareHeaders: (headers) => {
       headers.set("Accept", "application/json");
       headers.set("Content-Type", "application/json");
@@ -13,15 +13,14 @@ export const zebraApi = createApi({
   }),
   tagTypes: ["zebra"],
   endpoints: (builder) => ({
-
     // CRUD
     createNftListing: builder.mutation({
       query(data) {
         return {
           url: `create/`,
           method: "POST",
-          body: data
-        }
+          body: data,
+        };
       },
       invalidatesTags: ["zebra"],
     }),
@@ -31,12 +30,12 @@ export const zebraApi = createApi({
     }),
 
     updateNftListing: builder.mutation({
-      query({id, ...data}) {
+      query({ id, ...data }) {
         return {
           url: `update/${id}/`,
           method: "PATCH",
           body: data,
-        }
+        };
       },
       invalidatesTags: ["zebra"],
     }),
@@ -46,7 +45,7 @@ export const zebraApi = createApi({
         return {
           url: `delete/${id}/`,
           method: "DELETE",
-        }
+        };
       },
       invalidatesTags: ["zebra"],
     }),
@@ -78,12 +77,10 @@ export const zebraApi = createApi({
       query: () => `list/by-price/`,
       providesTags: ["zebra"],
     }),
-
   }),
 });
 
 export const {
-
   // CRUD
   useCreateNftListingMutation,
   useReadNftListingQuery,
@@ -100,6 +97,4 @@ export const {
   useLazyGetNftsByCollectionQuery,
   useGetNftsByPriceQuery,
   useLazyGetNftsByPriceQuery,
-
-
 } = zebraApi;
