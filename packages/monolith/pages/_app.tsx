@@ -9,9 +9,8 @@ import { store } from "../store";
 import { WagmiConfig, createClient, configureChains, chain } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
-
 const { provider, webSocketProvider } = configureChains(
-  [chain.mainnet, chain.polygon],
+  [chain.polygon],
   [publicProvider()]
 );
 
@@ -21,7 +20,7 @@ const client = createClient({
   webSocketProvider,
 });
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

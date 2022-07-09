@@ -7,9 +7,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import PageContainer from "@/components/PageContainer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SelectableNft from "@/components/SelectableNft";
 import EditPriceModal from "@/components/EditPriceModal";
+import UsersSnooks from "@/components/UsersSnooks/UsersSnooks";
 
 const images = [
   "https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600",
@@ -41,15 +42,7 @@ const OnboardingLending: React.FC = () => {
             each one.
           </Text>
           <SimpleGrid columns={4} mt={8} spacing={6}>
-            {images.map((imageUrl, i) => (
-              <SelectableNft
-                key={i}
-                imageUrl={imageUrl}
-                onClick={() => onClick(imageUrl)}
-                isSelected={selected.includes(imageUrl)}
-                onEdit={onOpen}
-              />
-            ))}
+            <UsersSnooks />
           </SimpleGrid>
           <Button colorScheme="pink" size="lg" mt={8}>
             Continue
