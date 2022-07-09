@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { Button } from '@chakra-ui/react';
 import {
   useReadNftListingQuery,
   useLazyReadNftListingQuery
@@ -8,14 +9,15 @@ import {
 
 export default function ReadNFT() {
   
-  const [pk, setPk] = useState('');
+  const router = useRouter();
+  const { id } = router.query;
 
   // Queries on Page Load
   const {
     data: readNftListingData,
     isLoading: readNftListingIsLoading,
     isError: readNftListingIsError,
-  } = useReadNftListingQuery()
+  } = useReadNftListingQuery({ id })
   
   // Needs Trigger
   const [
@@ -34,12 +36,12 @@ export default function ReadNFT() {
       {readNftListingData && (
         <>
           <div key={readNftListingData.id}>
-            <p>readNftListingData.supplierAddress</p>
-            <p>readNftListingData.nftAddress</p>
-            <p>readNftListingData.tokenId</p>
-            <p>readNftListingData.pricePerSecond</p>
-            <p>readNftListingData.maxRentDuration</p>
-            <p>readNftListingData.nonce</p>
+            <p>{readNftListingData.supplierAddress}</p>
+            <p>{readNftListingData.nftAddress}</p>
+            <p>{readNftListingData.tokenId}</p>
+            <p>{readNftListingData.pricePerSecond}</p>
+            <p>{readNftListingData.maxRentDuration}</p>
+            <p>{readNftListingData.nonce}</p>
           </div>
         </>
       )}
@@ -49,23 +51,23 @@ export default function ReadNFT() {
       {lazyReadNftListingData && (
         <>
         <div key={lazyReadNftListingData.id}>
-          <p>lazyReadNftListingData.supplierAddress</p>
-          <p>lazyReadNftListingData.nftAddress</p>
-          <p>lazyReadNftListingData.tokenId</p>
-          <p>lazyReadNftListingData.pricePerSecond</p>
-          <p>lazyReadNftListingData.maxRentDuration</p>
-          <p>lazyReadNftListingData.nonce</p>
+          <p>{lazyReadNftListingData.supplierAddress}</p>
+          <p>{lazyReadNftListingData.nftAddress}</p>
+          <p>{lazyReadNftListingData.tokenId}</p>
+          <p>{lazyReadNftListingData.pricePerSecond}</p>
+          <p>{lazyReadNftListingData.maxRentDuration}</p>
+          <p>{lazyReadNftListingData.nonce}</p>
         </div>
       </>
       )}
 
-      <button onClick={() => {
-        readNftListing({
-          pk,
-        })
-      }}>
-        Lazy Read Nft Listing
-      </button>
+      <Button 
+        colorScheme={'blue'}
+        onClick={ async () => {
+          await readNftListing({ id })
+        }}>
+          Lazy Read Nft Listing
+      </Button>
 
     </>
   )

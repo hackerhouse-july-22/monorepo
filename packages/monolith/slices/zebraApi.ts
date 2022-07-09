@@ -27,7 +27,12 @@ export const zebraApi = createApi({
     }),
 
     readNftListing: builder.query({
-      query: ({ id }) => `read/${id}/`,
+      query(data) {
+        return {
+          url: `read/${data.id}/`,
+          method: "GET",
+        }
+      },
     }),
 
     updateNftListing: builder.mutation({
