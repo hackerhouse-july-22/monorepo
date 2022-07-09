@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@thirdweb-dev/react": "^2.4.7",
     "@thirdweb-dev/sdk": "^2.3.24",
+    "@types/cookie": "^0.5.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "cookie": "^0.5.0",
     "cryptocurrency-icons": "^0.18.0",

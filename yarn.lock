@@ -3773,6 +3773,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cookie@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@types/cookie@npm:0.5.1"
+  checksum: 9a8d60fc84797122bc399d6bd330fe5780dc7aab032321de705049ea925339f74658bfa418de483a625d51858770efef58df633ff2e20f1bdf7fbd74a52847e2
+  languageName: node
+  linkType: hard
+
 "@types/hoist-non-react-statics@npm:^3.3.1":
   version: 3.3.1
   resolution: "@types/hoist-non-react-statics@npm:3.3.1"
@@ -9174,6 +9181,7 @@ __metadata:
     "@reduxjs/toolkit": ^1.8.3
     "@thirdweb-dev/react": ^2.4.7
     "@thirdweb-dev/sdk": ^2.3.24
+    "@types/cookie": ^0.5.1
     "@types/node": 18.0.0
     "@types/qrcode-svg": ^1.1.1
     "@types/react": 18.0.14
