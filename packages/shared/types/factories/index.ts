@@ -12,6 +12,7 @@ export * as guardManagerSol from "./GuardManager.sol";
 export * as migrate130To120Sol from "./Migrate_1_3_0_to_1_2_0.sol";
 export * as paymentTSol from "./Payment.t.sol";
 export * as rentTSol from "./Rent.t.sol";
+export * as testSol from "./Test.sol";
 export * as zebraModuleSol from "./ZebraModule.sol";
 export * as zebraTestSol from "./ZebraTest.sol";
 export * as testSol from "./test.sol";
