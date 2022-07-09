@@ -1,11 +1,18 @@
+import { NextPage } from 'next';
+import { Button } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import {
   useGetNftsByCollectionQuery,
   useLazyGetNftsByCollectionQuery,
-} from '../../../slices/zebraApi'
+} from '@/slices/zebraApi';
 
 
 
-export default function GetNFTsByCollection() {
+const GetNFTsByCollection: NextPage = () => {
+
+  const [sampleCollection, setSampleCollection] = useState(
+      '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D'
+    );
 
   // Queries on Page Load
   const {
@@ -13,7 +20,7 @@ export default function GetNFTsByCollection() {
     isSuccess: getNftsByCollectionIsSuccess,
     isLoading: getNftsByCollectionIsLoading,
     isError: getNftsByCollectionIsError,
-  } = useGetNftsByCollectionQuery();
+  } = useGetNftsByCollectionQuery(sampleCollection)
 
   // Needs Trigger
   const [
@@ -63,14 +70,15 @@ export default function GetNFTsByCollection() {
         </div>
       ))}
 
-      <button
+      <Button
+        colorScheme={'teal'}
         onClick={ async () => {
-          await getNftsByCollection()
+          await getNftsByCollection(sampleCollection)
         }}
         disabled={lazyGetNftsByCollectionIsLoading}
       >
         Get NFTs By Collection
-      </button>
+      </Button>
 
     
     </>
@@ -78,3 +86,4 @@ export default function GetNFTsByCollection() {
 
 }
 
+export default GetNFTsByCollection;

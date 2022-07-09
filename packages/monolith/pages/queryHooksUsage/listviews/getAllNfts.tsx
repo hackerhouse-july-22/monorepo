@@ -1,25 +1,32 @@
+import { NextPage } from 'next';
 import { 
   useGetAllNftsQuery,
   useLazyGetAllNftsQuery,
-} from "../../../slices/zebraApi";
+} from "@/slices/zebraApi";
+
+import { useEffect } from 'react';
+import { Button } from '@chakra-ui/react';
+
+import { IZebraNFT } from '@/types/';
 
 
-
-export default function GetAllNFTs() {
+const GetAllNFTs: NextPage = () => {
 
   // Queries on Page Load
   const {
     data: getAllNftsData,
+    error: getAllNftsError,
     isSuccess: getAllNftsIsSuccess,
     isLoading: getAllNftsIsLoading,
     isError: getAllNftsIsError,
-  } = useGetAllNftsQuery();
+  } = useGetAllNftsQuery({});
 
   // Needs Trigger
   const [
     getAllNfts,
     {
       data: lazyGetAllNftsData,
+      error: lazyGetAllNftsError,
       isSuccess: lazyGetAllNftsIsSuccess,
       isLoading: lazyGetAllNftsIsLoading,
       isError: lazyGetAllNftsIsError,
@@ -32,11 +39,11 @@ export default function GetAllNFTs() {
 
       {getAllNftsIsSuccess && (<p>Success!</p>)}
       {getAllNftsIsLoading && (<p>Loading...</p>)}
-      {getAllNftsIsError && (<p>Error!</p>)}
+      {getAllNftsIsError && (<p>{getAllNftsData.error ?? "Error!"}</p>)}
       {getAllNftsData && getAllNftsData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {getAllNftsData && getAllNftsData.nfts.map(nft => (
+      {getAllNftsData && getAllNftsData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
           <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
@@ -52,7 +59,7 @@ export default function GetAllNFTs() {
       {lazyGetAllNftsData && lazyGetAllNftsData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {lazyGetAllNftsData && lazyGetAllNftsData.nfts.map(nft => (
+      {lazyGetAllNftsData && lazyGetAllNftsData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
           <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
@@ -76,3 +83,5 @@ export default function GetAllNFTs() {
     </>
   )
 }
+
+export default GetAllNFTs;

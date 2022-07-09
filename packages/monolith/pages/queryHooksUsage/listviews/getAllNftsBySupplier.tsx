@@ -1,11 +1,18 @@
+import { NextPage } from 'next';
+import { Button } from '@chakra-ui/react';
+import { useState } from 'react';
 import {
   useGetNftsBySupplierQuery,
   useLazyGetNftsBySupplierQuery,
-} from '../../../slices/zebraApi'
+} from '@/slices/zebraApi';
 
 
 
-export default function GetNFTsBySupplier() {
+const GetNFTsBySupplier: NextPage = () => {
+
+  const [sampleSupplier, setSampleSupplier] = useState(
+    'filler_address'
+  );
 
   // Queries on Page Load
   const {
@@ -13,7 +20,7 @@ export default function GetNFTsBySupplier() {
     isSuccess: getNftsBySupplierIsSuccess,
     isLoading: getNftsBySupplierIsLoading,
     isError: getNftsBySupplierIsError,
-  } = useGetNftsBySupplierQuery();
+  } = useGetNftsBySupplierQuery(sampleSupplier);
 
   // Needs Trigger
   const [
@@ -63,14 +70,15 @@ export default function GetNFTsBySupplier() {
         </div>
       ))}
 
-      <button
+      <Button
+        colorScheme={'teal'}
         onClick={ async () => {
-          await getNftsBySupplier()
+          await getNftsBySupplier(sampleSupplier)
         }}
         disabled={lazyGetNftsBySupplierIsLoading}
       >
         Get NFTs By Supplier
-      </button>
+      </Button>
 
     
     </>
@@ -78,3 +86,4 @@ export default function GetNFTsBySupplier() {
 
 }
 
+export default GetNFTsBySupplier;
