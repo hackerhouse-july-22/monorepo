@@ -12,15 +12,120 @@ export const zebraApi = createApi({
   }),
   tagTypes: ["zebra"],
   endpoints: (builder) => ({
+
+    // CRUD
+    createNftListing: builder.mutation({
+      query(data) {
+        const {
+          supplierAddress,
+          nftAddress,
+          tokenId,
+          pricePerSecond,
+          maxRentDuration,
+          nonce
+        } = data
+        return {
+          url: `create/`,
+          method: "POST",
+          body: {
+            supplierAddress: `${supplierAddress}`,
+            nftAddress: `${nftAddress}`,
+            tokenId: `${tokenId}`,
+            pricePerSecond: `${pricePerSecond}`,
+            maxRentDuration: `${maxRentDuration}`,
+            nonce: `${nonce}`
+          },
+
+        }
+      },
+      invalidatesTags: ["zebra"],
+    }),
+
+    readNftListing: builder.query({
+      query: (pk) => `read/${pk}/`,
+    }),
+
+    updateNftListing: builder.mutation({
+      query(data) {
+        const {
+          pk,
+          supplierAddress,
+          nftAddress,
+          tokenId,
+          pricePerSecond,
+          maxRentDuration,
+          nonce
+        } = data
+        return {
+          url: `update/${pk}/`,
+          method: "POST",
+          body: {
+            supplierAddress: `${supplierAddress}`,
+            nftAddress: `${nftAddress}`,
+            tokenId: `${tokenId}`,
+            pricePerSecond: `${pricePerSecond}`,
+            maxRentDuration: `${maxRentDuration}`,
+            nonce: `${nonce}`
+          },
+        }
+      },
+      invalidatesTags: ["zebra"],
+    }),
+
+    deleteNftListing: builder.mutation({
+      query(data) {
+        const { pk } = data
+        return {
+          url: `delete/${pk}/`,
+          method: "DELETE",
+        }
+      },
+      invalidatesTags: ["zebra"],
+    }),
+
+    // List Views
     getAllNfts: builder.query({
       query: () => "list",
       providesTags: ["zebra"],
     }),
     // refetchOnMountOrArgChange: true,
+
+    getNftsBySupplier: builder.query({
+      query: (address) => `list/by-supplier/${address}/`,
+      providesTags: ["zebra"],
+    }),
+
+    getNftsByCollection: builder.query({
+      query: (address) => `list/by-collection/${address}/`,
+      providesTags: ["zebra"],
+    }),
+
+    getNftsByPrice: builder.query({
+      query: (price) => `list/by-price/${price}/`,
+      providesTags: ["zebra"],
+    }),
+
   }),
 });
 
 export const {
+
+  // CRUD
+  useCreateNftListingMutation,
+  useReadNftListingQuery,
+  useLazyReadNftListingQuery,
+  useUpdateNftListingMutation,
+  useDeleteNftListingMutation,
+
+  // List Views
   useGetAllNftsQuery,
-  // useLazyGetAllNftsQuery,
+  useLazyGetAllNftsQuery,
+  useGetNftsBySupplierQuery,
+  useLazyGetNftsBySupplierQuery,
+  useGetNftsByCollectionQuery,
+  useLazyGetNftsByCollectionQuery,
+  useGetNftsByPriceQuery,
+  useLazyGetNftsByPriceQuery,
+
+
 } = zebraApi;
