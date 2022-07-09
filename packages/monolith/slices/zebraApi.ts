@@ -17,36 +17,23 @@ export const zebraApi = createApi({
     // CRUD
     createNftListing: builder.mutation({
       query(data) {
-        console.log("data", data);
-        console.log("in createNftListing mutation: data.supplierAddress", data.supplierAddress);
-        const {
-          supplierAddress,
-          nftAddress,
-          tokenId,
-          pricePerSecond,
-          maxRentDuration,
-          nonce
-       } = data
-        console.log("in createNftListing mutation post data deconstruction", supplierAddress, nftAddress, tokenId, pricePerSecond, maxRentDuration, nonce);
         return {
           url: `create/`,
           method: "POST",
           body: data
-
-
         }
       },
       invalidatesTags: ["zebra"],
     }),
 
     readNftListing: builder.query({
-      query: (pk) => `read/${pk}/`,
+      query: ({ id }) => `read/${id}/`,
     }),
 
     updateNftListing: builder.mutation({
-      query({id: pk, ...data}) {
+      query({id, ...data}) {
         return {
-          url: `update/${pk}/`,
+          url: `update/${id}/`,
           method: "POST",
           body: data,
         }
@@ -55,10 +42,9 @@ export const zebraApi = createApi({
     }),
 
     deleteNftListing: builder.mutation({
-      query(data) {
-        const { pk } = data
+      query({ id }) {
         return {
-          url: `delete/${pk}/`,
+          url: `delete/${id}/`,
           method: "DELETE",
         }
       },

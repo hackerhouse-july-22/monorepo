@@ -1,5 +1,5 @@
 
-export interface IZebraNFT {
+export default interface IZebraNFT {
   id?: string,
   supplierAddress: string,
   nftAddress: string,
