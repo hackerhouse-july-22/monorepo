@@ -4,7 +4,7 @@ import { useMetamask, useSDK } from "@thirdweb-dev/react";
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 function useGigaConnect() {
-  const domain = process.env.NEXT_PUBLIC_SERVER_URL;
+  const domain = process.env.NEXT_PUBLIC_SERVER_URL!;
 
   const connectWithMetamask = useMetamask();
   const { connect: connectWagmi } = useConnect({
@@ -15,7 +15,7 @@ function useGigaConnect() {
   const sdk = useSDK();
 
   async function loginThirdweb() {
-    const payload = await sdk?.auth.login(domain!);
+    const payload = await sdk?.auth.login(domain);
     await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -41,6 +41,4 @@ function useGigaConnect() {
   const connect = async () => {
     await Promise.all([connectWithMetamask, connectWagmi]);
   };
-
-  const disconnect = async () => {};
 }
