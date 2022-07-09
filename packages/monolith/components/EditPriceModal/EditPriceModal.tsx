@@ -5,7 +5,6 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { Button, Heading } from "@chakra-ui/react";

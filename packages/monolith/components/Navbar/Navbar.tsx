@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   HStack,
   Grid,
@@ -16,6 +16,13 @@ import ConnectButton from "@/components/ConnectButton";
 import EthIcon from "cryptocurrency-icons/svg/color/eth.svg";
 
 const Navbar = () => {
+  // https://github.com/vercel/next.js/discussions/17443
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
+
   return (
     <>
       <Grid
@@ -57,9 +64,7 @@ const Navbar = () => {
               variant="unstyled"
               as={Button}
               leftIcon="🇺🇸"
-              rightIcon={
-                <BiChevronDown transform="scale(1.3) translate(0, 1px)" />
-              }
+              rightIcon={<BiChevronDown />}
             >
               US
             </MenuButton>
@@ -79,9 +84,7 @@ const Navbar = () => {
                   transform="translate(0,1.5px)"
                 />
               }
-              rightIcon={
-                <BiChevronDown transform="scale(1.3) translate(0, 1px)" />
-              }
+              rightIcon={<BiChevronDown />}
             >
               ETH
             </MenuButton>

@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Head from "next/head";
 import { Box, BoxProps } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import { useRouter } from "next/router";
-import { useAccount } from "@thirdweb-dev/react";
+import { useAccount } from "wagmi";
 import DisconnectedScreen from "@/components/DisconnectedScreen";
 
 type PageContainerProps = {
@@ -20,9 +20,15 @@ const PageContainer: React.FC<PageContainerProps> = ({
   children,
   ...props
 }) => {
-  const account = useAccount();
+  // https://github.com/vercel/next.js/discussions/17443
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  const { isConnected } = useAccount();
   const { asPath } = useRouter();
   const url = `http://localhost:3000/${asPath}`;
+
   return (
     <>
       <Head>
@@ -45,7 +51,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
 
       <Navbar />
       <Box as="main" pb={8} {...props}>
-        {account ? children : <DisconnectedScreen />}
+        {isConnected ? children : !mounted ? children : <DisconnectedScreen />}
       </Box>
     </>
   );
