@@ -10,9 +10,14 @@ import { SelectedData } from "../../pages/onboarding/lending";
 type UsersSnooksProps = {
   selected: SelectedData[];
   setSelected: Dispatch<SetStateAction<SelectedData[]>>;
+  setNftAddress: (id: number, tokenId: number) => void;
 };
 
-const UsersSnooks: React.FC<UsersSnooksProps> = ({ selected, setSelected }) => {
+const UsersSnooks: React.FC<UsersSnooksProps> = ({
+  selected,
+  setSelected,
+  setNftAddress,
+}) => {
   const [editedId, setEditedId] = useState<number | undefined>(undefined);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,7 +46,6 @@ const UsersSnooks: React.FC<UsersSnooksProps> = ({ selected, setSelected }) => {
   };
 
   const handleEdit = ({ price, minTime, maxTime }: EditPriceModalData) => {
-    console.log(editedId);
     if (editedId === undefined) return;
     setSelected((p) => [
       ...p.filter(({ id: cId }) => cId !== editedId),
@@ -66,6 +70,7 @@ const UsersSnooks: React.FC<UsersSnooksProps> = ({ selected, setSelected }) => {
       />
       {Array.from(Array(data?.toNumber()).keys()).map((id) => (
         <UserSnookIdWrapper
+          onGetNftId={(nftAddress) => setNftAddress(id, nftAddress)}
           price={selected.find((a) => a.id === id)?.price ?? 0}
           snookIndex={id}
           key={id}
