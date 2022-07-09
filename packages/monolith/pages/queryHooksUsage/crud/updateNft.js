@@ -38,13 +38,7 @@ export default function UpdateNFT() {
       <button 
         onClick={async () => {
           await updateNftListing({
-            pk,
-            supplierAddress,
-            nftAddress,
-            tokenId,
-            pricePerSecond,
-            maxRentDuration,
-            nonce
+            mutationVars,
           })
         }}
         disabled={updateNftListingIsLoading}
