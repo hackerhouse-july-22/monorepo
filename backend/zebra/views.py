@@ -31,25 +31,31 @@ zebraContractFromAbi = sdk.get_contract_from_abi(checksummedAddress, ZEBRA_TEST_
 
 class EthereumAuth(APIView):
     def post(self, request):
-        payload = request.data['payload']
+        try: 
+            payload = request.data['payload']
 
-        token = sdk.auth.generate_auth_token("localhost:3000/", payload)
+            token = sdk.auth.generate_auth_token("localhost:3000/", payload)
 
-        # https://portal.thirdweb.com/python/wallet-authenticator
+            # https://portal.thirdweb.com/python/wallet-authenticator
 
-        # on the frontend, you need to call the sdk.auth.login(domain) function,
-        # call it payload, and then send to the backend
+            # on the frontend, you need to call the sdk.auth.login(domain) function,
+            # call it payload, and then send to the backend
 
-        response = Response()
-        response.set_cookie('cookie', token, 
-            httponly=True,
-            secure=True,
-            samesite='Strict',
-            path='/',
-            # max_age=60*60*24*7 # defaults to 5 hours per signature
-        )
-        response.status_code = status.HTTP_200_OK
-        return response
+            response = Response()
+            response.set_cookie('cookie', token, 
+                httponly=True,
+                secure=True,
+                samesite='Strict',
+                path='/',
+                # max_age=60*60*24*7 # defaults to 5 hours per signature
+            )
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class ZebraNFTListView(APIView):
     """
@@ -454,3 +460,36 @@ class ZebraNFTListViewByPriceAndCollection(generics.ListAPIView):
 #                 {"error": str(e)},
 #                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
 #             )
+
+class GetNFTsBySupplierAddress(generics.ListAPIView):
+    """
+    List all ZebraNFTs by supplier address
+    """
+    permission_classes = [permissions.AllowAny,]
+    serializer_class = ZebraNFTSerializer
+
+    def get(self, request, address):
+        try:
+            nfts = ZebraNFT.objects.filter(supplierAddress=address)
+            if len(nfts) == 0:
+                return Response(
+                    {"error": "this address has no NFTs listed"},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            elif len(nfts) == 1:
+                serializer = ZebraNFTSerializer(nfts, many=False)
+                return Response(
+                    {"nfts": serializer.data},
+                    status=status.HTTP_200_OK
+                )
+            else:
+                serializer = ZebraNFTSerializer(nfts, many=True)
+                return Response(
+                    {"nfts": serializer.data},
+                    status=status.HTTP_200_OK
+                )
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

@@ -14,7 +14,7 @@ class ZebraNFTSerializer(serializers.ModelSerializer):
         model = ZebraNFT
         fields = '__all__'
         # fields = ('nftAddress', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce')
-        # read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at',)
         # extra_kwargs = {
         #     'nftAddress': {'required': True},
         #     'tokenId': {'required': True},
@@ -33,6 +33,7 @@ class ZebraNFTSerializer(serializers.ModelSerializer):
         """
         Update an existing ZebraNFT
         """
+        instance.supplierAddress = validated_data.get('supplierAddress', instance.supplierAddress)
         instance.nftAddress = validated_data.get('nftAddress', instance.nftAddress)
         instance.tokenId = validated_data.get('tokenId', instance.tokenId)
         instance.pricePerSecond = validated_data.get('pricePerSecond', instance.pricePerSecond)

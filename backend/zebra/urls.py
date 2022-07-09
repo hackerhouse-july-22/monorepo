@@ -17,5 +17,5 @@ urlpatterns = [
     path('delete/<int:pk>/', DeleteZebraNFTView.as_view(), name='zebra-nft-delete'),
     path('list/by-price/', ZebraNFTListViewByPrice.as_view(), name='zebra-nft-list-by-price'),
     path('list/by-collection/<str:address>/', ZebraNFTListViewByPriceAndCollection.as_view(), name='zebra-nft-list-by-collection'),
-   
+    path('list/by-supplier/<str:address>/', GetNFTsBySupplierAddress.as_view(), name='zebra-nft-list-by-user'),
 ]

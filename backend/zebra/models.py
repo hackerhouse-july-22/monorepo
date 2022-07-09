@@ -22,11 +22,13 @@ class ZebraNFT(models.Model):
     }
     """
 
+    supplierAddress = models.CharField(max_length=42, blank=False, null=False)
     nftAddress = models.CharField(max_length=42, blank=False, null=False)
     tokenId = models.IntegerField(blank=False, null=False)
     pricePerSecond = models.IntegerField(blank=False, null=False)
     maxRentDuration = models.IntegerField(blank=False, null=False)
     nonce = models.IntegerField(blank=False, null=False)
+
 
     # colletion = models.CharField(max_length=50)
 
