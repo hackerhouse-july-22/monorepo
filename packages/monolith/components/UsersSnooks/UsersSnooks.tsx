@@ -70,6 +70,7 @@ const UsersSnooks = () => {
       />
       {Array.from(Array(data?.toNumber()).keys()).map((id) => (
         <UserSnookIdWrapper
+          price={selected.find((a) => a.id === id)?.price ?? 0}
           snookIndex={id}
           key={id}
           onClick={() => onClick(id)}

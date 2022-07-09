@@ -39,6 +39,14 @@ const EditPriceModal: React.FC<EditPriceModalProps> = ({
     defaultValues: defaults,
   });
 
+  useEffect(() => {
+    if (defaults) {
+      reset({
+        ...defaults,
+      });
+    }
+  }, [defaults]);
+
   const onSubmit = (values: EditPriceModalData) => {
     onEdit(values);
     reset();

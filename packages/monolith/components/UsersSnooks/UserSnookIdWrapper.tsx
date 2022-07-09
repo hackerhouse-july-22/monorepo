@@ -7,7 +7,7 @@ import { SnookAbi } from "@/components/UsersSnooks/UsersSnooks.constants";
 
 type UserSnookIdWrapperProps = {
   snookIndex: number;
-} & Omit<SelectableNftProps, "imageUrl" | "isLoading">;
+} & Omit<SelectableNftProps, "imageUrl" | "isLoading" | "name">;
 
 type SnookData = {
   name: string;
@@ -98,6 +98,7 @@ const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
               .replace("ipfs://", "")}`
           : undefined
       }
+      name={snookData?.name as string}
       {...props}
     />
   );
