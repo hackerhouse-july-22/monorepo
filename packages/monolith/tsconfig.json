@@ -25,6 +25,6 @@
     "**/*.ts",
     "**/*.tsx",
     "components/ConnectButton/ConnectButton"
-  ],
+, "slices/zebraApi.js"  ],
   "exclude": ["node_modules"]
 }

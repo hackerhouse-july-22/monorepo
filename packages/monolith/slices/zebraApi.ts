@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const zebraApi = createApi({
   reducerPath: "zebraApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.API_URL}/api/v0/zebra/`,
+    // baseUrl: `${process.env.API_URL}/api/v0/zebra/`,
+    baseUrl: `http://127.0.0.1:8000/api/v0/zebra/`,
     prepareHeaders: (headers) => {
       headers.set("Accept", "application/json");
       headers.set("Content-Type", "application/json");
@@ -16,6 +17,8 @@ export const zebraApi = createApi({
     // CRUD
     createNftListing: builder.mutation({
       query(data) {
+        console.log("data", data);
+        console.log("in createNftListing mutation: data.supplierAddress", data.supplierAddress);
         const {
           supplierAddress,
           nftAddress,
@@ -23,18 +26,13 @@ export const zebraApi = createApi({
           pricePerSecond,
           maxRentDuration,
           nonce
-        } = data
+       } = data
+        console.log("in createNftListing mutation post data deconstruction", supplierAddress, nftAddress, tokenId, pricePerSecond, maxRentDuration, nonce);
         return {
           url: `create/`,
           method: "POST",
-          body: {
-            supplierAddress: `${supplierAddress}`,
-            nftAddress: `${nftAddress}`,
-            tokenId: `${tokenId}`,
-            pricePerSecond: `${pricePerSecond}`,
-            maxRentDuration: `${maxRentDuration}`,
-            nonce: `${nonce}`
-          },
+          body: data
+
 
         }
       },
@@ -46,27 +44,11 @@ export const zebraApi = createApi({
     }),
 
     updateNftListing: builder.mutation({
-      query(data) {
-        const {
-          pk,
-          supplierAddress,
-          nftAddress,
-          tokenId,
-          pricePerSecond,
-          maxRentDuration,
-          nonce
-        } = data
+      query({id: pk, ...data}) {
         return {
           url: `update/${pk}/`,
           method: "POST",
-          body: {
-            supplierAddress: `${supplierAddress}`,
-            nftAddress: `${nftAddress}`,
-            tokenId: `${tokenId}`,
-            pricePerSecond: `${pricePerSecond}`,
-            maxRentDuration: `${maxRentDuration}`,
-            nonce: `${nonce}`
-          },
+          body: data,
         }
       },
       invalidatesTags: ["zebra"],

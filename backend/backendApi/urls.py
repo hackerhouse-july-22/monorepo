@@ -39,8 +39,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # API endpoints
-    # path('api/v0/zebra/', include('zebra.urls')),
-    path('zebra/', include('zebra.urls')),
+    path('api/v0/zebra/', include('zebra.urls')),
+    # path('zebra/', include('zebra.urls')),
 
     # API GUIs/docs    
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
