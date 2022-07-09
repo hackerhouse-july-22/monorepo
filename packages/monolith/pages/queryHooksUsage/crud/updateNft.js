@@ -1,11 +1,21 @@
-
+import { useState } from 'react';
 
 import {
   useUpdateNftListingMutation,
-} from '../../slices/zebraApi'
+} from '../../../slices/zebraApi'
 
 
 export default function UpdateNFT() {
+
+  const [mutationVars, setMutationVars] = useState({
+    pk: '',
+    supplierAddress: '',
+    nftAddress: '',
+    tokenId: '',
+    pricePerSecond: '',
+    maxRentDuration: '',
+    nonce: '',
+  })
 
   const [
     updateNftListing,

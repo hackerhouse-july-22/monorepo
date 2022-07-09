@@ -1,13 +1,15 @@
-
+import { useState } from 'react'
 
 import {
   useReadNftListingQuery,
   useLazyReadNftListingQuery
-} from '../../slices/zebraApi'
+} from '../../../slices/zebraApi'
 
 
 export default function ReadNFT() {
   
+  const [pk, setPk] = useState('');
+
   // Queries on Page Load
   const {
     data: readNftListingData,

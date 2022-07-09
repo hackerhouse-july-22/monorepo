@@ -1,27 +1,22 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import {
-  // CRUD
-  useCreateNftListingMutation,
-  useReadNftListingQuery,
-  useUpdateNftListingMutation,
-  useDeleteNftListingMutation,
-
-  // List Views
-  useGetAllNftsQuery,
-  useLazyGetAllNftsQuery,
-  useGetNftsBySupplierQuery,
-  useLazyGetNftsBySupplierQuery,
-  useGetNftsByCollectionQuery,
-  useLazyGetNftsByCollectionQuery,
-  useGetNftsByPriceQuery,
-  useLazyGetNftsByPriceQuery,
-} from '../../../slices/zebraSlice'
+import { useCreateNftListingMutation } from '../../../slices/zebraSlice'
 
 
 export default function CreateNFT() {
 
   const router = useRouter()
+
+  
+  const [mutationVars, setMutationVars] = useState({
+    supplierAddress: '',
+    nftAddress: '',
+    tokenId: '',
+    pricePerSecond: '',
+    maxRentDuration: '',
+    nonce: '',
+  })
+
 
   const [
     createNftListing,
@@ -35,12 +30,7 @@ export default function CreateNFT() {
 
   const handleCreateNftListing = async () => {
     await createNftListing({
-      supplierAddress,
-      nftAddress,
-      tokenId,
-      pricePerSecond,
-      maxRentDuration,
-      nonce
+      mutationVars,
     })
   }
 

@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useDeleteNftListingMutation } from '../../slices/zebraApi'
+import { useEffect, useState } from 'react';
+import { useDeleteNftListingMutation } from '../../../slices/zebraApi'
 
 
 
 export default function DeleteNFT() {
 
   const router = useRouter();
+
+  const [pk, setPk] = useState('');
 
   const [
     deleteNftListing,
