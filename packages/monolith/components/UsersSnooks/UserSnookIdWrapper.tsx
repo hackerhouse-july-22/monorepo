@@ -7,6 +7,7 @@ import { SnookAbi } from "@/components/UsersSnooks/UsersSnooks.constants";
 
 type UserSnookIdWrapperProps = {
   snookIndex: number;
+  onGetNftId: (nftId: number) => void;
 } & Omit<SelectableNftProps, "imageUrl" | "isLoading" | "name">;
 
 type SnookData = {
@@ -30,6 +31,7 @@ type SnookData = {
 
 const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
   snookIndex,
+  onGetNftId,
   ...props
 }) => {
   const { address } = useAccount();
@@ -68,6 +70,7 @@ const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
 
   useEffect(() => {
     if (tokenIdData) {
+      onGetNftId(parseInt(tokenIdData.toString(), 10));
       getUri();
     }
   }, [tokenIdData]);

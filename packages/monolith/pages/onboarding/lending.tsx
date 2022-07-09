@@ -7,27 +7,50 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import PageContainer from "@/components/PageContainer";
-import React, { useEffect, useState } from "react";
-import SelectableNft from "@/components/SelectableNft";
-import EditPriceModal from "@/components/EditPriceModal";
+import React, { useState } from "react";
 import UsersSnooks from "@/components/UsersSnooks/UsersSnooks";
-
-const images = [
-  "https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600",
-];
+import { useCreateNftListingMutation } from "@/slices/zebraApi";
+import { useAccount } from "wagmi";
 
 export type SelectedData = {
   id: number;
+  address?: string;
   price: number;
   minTime: number;
   maxTime: number;
 };
 
 const OnboardingLending: React.FC = () => {
+  const [
+    createNftListing,
+    {
+      data: createNftListingData,
+      error: createNftListingError,
+      isSuccess: createNftListingIsSuccess,
+      isLoading: createNftListingIsLoading,
+      isError: createNftListingIsErråor,
+    },
+  ] = useCreateNftListingMutation();
+  const [tokenIdMap, setTokenIdMap] = useState<Record<string, string>>({});
+
+  const { address } = useAccount();
+
   const [selected, setSelected] = useState<SelectedData[]>([]);
 
-  const onContinue = () => {
-    console.log(selected);
+  const setNftAddress = (id: number, tokenId: number) => {
+    setTokenIdMap((p) => ({ ...p, [id]: tokenId }));
+  };
+
+  const onContinue = async () => {
+    const data = selected.map((s) => ({
+      supplierAddress: address,
+      nftAddress: s.address,
+      tokenId: tokenIdMap[s.id],
+      pricePerSecond: s.price / 60 / 60,
+      minRentDuration: s.minTime,
+      maxRentDuration: s.maxTime,
+    }));
+    console.log(data);
   };
 
   return (
@@ -42,7 +65,11 @@ const OnboardingLending: React.FC = () => {
             each one.
           </Text>
           <SimpleGrid columns={4} mt={8} spacing={6}>
-            <UsersSnooks selected={selected} setSelected={setSelected} />
+            <UsersSnooks
+              selected={selected}
+              setSelected={setSelected}
+              setNftAddress={setNftAddress}
+            />
           </SimpleGrid>
           <Button
             colorScheme="pink"
