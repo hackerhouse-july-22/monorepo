@@ -27,19 +27,14 @@ export const zebraApi = createApi({
     }),
 
     readNftListing: builder.query({
-      query(data) {
-        return {
-          url: `read/${data.id}/`,
-          method: "GET",
-        }
-      },
+      query: (id) => `read/${id}/`,
     }),
 
     updateNftListing: builder.mutation({
       query({id, ...data}) {
         return {
           url: `update/${id}/`,
-          method: "POST",
+          method: "PATCH",
           body: data,
         }
       },
@@ -47,7 +42,7 @@ export const zebraApi = createApi({
     }),
 
     deleteNftListing: builder.mutation({
-      query({ id }) {
+      query(id) {
         return {
           url: `delete/${id}/`,
           method: "DELETE",
@@ -58,7 +53,7 @@ export const zebraApi = createApi({
 
     // List Views
     getAllNfts: builder.query({
-      query: () => "list",
+      query: () => "list/",
       providesTags: ["zebra"],
     }),
     // refetchOnMountOrArgChange: true,
@@ -70,11 +65,17 @@ export const zebraApi = createApi({
 
     getNftsByCollection: builder.query({
       query: (address) => `list/by-collection/${address}/`,
+      // query(address) {
+      //   return {
+      //     url: `list/by-collection/${address}/`,
+      //     method: "GET",
+      //   }
+      // },
       providesTags: ["zebra"],
     }),
 
     getNftsByPrice: builder.query({
-      query: (price) => `list/by-price/${price}/`,
+      query: () => `list/by-price/`,
       providesTags: ["zebra"],
     }),
 

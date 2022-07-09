@@ -17,13 +17,14 @@ export default function ReadNFT() {
     data: readNftListingData,
     isLoading: readNftListingIsLoading,
     isError: readNftListingIsError,
-  } = useReadNftListingQuery({ id })
+  } = useReadNftListingQuery(id)
   
   // Needs Trigger
   const [
     readNftListing,
     {
       data: lazyReadNftListingData,
+      error: lazyReadNftListingError,
       isLoading: lazyReadNftListingIsLoading,
       isError: lazyReadNftListingIsError,
     }

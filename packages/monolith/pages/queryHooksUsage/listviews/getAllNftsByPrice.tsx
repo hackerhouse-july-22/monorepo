@@ -1,11 +1,15 @@
+import { NextPage } from 'next';
+import { Button } from '@chakra-ui/react';
+
 import {
   useGetNftsByPriceQuery,
   useLazyGetNftsByPriceQuery,
 } from '@/slices/zebraApi';
+import IZebraNFT from 'types/IZebraNFT';
 
 
 
-export default function GetNFTsByPrice() {
+const GetNFTsByPrice: NextPage = () => {
 
   // Queries on Page Load
   const {
@@ -36,9 +40,9 @@ export default function GetNFTsByPrice() {
       {getNftsByPriceData && getNftsByPriceData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {getNftsByPriceData && getNftsByPriceData.nfts.map(nft => (
+      {getNftsByPriceData && getNftsByPriceData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
-          <p>{nft.PriceAddress}</p>
+          <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
           <p>{nft.tokenId}</p>
           <p>{nft.pricePerSecond}</p>
@@ -52,9 +56,9 @@ export default function GetNFTsByPrice() {
       {lazyGetNftsByPriceData && lazyGetNftsByPriceData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {lazyGetNftsByPriceData && lazyGetNftsByPriceData.nfts.map(nft => (
+      {lazyGetNftsByPriceData && lazyGetNftsByPriceData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
-          <p>{nft.PriceAddress}</p>
+          <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
           <p>{nft.tokenId}</p>
           <p>{nft.pricePerSecond}</p>
@@ -63,14 +67,15 @@ export default function GetNFTsByPrice() {
         </div>
       ))}
 
-      <button
+      <Button
+        colorScheme='teal'
         onClick={ async () => {
           await getNftsByPrice()
         }}
         disabled={lazyGetNftsByPriceIsLoading}
       >
         Get NFTs By Price
-      </button>
+      </Button>
 
     
     </>
@@ -78,3 +83,4 @@ export default function GetNFTsByPrice() {
 
 }
 
+export default GetNFTsByPrice;

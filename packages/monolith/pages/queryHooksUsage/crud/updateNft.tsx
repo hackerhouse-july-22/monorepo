@@ -1,26 +1,31 @@
+import { NextPage } from 'next';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { IZebraNFT } from '@/types/';
+import { Button } from '@chakra-ui/react';
 
 import {
   useUpdateNftListingMutation,
 } from '@/slices/zebraApi';
 
 
-export default function UpdateNFT() {
+const UpdateNFT: NextPage = () => {
 
-  const [mutationVars, setMutationVars] = useState({
-    pk: '',
-    supplierAddress: '',
-    nftAddress: '',
-    tokenId: '',
-    pricePerSecond: '',
-    maxRentDuration: '',
-    nonce: '',
+  const [sampleUpdate, setSampleUpdate] = useState<IZebraNFT>({
+    id: '3',
+    supplierAddress: 'my_name_address_update_test',
+    nftAddress: '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D',
+    tokenId: '3',
+    pricePerSecond: '6',
+    maxRentDuration: '60',
+    nonce: '0',
   })
 
   const [
     updateNftListing,
     {
       data: updateNftListingData,
+      error: updateNftListingError,
       isSuccess: updateNftListingIsSuccess,
       isLoading: updateNftListingIsLoading,
       isError: updateNftListingIsError,
@@ -35,19 +40,20 @@ export default function UpdateNFT() {
       {updateNftListingIsLoading && (<p>Loading...</p>)}
       {updateNftListingIsError && (<p>Error!</p>)}
 
-      <button 
+      <Button 
+        colorScheme={'teal'}
         onClick={async () => {
-          await updateNftListing({
-            mutationVars,
-          })
+          await updateNftListing(sampleUpdate)
         }}
         disabled={updateNftListingIsLoading}
       >
         Update Nft Listing
-      </button>
+      </Button>
 
           
 
     </>
   )
 }
+
+export default UpdateNFT

@@ -218,7 +218,7 @@ class UpdateZebraNFTView(generics.UpdateAPIView):
     permission_classes = [permissions.AllowAny,]
     serializer_class = ZebraNFTSerializer
 
-    def put(self, request, id):
+    def patch(self, request, id):
         try:
             zebraNFT = ZebraNFT.objects.get(id=id)
             serializer = ZebraNFTSerializer(zebraNFT, data=request.data)
@@ -237,6 +237,9 @@ class UpdateZebraNFTView(generics.UpdateAPIView):
                 {"error": str(e)},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+    # def get_queryset(self):
+    #     return super().get_queryset()
 
 # class UpdateZebraNFTView(APIView):
 #     """
@@ -396,8 +399,13 @@ class ZebraNFTListViewByPrice(generics.ListAPIView):
     permission_classes = [permissions.AllowAny,]
     serializer_class = ZebraNFTSerializer
 
-    def get_queryset(self):
-        return ZebraNFT.objects.order_by('-pricePerSecond')
+    def get(self, request):
+        zebraNFTS = ZebraNFT.objects.all().order_by('-pricePerSecond')
+        serializer = ZebraNFTSerializer(zebraNFTS, many=True)
+        return Response(
+            {"nfts": serializer.data},
+            status=status.HTTP_200_OK
+        )
 
 
 
@@ -433,23 +441,11 @@ class GetNFTsBySupplierAddress(generics.ListAPIView):
     def get(self, request, address):
         try:
             nfts = ZebraNFT.objects.filter(supplierAddress=address)
-            if len(nfts) == 0:
-                return Response(
-                    {"error": "this address has no NFTs listed"},
-                    status=status.HTTP_404_NOT_FOUND
-                )
-            elif len(nfts) == 1:
-                serializer = ZebraNFTSerializer(nfts, many=False)
-                return Response(
-                    {"nfts": serializer.data},
-                    status=status.HTTP_200_OK
-                )
-            else:
-                serializer = ZebraNFTSerializer(nfts, many=True)
-                return Response(
-                    {"nfts": serializer.data},
-                    status=status.HTTP_200_OK
-                )
+            serializer = ZebraNFTSerializer(nfts, many=True)
+            return Response(
+                {"nfts": serializer.data},
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             return Response(
                 {"error": str(e)},

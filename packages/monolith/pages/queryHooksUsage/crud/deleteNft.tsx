@@ -1,14 +1,17 @@
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDeleteNftListingMutation } from '@/slices/zebraApi';
 
+import { Button, Box, Flex, Center } from '@chakra-ui/react';
+import { IZebraNFT } from '@/types/';
 
 
-export default function DeleteNFT() {
+const DeleteNFT: NextPage = () => {
 
   const router = useRouter();
 
-  const [pk, setPk] = useState('');
+  const [id, setId] = useState(3);
 
   const [
     deleteNftListing,
@@ -22,7 +25,7 @@ export default function DeleteNFT() {
   
   useEffect(() => {
     if (deleteNftListingIsSuccess) {
-      router.push('/', undefined, { shallow: true });
+      // router.push('/', undefined, { shallow: true });
     }
   }, [deleteNftListingIsSuccess])
 
@@ -32,19 +35,20 @@ export default function DeleteNFT() {
       {deleteNftListingIsLoading && (<p>Loading...</p>)}
       {deleteNftListingIsError && (<p>Error!</p>)}
 
-      <button
-        onClick={async () => {
-          await deleteNftListing({
-            pk,
-          })
+      <Button
+        colorScheme={'teal'}
+        onClick={ async () => {
+          await deleteNftListing(id)
         }}
         disabled={deleteNftListingIsLoading}
       >
         Delete Nft Listing
-      </button>
+      </Button>
       
 
 
     </>
   )
 }
+
+export default DeleteNFT
