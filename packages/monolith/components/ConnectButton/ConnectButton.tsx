@@ -14,6 +14,7 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import Jazzicon from "react-jazzicon";
 import truncateAddress from "../../utils/truncateAddress";
 import { useEffect, useState } from "react";
+import useGigaConnect from "hooks/useGigaConnect";
 
 export default function ConnectButton() {
   const [mounted, setMounted] = useState(false);
@@ -21,11 +22,7 @@ export default function ConnectButton() {
     setMounted(true);
   }, []);
 
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  const { disconnect } = useDisconnect();
-  const { address } = useAccount();
+  const { connect, disconnect, address } = useGigaConnect();
 
   if (!mounted) return null;
 

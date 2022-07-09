@@ -1,44 +1,66 @@
-import { useAccount, useDisconnect, useConnect } from "wagmi";
-import { useMetamask, useSDK } from "@thirdweb-dev/react";
+import {
+  useAccount as useWagmiAccount,
+  useDisconnect as useWagmiDisconnect,
+  useConnect as useWagmiConnect,
+} from "wagmi";
+import {
+  useMetamask as useThirdwebMetamask,
+  useSDK,
+  useDisconnect as useThirdwebDisconnect,
+} from "@thirdweb-dev/react";
+import Cookie from "js-cookie";
 
 import { InjectedConnector } from "wagmi/connectors/injected";
 
 function useGigaConnect() {
-  const domain = process.env.NEXT_PUBLIC_SERVER_URL!;
+  const domain = process.env.NEXT_PUBLIC_SERVER_DOMAIN!;
 
-  const connectWithMetamask = useMetamask();
-  const { connect: connectWagmi } = useConnect({
+  const connectWithMetamask = useThirdwebMetamask();
+  const { connectAsync: wagmiConnect } = useWagmiConnect({
     connector: new InjectedConnector(),
   });
-  const { disconnect: disconnectWagmi } = useDisconnect();
-  const { address } = useAccount();
   const sdk = useSDK();
 
-  async function loginThirdweb() {
+  async function login() {
     const payload = await sdk?.auth.login(domain);
-    await fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ payload }),
-    });
-  }
-
-  async function authenticateThirdweb() {
-    const res = await fetch("/api/authenticate", {
-      method: "POST",
-    });
-    return res;
-  }
-
-  async function logoutThirdweb() {
-    await fetch("/api/logout", {
-      method: "POST",
-    });
+    await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/v0/zebra/ethauth/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ payload }),
+      }
+    );
+    console.log();
   }
 
   const connect = async () => {
-    await Promise.all([connectWithMetamask, connectWagmi]);
+    await Promise.all([connectWithMetamask(), wagmiConnect()]);
+    await login();
+  };
+
+  function logout() {
+    Cookie.remove("cookie");
+  }
+
+  const { disconnect: wagmiDisconnect } = useWagmiDisconnect();
+  const thirdwebDisconnect = useThirdwebDisconnect();
+
+  const disconnect = () => {
+    wagmiDisconnect();
+    thirdwebDisconnect();
+    logout();
+  };
+
+  const { address } = useWagmiAccount();
+
+  return {
+    connect,
+    disconnect,
+    address,
   };
 }
+
+export default useGigaConnect;
