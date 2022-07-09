@@ -35,13 +35,17 @@ const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
   const { address } = useAccount();
 
   const [snookData, setSnookData] = useState<SnookData>();
-  const { data } = useContractRead({
+  const { data, error: tokenRead } = useContractRead({
     addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
     contractInterface: SnookAbi,
     functionName: "tokenOfOwnerByIndex",
     args: [address, snookIndex],
   });
-  const { data: tokenIdData, refetch } = useContractRead({
+  const {
+    data: tokenIdData,
+    refetch,
+    error,
+  } = useContractRead({
     addressOrName: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
     contractInterface: SnookAbi,
     functionName: "tokenByIndex",
@@ -81,6 +85,8 @@ const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
       })();
     }
   }, [tokenUriData]);
+
+  if (error || tokenRead) return null;
 
   return (
     <SelectableNft

@@ -6,6 +6,7 @@ import { SelectableNftProps } from "@/components/SelectableNft/SelectableNft";
 import UserSnookIdWrapper from "@/components/UsersSnooks/UserSnookIdWrapper";
 import { useDisclosure } from "@chakra-ui/react";
 import EditPriceModal from "@/components/EditPriceModal";
+import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
 
 type SelectedData = {
   id: number;
@@ -15,7 +16,7 @@ type SelectedData = {
 };
 
 const UsersSnooks = () => {
-  const [editedId, setEditedId] = useState<number>();
+  const [editedId, setEditedId] = useState<number | undefined>(undefined);
   const [selected, setSelected] = useState<SelectedData[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -38,20 +39,41 @@ const UsersSnooks = () => {
     }
   };
 
-  const handleEdit = (id: number) => {
+  const handleOpenEditModal = (id: number) => {
     setEditedId(id);
     onOpen();
   };
 
+  const handleEdit = ({ price, minTime, maxTime }: EditPriceModalData) => {
+    console.log(editedId);
+    if (editedId === undefined) return;
+    setSelected((p) => [
+      ...p.filter(({ id: cId }) => cId !== editedId),
+      {
+        id: editedId,
+        price: price,
+        maxTime,
+        minTime,
+      },
+    ]);
+    onClose();
+    setEditedId(undefined);
+  };
+
   return (
     <>
-      <EditPriceModal isOpen={isOpen} onClose={onClose} />
+      <EditPriceModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onEdit={handleEdit}
+        defaults={selected.find(({ id }) => id === editedId)}
+      />
       {Array.from(Array(data?.toNumber()).keys()).map((id) => (
         <UserSnookIdWrapper
           snookIndex={id}
           key={id}
           onClick={() => onClick(id)}
-          onEdit={() => handleEdit(id)}
+          onEdit={() => handleOpenEditModal(id)}
           isSelected={checkIsSelected(id)}
         />
       ))}
