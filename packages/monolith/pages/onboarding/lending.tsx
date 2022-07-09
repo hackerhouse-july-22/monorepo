@@ -16,7 +16,20 @@ const images = [
   "https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600",
 ];
 
+export type SelectedData = {
+  id: number;
+  price: number;
+  minTime: number;
+  maxTime: number;
+};
+
 const OnboardingLending: React.FC = () => {
+  const [selected, setSelected] = useState<SelectedData[]>([]);
+
+  const onContinue = () => {
+    console.log(selected);
+  };
+
   return (
     <>
       <PageContainer>
@@ -29,9 +42,15 @@ const OnboardingLending: React.FC = () => {
             each one.
           </Text>
           <SimpleGrid columns={4} mt={8} spacing={6}>
-            <UsersSnooks />
+            <UsersSnooks selected={selected} setSelected={setSelected} />
           </SimpleGrid>
-          <Button colorScheme="pink" size="lg" mt={8}>
+          <Button
+            colorScheme="pink"
+            size="lg"
+            mt={8}
+            onClick={onContinue}
+            isDisabled={selected.length === 0}
+          >
             Continue
           </Button>
         </Container>

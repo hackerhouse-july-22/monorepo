@@ -1,23 +1,19 @@
 import { useAccount, useContractRead } from "wagmi";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { SnookAbi } from "./UsersSnooks.constants";
-import SelectableNft from "@/components/SelectableNft";
-import { SelectableNftProps } from "@/components/SelectableNft/SelectableNft";
 import UserSnookIdWrapper from "@/components/UsersSnooks/UserSnookIdWrapper";
 import { useDisclosure } from "@chakra-ui/react";
 import EditPriceModal from "@/components/EditPriceModal";
 import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
+import { SelectedData } from "../../pages/onboarding/lending";
 
-type SelectedData = {
-  id: number;
-  price: number;
-  minTime: number;
-  maxTime: number;
+type UsersSnooksProps = {
+  selected: SelectedData[];
+  setSelected: Dispatch<SetStateAction<SelectedData[]>>;
 };
 
-const UsersSnooks = () => {
+const UsersSnooks: React.FC<UsersSnooksProps> = ({ selected, setSelected }) => {
   const [editedId, setEditedId] = useState<number | undefined>(undefined);
-  const [selected, setSelected] = useState<SelectedData[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { address } = useAccount();
