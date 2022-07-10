@@ -4,34 +4,16 @@ import SelectableNft, {
 import React, { useEffect, useState } from "react";
 import { useAccount, useContractRead } from "wagmi";
 import { SnookAbi } from "@/components/UsersSnooks/UsersSnooks.constants";
+import SnookData from "@/types/SnookData";
 
 type UserSnookIdWrapperProps = {
   snookIndex: number;
-  onGetNftId: (nftId: number) => void;
+  onGetNftData: (data: { nftId: number; nftImage: string }) => void;
 } & Omit<SelectableNftProps, "imageUrl" | "isLoading" | "name">;
-
-type SnookData = {
-  name: string;
-  description: string;
-  external_url: "https://playsnook.com";
-  image: string;
-  inGameImage: string;
-  imageCID: string;
-  inGameImageCID: string;
-  snookObject: {
-    colors: string[];
-    patterns: string[];
-    wearables: string[];
-    skinId: string;
-    stars: string;
-    traits: string[];
-    score: string;
-  };
-};
 
 const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
   snookIndex,
-  onGetNftId,
+  onGetNftData,
   ...props
 }) => {
   const { address } = useAccount();
@@ -70,10 +52,18 @@ const UserSnookIdWrapper: React.FC<UserSnookIdWrapperProps> = ({
 
   useEffect(() => {
     if (tokenIdData) {
-      onGetNftId(parseInt(tokenIdData.toString(), 10));
       getUri();
     }
   }, [tokenIdData]);
+
+  useEffect(() => {
+    if (tokenIdData && snookData?.image) {
+      onGetNftData({
+        nftId: parseInt(tokenIdData.toString(), 10),
+        nftImage: snookData?.image,
+      });
+    }
+  }, [tokenIdData, snookData]);
 
   useEffect(() => {
     if (tokenUriData) {

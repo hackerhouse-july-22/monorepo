@@ -21,7 +21,7 @@ type EditPriceModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onEdit: (data: EditPriceModalData) => void;
-  defaults?: EditPriceModalData;
+  defaults?: Partial<EditPriceModalData>;
 };
 
 const EditPriceModal: React.FC<EditPriceModalProps> = ({

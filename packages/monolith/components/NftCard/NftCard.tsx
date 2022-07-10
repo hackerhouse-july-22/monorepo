@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import { Box, Button, Flex, Radio, Tag, Text, Tooltip } from "@chakra-ui/react";
 
-type NftCardProps = {
-  imageUrl: string;
+export type NftCardProps = {
+  imageUrl?: string;
   topRightItem?: ReactNode;
   buttonText?: string;
   isDisabled?: boolean;

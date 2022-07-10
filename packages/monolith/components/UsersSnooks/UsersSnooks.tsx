@@ -10,7 +10,10 @@ import { SelectedData } from "../../pages/onboarding/lending";
 type UsersSnooksProps = {
   selected: SelectedData[];
   setSelected: Dispatch<SetStateAction<SelectedData[]>>;
-  setNftAddress: (id: number, tokenId: number) => void;
+  setNftAddress: (
+    id: number,
+    data: { nftId: number; nftImage: string }
+  ) => void;
 };
 
 const UsersSnooks: React.FC<UsersSnooksProps> = ({
@@ -70,7 +73,7 @@ const UsersSnooks: React.FC<UsersSnooksProps> = ({
       />
       {Array.from(Array(data?.toNumber()).keys()).map((id) => (
         <UserSnookIdWrapper
-          onGetNftId={(nftAddress) => setNftAddress(id, nftAddress)}
+          onGetNftData={(nftData) => setNftAddress(id, nftData)}
           price={selected.find((a) => a.id === id)?.price ?? 0}
           snookIndex={id}
           key={id}

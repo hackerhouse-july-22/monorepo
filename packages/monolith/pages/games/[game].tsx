@@ -11,19 +11,36 @@ import {
   Select,
   SimpleGrid,
   Spacer,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsChevronRight } from "react-icons/bs";
 import GameNftCard from "@/components/GameNftCard";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { useAppDispatch } from 'store';
-import UseNftModal from '@/components/UseNftModal';
-import {show} from "@/slices/useNftModalSlice"
+import { useAppDispatch } from "store";
+import UseNftModal from "@/components/UseNftModal";
+import { show } from "@/slices/useNftModalSlice";
+import { useGetNftsByCollectionQuery } from "@/slices/zebraApi";
+import { IZebraNFT } from "@/types/IZebraNFT";
 
 const Game: NextPage = () => {
+  const toast = useToast();
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const { data, error } = useGetNftsByCollectionQuery(
+    "0x4372597f1c600d86598675dcb6cf5713bb7525cf"
+  );
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error fetching data",
+        status: "error",
+      });
+    }
+  }, [error]);
 
   return (
     <PageContainer px={8}>
@@ -39,11 +56,11 @@ const Game: NextPage = () => {
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
           <NextLink href={router.asPath}>
-            <BreadcrumbLink as="span">Contact</BreadcrumbLink>
+            <BreadcrumbLink as="span">Snook</BreadcrumbLink>
           </NextLink>
         </BreadcrumbItem>
       </Breadcrumb>
-      <Flex alignItems="center">
+      <Flex alignItems="center" mt={2}>
         <Heading as="h1" size="2xl">
           Snook NFTs
         </Heading>
@@ -64,15 +81,19 @@ const Game: NextPage = () => {
         </Select>
       </SimpleGrid>
       <SimpleGrid columns={6} spacing={8} mt={8}>
-        <GameNftCard
-          imageUrl="https://www.esports.net/wp-content/uploads/2022/02/snook-game-review.jpg"
-          name="Snook Basic Snek"
-          category="Basic"
-          price={123}
-          minTime={12}
-          maxTime={24}
-          onClick={() => dispatch(show("Snook Basic Snek"))}
-        />
+        {data?.nfts &&
+          (data?.nfts as IZebraNFT[]).map(
+            ({ tokenId, pricePerSecond, maxRentDuration }) => (
+              <GameNftCard
+                key={tokenId}
+                price={pricePerSecond}
+                minTime={12}
+                maxTime={maxRentDuration}
+                nftId={tokenId}
+                onClick={() => dispatch(show("Snook Basic Snek"))}
+              />
+            )
+          )}
       </SimpleGrid>
       <UseNftModal />
     </PageContainer>

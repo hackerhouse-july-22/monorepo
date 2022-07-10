@@ -4,13 +4,14 @@ import {
   Heading,
   SimpleGrid,
   Text,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import PageContainer from "@/components/PageContainer";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UsersSnooks from "@/components/UsersSnooks/UsersSnooks";
 import { useCreateNftListingMutation } from "@/slices/zebraApi";
 import { useAccount } from "wagmi";
+import { useRouter } from "next/router";
 
 export type SelectedData = {
   id: number;
@@ -21,6 +22,8 @@ export type SelectedData = {
 };
 
 const OnboardingLending: React.FC = () => {
+  const toast = useToast();
+  const router = useRouter();
   const [
     createNftListing,
     {
@@ -31,27 +34,41 @@ const OnboardingLending: React.FC = () => {
       isError: createNftListingIsErråor,
     },
   ] = useCreateNftListingMutation();
-  const [tokenIdMap, setTokenIdMap] = useState<Record<string, string>>({});
+  const [tokenIdMap, setTokenIdMap] = useState<
+    Record<string, { nftId: string; nftImage: string }>
+  >({});
 
   const { address } = useAccount();
 
   const [selected, setSelected] = useState<SelectedData[]>([]);
 
-  const setNftAddress = (id: number, tokenId: number) => {
-    setTokenIdMap((p) => ({ ...p, [id]: tokenId }));
+  const setNftAddress = (id: number, { nftId, nftImage }: any) => {
+    setTokenIdMap((p) => ({ ...p, [id]: { nftId, nftImage } }));
   };
 
   const onContinue = async () => {
     const data = selected.map((s) => ({
       supplierAddress: address,
-      nftAddress: s.address,
-      tokenId: tokenIdMap[s.id],
-      pricePerSecond: s.price / 60 / 60,
+      tokenId: tokenIdMap[s.id].nftId,
+      pricePerSecond: Math.round(s.price / 60 / 60),
       minRentDuration: s.minTime,
       maxRentDuration: s.maxTime,
+      nftAddress: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
+      nftImage: tokenIdMap[s.id].nftImage,
+      nonce: 0,
     }));
-    console.log(data);
+    await Promise.all(data.map((a) => createNftListing(a)));
   };
+
+  useEffect(() => {
+    if (createNftListingIsSuccess) {
+      toast({
+        title: "Created NFT",
+        status: "success",
+      });
+      router.push("/lending");
+    }
+  }, [createNftListingIsSuccess]);
 
   return (
     <>

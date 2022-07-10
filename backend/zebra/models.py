@@ -24,6 +24,7 @@ class ZebraNFT(models.Model):
 
     supplierAddress = models.CharField(max_length=42, blank=False, null=False)
     nftAddress = models.CharField(max_length=42, blank=False, null=False)
+    nftImage = models.CharField(max_length=200, blank=False, null=False)
     tokenId = models.IntegerField(blank=False, null=False)
     pricePerSecond = models.IntegerField(blank=False, null=False)
     maxRentDuration = models.IntegerField(blank=False, null=False)
