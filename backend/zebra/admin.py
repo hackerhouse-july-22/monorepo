@@ -15,7 +15,10 @@ class ZebraNFTAdmin(admin.ModelAdmin):
     """
     Admin settings for ZebraNFT model
     """
-    list_display = ('supplierAddress','nftAddress', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at')
+    list_display = (
+        'supplierAddress','nftAddress', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at'
+        # 'renterWalletInfo','supplierWalletInfo',
+        )
 
     ordering = ('-created_at',)
 

@@ -9,7 +9,12 @@ import web3
 # from .utils import recoverAddress, isValidEthereumAddress
 
 from .models import ZebraNFT, UserWalletInfo
-from .serializers import ZebraNFTSerializer, UserWalletInfoSerializer
+from .serializers import (
+    ZebraNFTSerializer,
+    CreateZebraNFTSerializer,
+    UserWalletInfoSerializer
+
+) 
 from .abi import ZEBRA_TEST_ABI
 
 from thirdweb import ThirdwebSDK
@@ -80,11 +85,12 @@ class CreateGnosisLinkToWalletView(generics.CreateAPIView):
             # if not web3.Web3.isChecksumAddress(gnosisSafeAddress):
             #     raise Exception("Invalid gnosis safe address")
             
-            # if UserWalletInfo.objects.get(user_wallet_address=userWalletAddress).exists():
-            #     raise Exception("User wallet address already exists")
+            if UserWalletInfo.objects.get(user_wallet_address=userWalletAddress).exists():
+                raise Exception("User wallet address already exists")
                 
             if UserWalletInfo.objects.get(
-                user_wallet_address=userWalletAddress).exists():
+                    gnosis_safe_address=gnosisSafeAddress
+                ).exists():
                 raise Exception("Gnosis safe address already exists")
             
             newUseWalletGnosisLink = UserWalletInfo.objects.create(
@@ -152,7 +158,7 @@ class ZebraNFTListView(APIView):
             )
 
 class CreateNFTView(generics.CreateAPIView):
-    serializer_class = ZebraNFTSerializer
+    serializer_class = CreateZebraNFTSerializer
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):
