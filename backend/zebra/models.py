@@ -30,6 +30,12 @@ class ZebraNFT(models.Model):
     maxRentDuration = models.IntegerField(blank=False, null=False)
     nonce = models.IntegerField(blank=False, null=False)
 
+    # renterAddress = models.CharField(max_length=42, blank=True, null=True)
+    # renterGnosisSafeAddress = models.CharField(max_length=42, blank=False, null=False)
+
+    supplierWalletInfo = models.ForeignKey('UserWalletInfo', on_delete=models.CASCADE, related_name='supplier_wallet_info', blank=True, null=True)
+    renterWalletInfo = models.ForeignKey('UserWalletInfo', on_delete=models.CASCADE, related_name='renter_wallet_info', blank=True, null=True)
+
 
     # colletion = models.CharField(max_length=50)
 
@@ -40,28 +46,16 @@ class ZebraNFT(models.Model):
         return f"NFT Address: {self.nftAddress}"
 
 
-# class Supplier(models.Model):
-#     """
-#     Supplier model
-#     """
-#     address = models.CharField(max_length=42, blank=False, null=False)
+# model to hold use wallet address and gnosis safe id
+class UserWalletInfo(models.Model):
+    """
+    Model to hold user wallet address and gnosis safe id
+    """
+    user_wallet_address = models.CharField(max_length=42, blank=False, null=False)
+    gnosis_safe_address = models.CharField(max_length=42, blank=False, null=False)
 
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return f"Address: {self.address}"
+    def __str__(self):
+        return f"User Wallet Address: {self.user_wallet_address}"
 
 
-# class Offers(models.Model):
-#     """
-#     Offers model
-#     """
-#     offer = models.ForeignKey(ZebraNFT, on_delete=models.CASCADE)
-#     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return f"Offer: {self.offer}"
+    

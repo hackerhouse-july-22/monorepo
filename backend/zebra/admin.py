@@ -2,9 +2,14 @@ from django.contrib import admin
 
 from .models import (
     ZebraNFT,
+    UserWalletInfo
     # Supplier,
     # Offers
 )
+
+class UserWalletInfoAdmin(admin.ModelAdmin):
+    list_display = ('user_wallet_address', 'gnosis_safe_address')
+    
 
 class ZebraNFTAdmin(admin.ModelAdmin):
     """
@@ -14,23 +19,8 @@ class ZebraNFTAdmin(admin.ModelAdmin):
 
     ordering = ('-created_at',)
 
-# class OffersAdmin(admin.ModelAdmin):
-#     """
-#     Admin settings for Offers model
-#     """
-#     list_display = ('offer', 'supplier',)
 
-#     ordering = ('-created_at',)
-
-# class SupplierAdmin(admin.ModelAdmin):
-#     """
-#     Admin settings for Supplier model
-#     """
-#     list_display = ('address',)
-
-#     ordering = ('-created_at',)
-
-
+admin.site.register(UserWalletInfo, UserWalletInfoAdmin)
 admin.site.register(ZebraNFT, ZebraNFTAdmin)
 # admin.site.register(Offers, OffersAdmin)
 # admin.site.register(Supplier, SupplierAdmin)
