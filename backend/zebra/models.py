@@ -36,6 +36,7 @@ class ZebraNFT(models.Model):
     supplierWalletInfo = models.ForeignKey('UserWalletInfo', on_delete=models.CASCADE, related_name='supplier_wallet_info', blank=True, null=True)
     renterWalletInfo = models.ForeignKey('UserWalletInfo', on_delete=models.CASCADE, related_name='renter_wallet_info', blank=True, null=True)
 
+    signature = models.CharField(max_length=42, blank=False, null=False)
 
     # colletion = models.CharField(max_length=50)
 
