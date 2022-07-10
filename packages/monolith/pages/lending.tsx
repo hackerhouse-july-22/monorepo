@@ -1,27 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageContainer from "@/components/PageContainer";
 import {
+  Center,
   Container,
   Heading,
   SimpleGrid,
+  Spinner,
   Stat,
   StatArrow,
   StatHelpText,
   StatLabel,
   StatNumber,
-  Tag,
-  Tooltip,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import NftCard from "@/components/NftCard";
 import EditPriceModal from "@/components/EditPriceModal";
+import {
+  useGetNftsBySupplierQuery,
+  useUpdateNftListingMutation,
+} from "@/slices/zebraApi";
+import { useAccount } from "wagmi";
+import { IZebraNFT } from "@/types/IZebraNFT";
+import SnookCardFromId from "@/components/SnookCardFromId";
+import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
 
 const Lending: React.FC = () => {
+  const [edited, setEdited] = useState<IZebraNFT | undefined>(undefined);
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { address } = useAccount();
+  const { data, isLoading } = useGetNftsBySupplierQuery(address);
+  const [updateNftListing, { error, isSuccess }] =
+    useUpdateNftListingMutation();
+
+  const handleEdit = ({ price, maxTime }: EditPriceModalData) => {
+    console.log(edited);
+    updateNftListing({
+      ...edited,
+      id: edited?.id,
+      pricePerSecond: price,
+      maxRentDuration: maxTime,
+    });
+    onClose();
+  };
+
+  useEffect(() => {
+    if (isSuccess)
+      toast({
+        title: "NFT Updated",
+        status: "success",
+      });
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (error)
+      toast({
+        title: "Error updating NFT",
+        status: "error",
+      });
+  }, [error]);
 
   return (
     <>
-      <EditPriceModal isOpen={isOpen} onClose={onClose} />
+      <EditPriceModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onEdit={handleEdit}
+        defaults={{
+          price: edited?.pricePerSecond,
+          maxTime: edited?.maxRentDuration,
+        }}
+      />
       <PageContainer>
         <Container>
           <Heading as="h1" size="2xl" mt={12}>
@@ -30,7 +79,7 @@ const Lending: React.FC = () => {
           <SimpleGrid columns={3} spacing={4} mt={8}>
             <Stat>
               <StatLabel>Total Lent NFTs</StatLabel>
-              <StatNumber>12</StatNumber>
+              <StatNumber>{data?.nfts?.length}</StatNumber>
               <StatHelpText>4 Actively Rented</StatHelpText>
             </Stat>
             <Stat>
@@ -58,28 +107,40 @@ const Lending: React.FC = () => {
           <Heading as="h3" size="md" mt={6}>
             Snook
           </Heading>
-          <SimpleGrid columns={4} mt={4} spacing={6}>
-            <NftCard
-              imageUrl="https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600"
-              primaryText="0.012 ETH / Day"
-              secondaryText="2hrs min, 4hrs max"
-              onButtonClick={onOpen}
-              buttonText="Edit"
-            />
-            <NftCard
-              imageUrl="https://lh3.googleusercontent.com/jvaVcHdVPwuExwfjq4YFqV9lCXTx2QEMIZc1S240RzFCZVOHHFuYlW226Jbhk0bYFt1B-rdOx2RLz12N5AkoPyCS3IvLMrLn23Wp3CU=w600"
-              isDisabled
-              buttonText="Edit"
-              topRightItem={
-                <Tooltip label="6hrs left">
-                  <Tag colorScheme="red">Rented</Tag>
-                </Tooltip>
-              }
-              primaryText="0.012 ETH / Day"
-              secondaryText="2hrs min, 4hrs max"
-              onButtonClick={onOpen}
-            />
-          </SimpleGrid>
+          {!data ? (
+            <Center>
+              <Spinner />
+            </Center>
+          ) : (
+            <SimpleGrid columns={4} mt={4} spacing={6}>
+              {(data?.nfts as IZebraNFT[])?.map(
+                ({
+                  id,
+                  pricePerSecond,
+                  tokenId,
+                  maxRentDuration,
+                  ...props
+                }) => (
+                  <SnookCardFromId
+                    key={tokenId}
+                    nftId={tokenId}
+                    onButtonClick={() => {
+                      onOpen();
+                      setEdited({
+                        id,
+                        pricePerSecond,
+                        tokenId,
+                        maxRentDuration,
+                        ...props,
+                      });
+                    }}
+                    buttonText="Edit"
+                    secondaryText={pricePerSecond.toString()}
+                  />
+                )
+              )}
+            </SimpleGrid>
+          )}
         </Container>
       </PageContainer>
     </>

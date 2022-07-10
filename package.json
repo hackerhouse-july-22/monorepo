@@ -18,7 +18,8 @@
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "framer-motion": "^6"
+    "framer-motion": "^6",
+    "react-hook-form": "^7.33.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "latest",

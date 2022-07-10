@@ -16,12 +16,6 @@ const Home: NextPage = () => {
             name="Snook"
             numAssets={18}
             imageUrl="https://www.esports.net/wp-content/uploads/2022/02/snook-game-review.jpg"
-            url="test"
-          />
-          <GameCard
-            name="Snook"
-            numAssets={18}
-            imageUrl="https://www.esports.net/wp-content/uploads/2022/02/snook-game-review.jpg"
             url="snook"
           />
         </SimpleGrid>

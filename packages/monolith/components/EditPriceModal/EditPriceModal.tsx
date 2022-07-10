@@ -1,33 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { Button, Heading } from "@chakra-ui/react";
 import { FormInput } from "@/components/FormInputs";
 import { useForm } from "react-hook-form";
 
-type EditPriceModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-type EditPriceModalData = {
+export type EditPriceModalData = {
   price: number;
   minTime: number;
   maxTime: number;
 };
 
-const EditPriceModal: React.FC<EditPriceModalProps> = ({ onClose, isOpen }) => {
+type EditPriceModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  onEdit: (data: EditPriceModalData) => void;
+  defaults?: Partial<EditPriceModalData>;
+};
+
+const EditPriceModal: React.FC<EditPriceModalProps> = ({
+  onClose,
+  isOpen,
+  onEdit,
+  defaults,
+}) => {
   const {
     register,
     formState: { errors },
-  } = useForm<EditPriceModalData>();
+    handleSubmit,
+    reset,
+  } = useForm<EditPriceModalData>({
+    defaultValues: defaults,
+  });
+
+  useEffect(() => {
+    if (defaults) {
+      reset({
+        ...defaults,
+      });
+    }
+  }, [defaults]);
+
+  const onSubmit = (values: EditPriceModalData) => {
+    onEdit(values);
+    reset();
+    onClose();
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -92,7 +116,9 @@ const EditPriceModal: React.FC<EditPriceModalProps> = ({ onClose, isOpen }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="pink">Save</Button>
+          <Button colorScheme="pink" onClick={handleSubmit(onSubmit)}>
+            Save
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -37,9 +37,68 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # 3rd-party
+    'rest_framework',
+    'corsheaders',
+    'drf_yasg',
+    # 'storages',
+
+    # Project
+    'zebra.apps.ZebraConfig',
 ]
 
+SITE_ID = 1
+
+CORS_ALLOWED_ORIGINS = [
+    # 'http://localhost:8000', # default django port
+    'http://localhost:3000', # default react port
+    'http://127.0.0.1:3000',
+    # '*', # all
+]
+CORS_ALLOW_ALL_ORIGINS = True
+
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
+}
+
+#           DRF settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT auth for drf
+        
+    ],
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     'django_filters.rest_framework.DjangoFilterBackend'], # GLOBAL FILTERING on API
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',
+        'user': '1000/day'
+    },
+    'DEFAULT_PARSER_CLASSES': (
+          'rest_framework.parsers.FormParser',
+          'rest_framework.parsers.MultiPartParser',
+          'rest_framework.parsers.JSONParser',
+   ),
+    'DEFAULT_MODEL_SERIALIZER_CLASS': (
+        'rest_framework.serializers.ModelSerializer',
+    ),
+}
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # add for cors headers
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

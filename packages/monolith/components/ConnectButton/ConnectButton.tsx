@@ -8,18 +8,26 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
-import {
-  useAddress,
-  useDisconnect,
-  useMetamask,
-} from "@thirdweb-dev/react";
+import { useAccount, useDisconnect, useConnect } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+
 import Jazzicon from "react-jazzicon";
 import truncateAddress from "../../utils/truncateAddress";
+import { useEffect, useState } from "react";
 
 export default function ConnectButton() {
-  const connectWithMetaMask = useMetamask();
-  const disconnect = useDisconnect();
-  const address = useAddress();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+  const { address } = useAccount();
+
+  if (!mounted) return null;
 
   return (
     <>
@@ -40,7 +48,7 @@ export default function ConnectButton() {
               </Flex>
             </MenuButton>
             <MenuList>
-              <MenuItem color="red" onClick={disconnect}>
+              <MenuItem color="red" onClick={() => disconnect()}>
                 Disconnect
               </MenuItem>
             </MenuList>
@@ -48,7 +56,7 @@ export default function ConnectButton() {
         </>
       ) : (
         <>
-          <Button variant="secondary" onClick={connectWithMetaMask}>
+          <Button variant="secondary" onClick={() => connect()}>
             Connect MetaMask
           </Button>
         </>
