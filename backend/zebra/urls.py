@@ -18,4 +18,8 @@ urlpatterns = [
     path('list/by-price/', ZebraNFTListViewByPrice.as_view(), name='zebra-nft-list-by-price'),
     path('list/by-collection/<str:address>/', ZebraNFTListViewByPriceAndCollection.as_view(), name='zebra-nft-list-by-collection'),
     path('list/by-supplier/<str:address>/', GetNFTsBySupplierAddress.as_view(), name='zebra-nft-list-by-user'),
+
+    # Wallet Info
+    path('wallet/create/', CreateGnosisLinkToWalletView.as_view(), name='wallet-info-create'),
+    path('wallet/read/<str:address>/', ReadUserWalletInfoView.as_view(), name='wallet-info-read'),
 ]

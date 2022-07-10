@@ -79,6 +79,21 @@ export const zebraApi = createApi({
       providesTags: ["zebra"],
     }),
 
+    // Wallet Auth/Gnosis
+    createWalletInfo: builder.mutation({
+      query(data) {
+        return {
+          url: `wallet/create/`,
+          method: "POST",
+          body: data
+        }
+      }
+    }),
+
+    getWalletInfo: builder.query({
+      query: (address) => `wallet/read/${address}/`,
+    }),
+
   }),
 });
 
@@ -101,5 +116,9 @@ export const {
   useGetNftsByPriceQuery,
   useLazyGetNftsByPriceQuery,
 
+  // Wallet Auth/Gnosis
+  useCreateWalletInfoMutation,
+  useGetWalletInfoQuery,
+  useLazyGetWalletInfoQuery,
 
 } = zebraApi;

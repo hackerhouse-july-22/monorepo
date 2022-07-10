@@ -8,8 +8,8 @@ import web3
 
 # from .utils import recoverAddress, isValidEthereumAddress
 
-from .models import ZebraNFT
-from .serializers import ZebraNFTSerializer
+from .models import ZebraNFT, UserWalletInfo
+from .serializers import ZebraNFTSerializer, UserWalletInfoSerializer
 from .abi import ZEBRA_TEST_ABI
 
 from thirdweb import ThirdwebSDK
@@ -28,6 +28,10 @@ checksummedAddress      = web3.Web3.toChecksumAddress(ZEBRA_PROTOCOL_ADDRESS)
 # Can also use abi
 # zebraContractFromAbi = sdk.get_contract_from_abi(ZEBRA_PROTOCOL_ADDRESS, ZEBRA_TEST_ABI)
 zebraContractFromAbi = sdk.get_contract_from_abi(checksummedAddress, ZEBRA_TEST_ABI)
+
+####################################
+# Wallet/Auth                      #
+####################################
 
 class EthereumAuth(APIView):
     def post(self, request):
@@ -56,6 +60,74 @@ class EthereumAuth(APIView):
                 {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class CreateGnosisLinkToWalletView(generics.CreateAPIView):
+    """
+    Link a gnosis safe address to a user wallet address
+    """
+    serializer_class = UserWalletInfoSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def post(self, request):
+        userWalletAddress = request.data['userWalletAddress']
+        gnosisSafeAddress = request.data['userGnosisAddress']
+        
+        try:
+
+            # if not web3.Web3.isChecksumAddress(userWalletAddress):
+            #     raise Exception("Invalid user wallet address")
+            
+            # if not web3.Web3.isChecksumAddress(gnosisSafeAddress):
+            #     raise Exception("Invalid gnosis safe address")
+            
+            # if UserWalletInfo.objects.get(user_wallet_address=userWalletAddress).exists():
+            #     raise Exception("User wallet address already exists")
+                
+            if UserWalletInfo.objects.get(
+                user_wallet_address=userWalletAddress).exists():
+                raise Exception("Gnosis safe address already exists")
+            
+            newUseWalletGnosisLink = UserWalletInfo.objects.create(
+                user_wallet_address=userWalletAddress,
+                gnosis_safe_address=gnosisSafeAddress
+            )
+            newUseWalletGnosisLink.save()                
+
+            return Response(
+                {"message": "Successfully linked userWalletAddress to gnosisSafeAddress"},
+                status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class ReadUserWalletInfoView(generics.RetrieveAPIView):
+    """
+    Get user wallet info
+    """
+    serializer_class = UserWalletInfoSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def get(self, request, address):
+        try:
+            userWalletInfo = UserWalletInfo.objects.get(
+                user_wallet_address=address
+            )
+            serializer = UserWalletInfoSerializer(userWalletInfo)
+            return Response(
+                {"userWalletInfo": serializer.data},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+####################################
+# NFT Stuff                        #
+####################################
 
 class ZebraNFTListView(APIView):
     """
