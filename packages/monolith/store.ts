@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { zebraApi } from "./slices/zebraApi";
 import useNftModal from "./slices/useNftModalSlice";
+import editPriceModal from "./slices/editPriceModalSlice";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -18,6 +19,7 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
 const reducers = combineReducers({
   [zebraApi.reducerPath]: zebraApi.reducer,
   useNftModal,
+  editPriceModal,
 });
 
 const persistConfig = {

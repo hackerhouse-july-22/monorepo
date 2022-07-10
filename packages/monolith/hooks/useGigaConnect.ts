@@ -8,7 +8,6 @@ import {
   useSDK,
   useDisconnect as useThirdwebDisconnect,
 } from "@thirdweb-dev/react";
-import Cookie from "js-cookie";
 
 import { InjectedConnector } from "wagmi/connectors/injected";
 

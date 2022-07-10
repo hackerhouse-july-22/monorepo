@@ -7,54 +7,59 @@ import {
   ModalFooter,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import { Button, Heading } from "@chakra-ui/react";
+import { Button, Heading, useToast } from "@chakra-ui/react";
 import { FormInput } from "@/components/FormInputs";
 import { useForm } from "react-hook-form";
+import { useUpdateNftListingMutation } from "@/slices/zebraApi";
+import { useAppDispatch, useAppSelector } from "store";
+import { hide } from "@/slices/editPriceModalSlice";
+import useGigaConnect from "hooks/useGigaConnect";
+import { useSignTypedData } from "wagmi";
+import { ethers } from "ethers";
 
-export type EditPriceModalData = {
+type EditPriceModalData = {
   price: number;
   minTime: number;
   maxTime: number;
 };
 
-type EditPriceModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  onEdit: (data: EditPriceModalData) => void;
-  defaults?: Partial<EditPriceModalData>;
-};
+const EditPriceModal: React.FC = () => {
+  const { shouldShow, nftId, id } = useAppSelector(
+    (state) => state.editPriceModal
+  );
+  const dispatch = useAppDispatch();
+  const toast = useToast();
+  const { address } = useGigaConnect();
 
-const EditPriceModal: React.FC<EditPriceModalProps> = ({
-  onClose,
-  isOpen,
-  onEdit,
-  defaults,
-}) => {
   const {
     register,
-    formState: { errors },
     handleSubmit,
-    reset,
-  } = useForm<EditPriceModalData>({
-    defaultValues: defaults,
-  });
+    formState: { isValid, errors },
+  } = useForm<EditPriceModalData>();
+
+  const [updateNftListing, { isSuccess, error }] =
+    useUpdateNftListingMutation();
+
+  const { signTypedDataAsync } = useSignTypedData();
 
   useEffect(() => {
-    if (defaults) {
-      reset({
-        ...defaults,
+    if (isSuccess)
+      toast({
+        title: "NFT Updated",
+        status: "success",
       });
-    }
-  }, [defaults]);
+  }, [isSuccess]);
 
-  const onSubmit = (values: EditPriceModalData) => {
-    onEdit(values);
-    reset();
-    onClose();
-  };
+  useEffect(() => {
+    if (error)
+      toast({
+        title: "Error updating NFT",
+        status: "error",
+      });
+  }, [error]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={shouldShow} onClose={() => dispatch(hide())}>
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
@@ -116,7 +121,67 @@ const EditPriceModal: React.FC<EditPriceModalProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="pink" onClick={handleSubmit(onSubmit)}>
+          <Button
+            colorScheme="pink"
+            disabled={isValid}
+            onClick={handleSubmit(async (data) => {
+              const maxRentalDuration = data.maxTime * 60;
+              const pricePerSecond = ethers.utils
+                .parseEther(`${data.price}`)
+                .div(60 * 60);
+              const signature = await signTypedDataAsync({
+                domain: {
+                  // name?: string;
+                  // version?: string;
+                  // chainId?: string | number | bigint;
+                  // verifyingContract?: string;
+                  // salt?: BytesLike;
+                },
+                types: {
+                  Offer: [
+                    {
+                      name: "NFT",
+                      type: "address",
+                    },
+                    {
+                      name: "tokenId",
+                      type: "uint256",
+                    },
+                    {
+                      name: "pricePerSecond",
+                      type: "uint256",
+                    },
+                    {
+                      name: "maxRentalDuration",
+                      type: "uint256",
+                    },
+                    {
+                      name: "nonce",
+                      type: "uint256",
+                    },
+                  ],
+                },
+                value: {
+                  Offer: {
+                    NFT: nftId,
+                    tokenId: id,
+                    pricePerSecond,
+                    maxRentalDuration,
+                    nonce: 0,
+                  },
+                },
+              });
+              updateNftListing({
+                supplierAddress: address,
+                nftAddress: nftId,
+                tokenId: id,
+                pricePerSecond,
+                maxRentDuration: maxRentalDuration,
+                nonce: 0,
+                signature: signature,
+              });
+            })}
+          >
             Save
           </Button>
         </ModalFooter>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PageContainer from "@/components/PageContainer";
 import {
   Center,
@@ -20,57 +20,21 @@ import {
   useUpdateNftListingMutation,
 } from "@/slices/zebraApi";
 import { useAccount } from "wagmi";
-import { IZebraNFT } from "@/types/IZebraNFT";
+import { show } from "@/slices/editPriceModalSlice";
+import { useDispatch } from "react-redux";
+import { type IZebraNFT } from "@/types/IZebraNFT";
 import SnookCardFromId from "@/components/SnookCardFromId";
-import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
 
 const Lending: React.FC = () => {
   const [edited, setEdited] = useState<IZebraNFT | undefined>(undefined);
-  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { address } = useAccount();
   const { data, isLoading } = useGetNftsBySupplierQuery(address);
-  const [updateNftListing, { error, isSuccess }] =
-    useUpdateNftListingMutation();
-
-  const handleEdit = ({ price, maxTime }: EditPriceModalData) => {
-    console.log(edited);
-    updateNftListing({
-      ...edited,
-      id: edited?.id,
-      pricePerSecond: price,
-      maxRentDuration: maxTime,
-    });
-    onClose();
-  };
-
-  useEffect(() => {
-    if (isSuccess)
-      toast({
-        title: "NFT Updated",
-        status: "success",
-      });
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (error)
-      toast({
-        title: "Error updating NFT",
-        status: "error",
-      });
-  }, [error]);
+  const dispatch = useDispatch();
 
   return (
     <>
-      <EditPriceModal
-        isOpen={isOpen}
-        onClose={onClose}
-        onEdit={handleEdit}
-        defaults={{
-          price: edited?.pricePerSecond,
-          maxTime: edited?.maxRentDuration,
-        }}
-      />
+      <EditPriceModal />
       <PageContainer>
         <Container>
           <Heading as="h1" size="2xl" mt={12}>
@@ -125,14 +89,7 @@ const Lending: React.FC = () => {
                     key={tokenId}
                     nftId={tokenId}
                     onButtonClick={() => {
-                      onOpen();
-                      setEdited({
-                        id,
-                        pricePerSecond,
-                        tokenId,
-                        maxRentDuration,
-                        ...props,
-                      });
+                      dispatch(show({ nftId: tokenId.toString(), id }));
                     }}
                     buttonText="Edit"
                     secondaryText={pricePerSecond.toString()}
