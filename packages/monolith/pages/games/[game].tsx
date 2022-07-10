@@ -83,14 +83,14 @@ const Game: NextPage = () => {
       <SimpleGrid columns={6} spacing={8} mt={8}>
         {data?.nfts &&
           (data?.nfts as IZebraNFT[]).map(
-            ({ tokenId, pricePerSecond, maxRentDuration }) => (
+            ({ id, tokenId, pricePerSecond, maxRentDuration }) => (
               <GameNftCard
                 key={tokenId}
                 price={pricePerSecond}
                 minTime={12}
                 maxTime={maxRentDuration}
                 nftId={tokenId}
-                onClick={() => dispatch(show("Snook Basic Snek"))}
+                onClick={() => dispatch(show({ nftId: tokenId, id }))}
               />
             )
           )}

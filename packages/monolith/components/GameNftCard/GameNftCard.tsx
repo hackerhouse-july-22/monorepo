@@ -26,6 +26,7 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
   maxTime,
   nftId,
   canSupply,
+  ...props
 }) => {
   const [snookData, setSnookData] = useState<SnookData>();
 
@@ -42,8 +43,6 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
     functionName: "assetIsRented",
     args: ["0x4372597f1c600d86598675dcb6cf5713bb7525cf", nftId],
   });
-
-  console.log(data);
 
   useEffect(() => {
     if (tokenUriData) {
@@ -76,6 +75,7 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
       height="400px"
       p={4}
       borderRadius={8}
+      {...props}
     >
       <Flex>
         {canSupply && <Button colorScheme="pink">Supply your NFT</Button>}
