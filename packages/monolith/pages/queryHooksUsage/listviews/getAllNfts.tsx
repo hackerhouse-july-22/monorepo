@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react';
 import { Button } from '@chakra-ui/react';
 
-import { IZebraNFT } from '@/types/';
+import IZebraNFT from '@/types/IZebraNFT';
 
 
 const GetAllNFTs: NextPage = () => {
@@ -51,6 +51,9 @@ const GetAllNFTs: NextPage = () => {
           <p>{nft.pricePerSecond}</p>
           <p>{nft.maxRentDuration}</p>
           <p>{nft.nonce}</p>
+          {/* NEW DATA */}
+          <p>{nft.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+          <p>{nft.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
         </div>
       ))}
 
@@ -67,6 +70,9 @@ const GetAllNFTs: NextPage = () => {
           <p>{nft.pricePerSecond}</p>
           <p>{nft.maxRentDuration}</p>
           <p>{nft.nonce}</p>
+          {/* NEW DATA */}
+          <p>{nft.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+          <p>{nft.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
         </div>
       ))}
 

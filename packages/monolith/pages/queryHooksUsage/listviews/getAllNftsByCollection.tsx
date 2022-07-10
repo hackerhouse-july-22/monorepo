@@ -5,6 +5,7 @@ import {
   useGetNftsByCollectionQuery,
   useLazyGetNftsByCollectionQuery,
 } from '@/slices/zebraApi';
+import IZebraNFT from '@/types/IZebraNFT';
 
 
 
@@ -43,14 +44,17 @@ const GetNFTsByCollection: NextPage = () => {
       {getNftsByCollectionData && getNftsByCollectionData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {getNftsByCollectionData && getNftsByCollectionData.nfts.map(nft => (
+      {getNftsByCollectionData && getNftsByCollectionData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
           <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
+          <p>{nft.nftImage}</p>
           <p>{nft.tokenId}</p>
           <p>{nft.pricePerSecond}</p>
           <p>{nft.maxRentDuration}</p>
           <p>{nft.nonce}</p>
+          <p>{nft.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+          <p>{nft.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
         </div>
       ))}
 
@@ -59,14 +63,17 @@ const GetNFTsByCollection: NextPage = () => {
       {lazyGetNftsByCollectionData && lazyGetNftsByCollectionData.nfts.length === 0 && (
         <p>No Nfts listed</p>
       )}
-      {lazyGetNftsByCollectionData && lazyGetNftsByCollectionData.nfts.map(nft => (
+      {lazyGetNftsByCollectionData && lazyGetNftsByCollectionData.nfts.map((nft: IZebraNFT) => (
         <div key={nft.id}>
           <p>{nft.supplierAddress}</p>
           <p>{nft.nftAddress}</p>
+          <p>{nft.nftImage}</p>
           <p>{nft.tokenId}</p>
           <p>{nft.pricePerSecond}</p>
           <p>{nft.maxRentDuration}</p>
           <p>{nft.nonce}</p>
+      <p>{nft.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+      <p>{nft.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
         </div>
       ))}
 

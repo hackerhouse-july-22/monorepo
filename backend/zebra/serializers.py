@@ -31,7 +31,9 @@ class CreateZebraNFTSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = ZebraNFT
-        fields = ('supplierAddress','nftAddress', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at')
+        fields = [
+            'supplierAddress','nftAddress','nftImage', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at'
+        ]
         # read_only_fields = ('user_wallet_address', 'gnosis_safe_address')
     
     def create(self, validated_data):
@@ -41,7 +43,16 @@ class CreateZebraNFTSerializer(serializers.ModelSerializer):
         return ZebraNFT.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        return super().update(instance, validated_data)
+        instance.supplierAddress = validated_data.get('supplierAddress', instance.supplierAddress)
+        instance.nftAddress = validated_data.get('nftAddress', instance.nftAddress)
+        instance.nftImage = validated_data.get('nftImage', instance.nftImage)
+        instance.tokenId = validated_data.get('tokenId', instance.tokenId)
+        instance.pricePerSecond = validated_data.get('pricePerSecond', instance.pricePerSecond)
+        instance.maxRentDuration = validated_data.get('maxRentDuration', instance.maxRentDuration)
+        instance.nonce = validated_data.get('nonce', instance.nonce)
+        instance.save()
+        return instance
+
 
 
 class ZebraNFTSerializer(serializers.ModelSerializer):
@@ -79,17 +90,14 @@ class ZebraNFTSerializer(serializers.ModelSerializer):
         """
         instance.supplierAddress = validated_data.get('supplierAddress', instance.supplierAddress)
         instance.nftAddress = validated_data.get('nftAddress', instance.nftAddress)
-        instance.nftImage = validated_data.get('nftImage', instance.nftImage)
         instance.tokenId = validated_data.get('tokenId', instance.tokenId)
         instance.pricePerSecond = validated_data.get('pricePerSecond', instance.pricePerSecond)
         instance.maxRentDuration = validated_data.get('maxRentDuration', instance.maxRentDuration)
         instance.nonce = validated_data.get('nonce', instance.nonce)
-        instance.renterWalletInfo = validated_data.get('renterWalletInfo', instance.renterWalletInfo)
-        
-        
         instance.save()
         return instance
-    
+
+
     def get_renterWalletInfo(self, obj):
         """
         Get the renterWalletInfo for the ZebraNFT
