@@ -89,7 +89,9 @@ const Lending: React.FC = () => {
                     key={tokenId}
                     nftId={tokenId}
                     onButtonClick={() => {
-                      dispatch(show({ nftId: tokenId.toString(), id }));
+                      dispatch(
+                        show({ nftId: tokenId.toString(), id: Number(id) })
+                      );
                     }}
                     buttonText="Edit"
                     secondaryText={pricePerSecond.toString()}
