@@ -23,16 +23,13 @@ function useGigaConnect() {
 
   async function login() {
     const payload = await sdk?.auth.login(domain);
-    await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/v0/zebra/ethauth/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ payload }),
-      }
-    );
+    await fetch(`${process.env.NEXT_PUBLIC_UI_DOMAIN}/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ payload }),
+    });
     console.log();
   }
 
