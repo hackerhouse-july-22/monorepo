@@ -21,8 +21,12 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "store";
 import UseNftModal from "@/components/UseNftModal";
 import { show } from "@/slices/useNftModalSlice";
-import { useGetNftsByCollectionQuery } from "@/slices/zebraApi";
+import {
+  useGetNftsByCollectionQuery,
+  useGetWalletInfoQuery,
+} from "@/slices/zebraApi";
 import { IZebraNFT } from "@/types/IZebraNFT";
+import { useAccount } from "wagmi";
 
 const Game: NextPage = () => {
   const toast = useToast();

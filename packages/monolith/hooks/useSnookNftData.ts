@@ -9,7 +9,7 @@ type UseSnookNftData = {
   error?: any;
 };
 
-const useSnookNftData = (nftId: string): UseSnookNftData => {
+const useSnookNftData = (nftId: number): UseSnookNftData => {
   const [snookData, setSnookData] = useState<SnookData>();
 
   const {

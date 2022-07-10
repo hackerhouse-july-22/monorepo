@@ -21,12 +21,15 @@ import { hide } from "@/slices/useNftModalSlice";
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { useAppSelector, useAppDispatch } from "store";
 import { FormInput } from "@/components/FormInputs";
-import { useReadNftListingQuery } from "@/slices/zebraApi";
+import {
+  useGetWalletInfoQuery,
+  useReadNftListingQuery,
+} from "@/slices/zebraApi";
 import useSnookNftData from "../../hooks/useSnookNftData";
 import transformIpfsUrl from "../../utils/transformIpfsUrl";
 import { useForm, useWatch } from "react-hook-form";
 import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
-import { useContractWrite } from "wagmi";
+import { useAccount, useContractWrite } from "wagmi";
 import { abi } from "../../../contracts/out/Zebra.sol/Zebra.json";
 
 type UseNftModalData = {
@@ -37,12 +40,16 @@ const UseNftModal: React.FC = () => {
   const { shouldShow, nftId, id } = useAppSelector(
     (state) => state.useNftModal
   );
-  const { data } = useSnookNftData(nftId as string);
+  const { address } = useAccount();
+
+  const { data } = useSnookNftData(nftId as number);
   const {
     data: readNftListingData,
     isLoading: readNftListingIsLoading,
     isError: readNftListingIsError,
   } = useReadNftListingQuery(id);
+  const { data: walletInfo, error: getWalletInfoError } =
+    useGetWalletInfoQuery(address);
 
   const { write, error, isLoading } = useContractWrite({
     addressOrName: "0x802212d3DCCD679EF1c7019Ae8aF44A26c2622D2",
@@ -67,7 +74,7 @@ const UseNftModal: React.FC = () => {
 
   const onSubmit = ({ numHours }: UseNftModalData) => {
     write({
-      args: [numHours * 60 * 60],
+      args: [numHours * 60 * 60, walletInfo, readNftListingData],
     });
   };
 
@@ -102,14 +109,14 @@ const UseNftModal: React.FC = () => {
                 </Text>
                 <Text fontSize="10">
                   <b>Price: </b>
-                  {readNftListingData.pricePerSecond}
+                  {readNftListingData?.pricePerSecond}
                 </Text>
                 <Text fontSize="10">
                   <b>Min: </b>12 hours
                 </Text>
                 <Text fontSize="10" position="absolute" bottom="0" right="0">
                   <b>Max: </b>
-                  {readNftListingData.maxRentDuration} hours
+                  {readNftListingData?.maxRentDuration} hours
                 </Text>
               </VStack>
             </SimpleGrid>

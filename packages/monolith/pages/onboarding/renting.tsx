@@ -8,36 +8,64 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import PageContainer from "@/components/PageContainer";
-import { useContractWrite } from "wagmi";
+import { useAccount, useContractWrite } from "wagmi";
 import { abi } from "../../../contracts/out/Zebra.sol/Zebra.json";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useCreateWalletInfoMutation } from "@/slices/zebraApi";
 
 const OnboardingRenting: NextPage = () => {
   const router = useRouter();
+  const { address } = useAccount();
 
   const toast = useToast();
   const { write, data, error, isLoading } = useContractWrite({
-    addressOrName: "0x802212d3DCCD679EF1c7019Ae8aF44A26c2622D2",
+    addressOrName: "0xf4a44a0c9D7ae18E55f96BDA1BDd996200bC6842",
     contractInterface: abi,
     functionName: "createZebraSafe",
+    onSettled(data, error) {
+      console.log("Settled", { data, error });
+    },
   });
 
+  const [
+    createWalletInfo,
+    {
+      error: createWalletInfoError,
+      isSuccess: createWalletInfoIsSuccess,
+      isLoading: createWalletInfoIsLoading,
+    },
+  ] = useCreateWalletInfoMutation();
+
   useEffect(() => {
-    if (error)
+    if (error || createWalletInfoError)
       toast({
         title: "Something went wrong :(",
-        description: error.toString(),
+        description: (error || createWalletInfoError)?.toString(),
         status: "error",
       });
-  }, [error]);
+  }, [error, createWalletInfoError]);
 
   useEffect(() => {
     if (data) {
+      data.wait().then((d: any) => {
+        const userGnosisAddress = d.events.find(
+          (e: any) => e.event === "ZebraSafeDeploy"
+        ).args[0];
+        createWalletInfo({
+          userWalletAddress: address,
+          userGnosisAddress,
+        });
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (createWalletInfoIsSuccess) {
       toast({ title: "Gnosis Safe Created!", status: "success" });
       router.push("/");
     }
-  }, [data]);
+  }, [createWalletInfoIsSuccess]);
 
   const onCreate = async () => {
     await write();
@@ -58,7 +86,7 @@ const OnboardingRenting: NextPage = () => {
           colorScheme="pink"
           mt={6}
           onClick={onCreate}
-          isLoading={isLoading}
+          isLoading={isLoading || createWalletInfoIsLoading}
         >
           Create Gnosis Safe
         </Button>
