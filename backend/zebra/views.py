@@ -70,8 +70,15 @@ class CreateGnosisLinkToWalletView(generics.CreateAPIView):
 
     def post(self, request):
         userWalletAddress = request.data['userWalletAddress']
-        gnosisSafeAddress = request.data['userGnosisAddress']
+        userGnosisAddress = request.data['userGnosisAddress']
         
+        # check if userWalletAddress instance already exists
+        if UserWalletInfo.objects.filter(user_wallet_address=userWalletAddress).exists():
+            return Response(
+                {"error": "User wallet address already exists"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         try:
 
             # if not web3.Web3.isChecksumAddress(userWalletAddress):
@@ -83,15 +90,14 @@ class CreateGnosisLinkToWalletView(generics.CreateAPIView):
             # if UserWalletInfo.objects.get(user_wallet_address=userWalletAddress).exists():
             #     raise Exception("User wallet address already exists")
                 
-            if UserWalletInfo.objects.get(
-                user_wallet_address=userWalletAddress).exists():
-                raise Exception("Gnosis safe address already exists")
+            # if UserWalletInfo.objects.get(
+            #     user_wallet_address=userWalletAddress).exists():
+            #     raise Exception("Gnosis safe address already exists")
             
-            newUseWalletGnosisLink = UserWalletInfo.objects.create(
+            UserWalletInfo.objects.create(
                 user_wallet_address=userWalletAddress,
-                gnosis_safe_address=gnosisSafeAddress
+                gnosis_safe_address=userGnosisAddress
             )
-            newUseWalletGnosisLink.save()                
 
             return Response(
                 {"message": "Successfully linked userWalletAddress to gnosisSafeAddress"},
