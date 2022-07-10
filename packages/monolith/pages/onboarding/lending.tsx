@@ -50,7 +50,7 @@ const OnboardingLending: React.FC = () => {
     const data = selected.map((s) => ({
       supplierAddress: address,
       tokenId: tokenIdMap[s.id].nftId,
-      pricePerSecond: Math.round(s.price / 60 / 60),
+      pricePerSecond: s.price,
       minRentDuration: s.minTime,
       maxRentDuration: s.maxTime,
       nftAddress: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",

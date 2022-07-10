@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +16,7 @@ import {
   Grid,
   Spinner,
   SimpleGrid,
+  useToast,
 } from "@chakra-ui/react";
 import { hide } from "@/slices/useNftModalSlice";
 import { createDraftSafeSelector } from "@reduxjs/toolkit";
@@ -28,7 +29,6 @@ import {
 import useSnookNftData from "../../hooks/useSnookNftData";
 import transformIpfsUrl from "../../utils/transformIpfsUrl";
 import { useForm, useWatch } from "react-hook-form";
-import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
 import { useAccount, useContractWrite } from "wagmi";
 import { abi } from "../../../contracts/out/Zebra.sol/Zebra.json";
 
@@ -37,6 +37,7 @@ type UseNftModalData = {
 };
 
 const UseNftModal: React.FC = () => {
+  const toast = useToast();
   const { shouldShow, nftId, id } = useAppSelector(
     (state) => state.useNftModal
   );
@@ -45,8 +46,8 @@ const UseNftModal: React.FC = () => {
   const { data } = useSnookNftData(nftId as number);
   const {
     data: readNftListingData,
-    isLoading: readNftListingIsLoading,
-    isError: readNftListingIsError,
+    refetch,
+    error: readError,
   } = useReadNftListingQuery(id);
   const { data: walletInfo, error: getWalletInfoError } =
     useGetWalletInfoQuery(address);
@@ -56,6 +57,30 @@ const UseNftModal: React.FC = () => {
     contractInterface: abi,
     functionName: "rent",
   });
+
+  useEffect(() => {
+    if (shouldShow) {
+      refetch();
+    }
+  }, [shouldShow]);
+
+  useEffect(() => {
+    if (readError) {
+      toast({
+        title: "Error reading NFT",
+        description: readError.toString(),
+      });
+    }
+  }, [readError]);
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Error renting NFT",
+        description: error.toString(),
+      });
+    }
+  }, [error]);
 
   const dispatch = useAppDispatch();
 

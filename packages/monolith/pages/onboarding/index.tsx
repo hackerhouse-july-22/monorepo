@@ -31,7 +31,7 @@ const Onboarding: NextPage = () => (
             We’ll find renters, and ensure that your assets remain safe with our
             trusted Gnosis safe system.
           </Text>
-          <Button colorScheme="pink" mt={4}>
+          <Button colorScheme="pink" mt={4} href="/onboarding/lending">
             Get Started Lending
           </Button>
         </Box>

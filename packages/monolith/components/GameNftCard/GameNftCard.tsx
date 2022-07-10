@@ -75,6 +75,7 @@ const GameNftCard: React.FC<GameNftCardProps> = ({
       height="400px"
       p={4}
       borderRadius={8}
+      cursor="pointer"
       {...props}
     >
       <Flex>
