@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store } from "../store";
 import { WagmiConfig, createClient, configureChains, chain } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
+import Navbar from "@/components/Navbar";
 
 const { provider, webSocketProvider } = configureChains(
   [chain.polygon],
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <WagmiConfig client={client}>
           <ThirdwebProvider desiredChainId={ChainId.Rinkeby} autoConnect>
             <ChakraProvider theme={theme} resetCSS>
+              <Navbar />
               <Component {...pageProps} />
             </ChakraProvider>
           </ThirdwebProvider>

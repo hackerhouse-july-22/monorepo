@@ -4,7 +4,7 @@ export const zebraApi = createApi({
   reducerPath: "zebraApi",
   baseQuery: fetchBaseQuery({
     // baseUrl: `${process.env.API_URL}/api/v0/zebra/`,
-    baseUrl: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v0/zebra/`,
+    baseUrl: `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/v0/zebra/`,
     prepareHeaders: (headers) => {
       headers.set("Accept", "application/json");
       headers.set("Content-Type", "application/json");

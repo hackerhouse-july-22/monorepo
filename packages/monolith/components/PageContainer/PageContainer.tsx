@@ -48,8 +48,6 @@ const PageContainer: React.FC<PageContainerProps> = ({
         <meta property="twitter:image" content={imageUrl} />
         <link rel="canonical" href={url} />
       </Head>
-
-      <Navbar />
       <Box as="main" pb={8} {...props}>
         {isConnected ? children : !mounted ? children : <DisconnectedScreen />}
       </Box>
