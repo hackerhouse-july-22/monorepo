@@ -3,8 +3,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { SnookAbi } from "./UsersSnooks.constants";
 import UserSnookIdWrapper from "@/components/UsersSnooks/UserSnookIdWrapper";
 import { useDisclosure } from "@chakra-ui/react";
-import EditPriceModal from "@/components/EditPriceModal";
-import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
+import ListNftModal from "@/components/ListNftModal";
+import { ListNftModalData } from "@/components/ListNftModal/ListNftModal";
 import { SelectedData } from "../../pages/onboarding/lending";
 
 type UsersSnooksProps = {
@@ -48,7 +48,7 @@ const UsersSnooks: React.FC<UsersSnooksProps> = ({
     onOpen();
   };
 
-  const handleEdit = ({ price, minTime, maxTime }: EditPriceModalData) => {
+  const handleEdit = ({ price, minTime, maxTime }: ListNftModalData) => {
     if (editedId === undefined) return;
     setSelected((p) => [
       ...p.filter(({ id: cId }) => cId !== editedId),
@@ -65,7 +65,7 @@ const UsersSnooks: React.FC<UsersSnooksProps> = ({
 
   return (
     <>
-      <EditPriceModal
+      <ListNftModal
         isOpen={isOpen}
         onClose={onClose}
         onEdit={handleEdit}

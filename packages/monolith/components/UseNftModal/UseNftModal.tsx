@@ -18,14 +18,12 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { hide } from "@/slices/useNftModalSlice";
-import { createDraftSafeSelector } from "@reduxjs/toolkit";
 import { useAppSelector, useAppDispatch } from "store";
 import { FormInput } from "@/components/FormInputs";
 import { useReadNftListingQuery } from "@/slices/zebraApi";
 import useSnookNftData from "../../hooks/useSnookNftData";
 import transformIpfsUrl from "../../utils/transformIpfsUrl";
 import { useForm, useWatch } from "react-hook-form";
-import { EditPriceModalData } from "@/components/EditPriceModal/EditPriceModal";
 import { useContractWrite } from "wagmi";
 import { abi } from "../../../contracts/out/Zebra.sol/Zebra.json";
 
@@ -37,7 +35,7 @@ const UseNftModal: React.FC = () => {
   const { shouldShow, nftId, id } = useAppSelector(
     (state) => state.useNftModal
   );
-  const { data } = useSnookNftData(nftId as string);
+  const { data } = useSnookNftData(nftId?.toString() as string);
   const {
     data: readNftListingData,
     isLoading: readNftListingIsLoading,
