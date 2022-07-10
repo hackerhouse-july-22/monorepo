@@ -73,7 +73,7 @@ export default function ReadNFT() {
       <Button 
         colorScheme={'blue'}
         onClick={ async () => {
-          await readNftListing({ id })
+          await readNftListing(id)
         }}>
           Lazy Read Nft Listing
       </Button>
