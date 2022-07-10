@@ -5,6 +5,7 @@ import {
   useReadNftListingQuery,
   useLazyReadNftListingQuery
 } from '@/slices/zebraApi'
+import IZebraNFT from '@/types/IZebraNFT';
 
 
 export default function ReadNFT() {
@@ -39,10 +40,14 @@ export default function ReadNFT() {
           <div key={readNftListingData.id}>
             <p>{readNftListingData.supplierAddress}</p>
             <p>{readNftListingData.nftAddress}</p>
+            <p>{readNftListingData.nftImage}</p>
             <p>{readNftListingData.tokenId}</p>
             <p>{readNftListingData.pricePerSecond}</p>
             <p>{readNftListingData.maxRentDuration}</p>
             <p>{readNftListingData.nonce}</p>
+            <p>{readNftListingData.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+            <p>{readNftListingData.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
+            
           </div>
         </>
       )}
@@ -54,10 +59,13 @@ export default function ReadNFT() {
         <div key={lazyReadNftListingData.id}>
           <p>{lazyReadNftListingData.supplierAddress}</p>
           <p>{lazyReadNftListingData.nftAddress}</p>
+          <p>{lazyReadNftListingData.nftImage}</p>
           <p>{lazyReadNftListingData.tokenId}</p>
           <p>{lazyReadNftListingData.pricePerSecond}</p>
           <p>{lazyReadNftListingData.maxRentDuration}</p>
           <p>{lazyReadNftListingData.nonce}</p>
+          <p>{lazyReadNftListingData.renterWalletInfo?.user_wallet_address ?? "no renter"}</p>
+          <p>{lazyReadNftListingData.renterWalletInfo?.gnosis_safe_address ?? "no renter"}</p>
         </div>
       </>
       )}
@@ -65,7 +73,7 @@ export default function ReadNFT() {
       <Button 
         colorScheme={'blue'}
         onClick={ async () => {
-          await readNftListing({ id })
+          await readNftListing(id)
         }}>
           Lazy Read Nft Listing
       </Button>

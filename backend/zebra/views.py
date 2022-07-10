@@ -9,7 +9,12 @@ import web3
 # from .utils import recoverAddress, isValidEthereumAddress
 
 from .models import ZebraNFT, UserWalletInfo
-from .serializers import ZebraNFTSerializer, UserWalletInfoSerializer
+from .serializers import (
+    ZebraNFTSerializer,
+    CreateZebraNFTSerializer,
+    UserWalletInfoSerializer
+
+) 
 from .abi import ZEBRA_TEST_ABI
 
 from thirdweb import ThirdwebSDK
@@ -60,6 +65,7 @@ class EthereumAuth(APIView):
                 {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
 
 class CreateGnosisLinkToWalletView(generics.CreateAPIView):
     """
@@ -158,7 +164,7 @@ class ZebraNFTListView(APIView):
             )
 
 class CreateNFTView(generics.CreateAPIView):
-    serializer_class = ZebraNFTSerializer
+    serializer_class = CreateZebraNFTSerializer
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):
@@ -294,27 +300,33 @@ class UpdateZebraNFTView(generics.UpdateAPIView):
     Update a ZebraNFT
     """
     permission_classes = [permissions.AllowAny,]
-    serializer_class = ZebraNFTSerializer
+    serializer_class = CreateZebraNFTSerializer
 
     def patch(self, request, id):
+        
         try:
             zebraNFT = ZebraNFT.objects.get(id=id)
-            serializer = ZebraNFTSerializer(zebraNFT, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
+            serializer = self.serializer_class(
+                zebraNFT, data=request.data, partial=True
+                )    
+            try:
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(
+                        serializer.data,
+                        status=status.HTTP_200_OK
+                    )
+            except Exception as e:
                 return Response(
-                    serializer.data,
-                    status=status.HTTP_200_OK
+                    {"error": f"Error validaitng serializer in view: {str(e)}"},
+                    status=status.HTTP_400_BAD_REQUEST
                 )
-            return Response(
-                serializer.errors,
-                status=status.HTTP_400_BAD_REQUEST
-            )
         except Exception as e:
             return Response(
                 {"error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
 
     # def get_queryset(self):
     #     return super().get_queryset()

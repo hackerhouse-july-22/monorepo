@@ -22,4 +22,6 @@ urlpatterns = [
     # Wallet Info
     path('wallet/create/', CreateGnosisLinkToWalletView.as_view(), name='wallet-info-create'),
     path('wallet/read/<str:address>/', ReadUserWalletInfoView.as_view(), name='wallet-info-read'),
+
+    #  Rent Endpoints
 ]

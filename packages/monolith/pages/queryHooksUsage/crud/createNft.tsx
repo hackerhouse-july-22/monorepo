@@ -23,15 +23,17 @@ const CreateNFT: NextPage = () => {
   const samepleNFT: IZebraNFT = {
     supplierAddress: "0x8A7D1a110bE72f1daC683Fc0Cf23685b380faA32",
     nftAddress: "0x09aA1A14e572e6fC05F64e541699D3E0361C7F2f",
+    nftImage: "some hyperlink to an image",
     tokenId: 2208,
     pricePerSecond: 2,
     maxRentDuration: 180,
     nonce: 0,
   };
-
+  
   const [sampleNft2, setMutationVars] = useState<IZebraNFT>({
     supplierAddress: "",
     nftAddress: "",
+    nftImage: "",
     tokenId: 0,
     pricePerSecond: 0,
     maxRentDuration: 0,
