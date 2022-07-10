@@ -26,6 +26,7 @@ import "./ZebraInstaller.sol";
 /// @author tobou.eth
 contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
     event ZebraSafeDeploy(GnosisSafeProxy indexed safeProxy);
+    event Rent(GnosisSafeProxy indexed renter, address indexed supplier, IERC721 indexed NFT, uint256 tokenId);
 
     GnosisSafeL2 immutable public GNOSIS_SAFE_SINGLETON;
     GnosisSafeProxyFactory immutable public FACTORY;
@@ -177,6 +178,8 @@ contract Zebra is BaseGuard, ReentrancyGuard, EIP712, Ownable {
             renter: safe,
             endDate: block.timestamp + duration
         });
+
+        emit Rent(safe, signer, offer.NFT, offer.tokenId);
     }
 
     // back office
