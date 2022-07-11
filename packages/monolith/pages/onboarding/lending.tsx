@@ -10,8 +10,11 @@ import PageContainer from "@/components/PageContainer";
 import React, { useEffect, useState } from "react";
 import UsersSnooks from "@/components/UsersSnooks/UsersSnooks";
 import { useCreateNftListingMutation } from "@/slices/zebraApi";
-import { useAccount } from "wagmi";
+import { useAccount, useSignTypedData } from "wagmi";
 import { useRouter } from "next/router";
+import OfferAbi from "constants/OfferAbi";
+import { ethers } from "ethers";
+import { IZebraNFT } from "@/types/IZebraNFT";
 
 export type SelectedData = {
   id: number;
@@ -46,18 +49,47 @@ const OnboardingLending: React.FC = () => {
     setTokenIdMap((p) => ({ ...p, [id]: { nftId, nftImage } }));
   };
 
+  const { signTypedDataAsync } = useSignTypedData();
+
   const onContinue = async () => {
-    const data = selected.map((s) => ({
-      supplierAddress: address,
-      tokenId: tokenIdMap[s.id].nftId,
-      pricePerSecond: Math.round(s.price / 60 / 60),
-      minRentDuration: s.minTime,
-      maxRentDuration: s.maxTime,
-      nftAddress: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
-      nftImage: tokenIdMap[s.id].nftImage,
-      nonce: 0,
-    }));
-    await Promise.all(data.map((a) => createNftListing(a)));
+    const data: IZebraNFT[] = selected.map((s) => {
+      return {
+        supplierAddress: address!,
+        tokenId: parseInt(tokenIdMap[s.id].nftId),
+        pricePerSecond: ethers.utils
+          .parseEther(`${s.price}`)
+          .div(60 * 60)
+          .toNumber(),
+        maxRentDuration: s.maxTime * 60,
+        nftAddress: "0x4372597f1c600d86598675dcb6cf5713bb7525cf",
+        nftImage: tokenIdMap[s.id].nftImage,
+        nonce: 0,
+      };
+    });
+    const signatures = await Promise.all(
+      data.map((s) =>
+        signTypedDataAsync({
+          domain: {},
+          types: {
+            Offer: OfferAbi,
+          },
+          value: {
+            Offer: {
+              NFT: s.nftAddress,
+              tokenId: s.tokenId,
+              pricePerSecond: s.pricePerSecond,
+              maxRentalDuration: s.maxRentDuration,
+              nonce: s.nonce,
+            },
+          },
+        })
+      )
+    );
+    await Promise.all(
+      data.map((a, index) =>
+        createNftListing({ ...a, signature: signatures[index] })
+      )
+    );
   };
 
   useEffect(() => {

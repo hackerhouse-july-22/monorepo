@@ -16,6 +16,7 @@ import { hide } from "@/slices/editPriceModalSlice";
 import useGigaConnect from "hooks/useGigaConnect";
 import { useSignTypedData } from "wagmi";
 import { ethers } from "ethers";
+import OfferAbi from "constants/OfferAbi";
 
 type EditPriceModalData = {
   price: number;
@@ -138,28 +139,7 @@ const EditPriceModal: React.FC = () => {
                   // salt?: BytesLike;
                 },
                 types: {
-                  Offer: [
-                    {
-                      name: "NFT",
-                      type: "address",
-                    },
-                    {
-                      name: "tokenId",
-                      type: "uint256",
-                    },
-                    {
-                      name: "pricePerSecond",
-                      type: "uint256",
-                    },
-                    {
-                      name: "maxRentalDuration",
-                      type: "uint256",
-                    },
-                    {
-                      name: "nonce",
-                      type: "uint256",
-                    },
-                  ],
+                  Offer: OfferAbi,
                 },
                 value: {
                   Offer: {

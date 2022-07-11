@@ -9,4 +9,5 @@ export interface IZebraNFT {
   nonce: number;
   created_at?: string;
   updated_at?: string;
+  signature?: string;
 }
