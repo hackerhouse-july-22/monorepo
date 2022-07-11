@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useCreateNftListingMutation } from "@/slices/zebraApi";
 import { Button, Box, Flex, Center } from "@chakra-ui/react";
-import { IZebraNFT } from "@/types/IZebraNFT";
+import IZebraNFT from "@/types/IZebraNFT";
 
 // interface IZebraNFT {
 //   id?: string,
@@ -20,11 +20,26 @@ import { IZebraNFT } from "@/types/IZebraNFT";
 const CreateNFT: NextPage = () => {
   const router = useRouter();
 
+
+  const randomHexAddress = () => {
+    let result = "0x"
+    for (let i = 0; i < 40; i++) {
+      result += Math.floor(Math.random() * 16).toString(16)
+    }
+    return result
+  }
+  const randomStringLength20 = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  }
+  const randomNumberBetween1and10000 = () => {
+    return Math.floor(Math.random() * 10000) + 1
+  }
+
   const samepleNFT: IZebraNFT = {
-    supplierAddress: "0x8A7D1a110bE72f1daC683Fc0Cf23685b380faA32",
-    nftAddress: "0x09aA1A14e572e6fC05F64e541699D3E0361C7F2f",
-    nftImage: "some hyperlink to an image",
-    tokenId: 2208,
+    supplierAddress: randomHexAddress(),
+    nftAddress: randomHexAddress(),
+    nftImage: randomStringLength20(),
+    tokenId: randomNumberBetween1and10000(),
     pricePerSecond: 2,
     maxRentDuration: 180,
     nonce: 0,
