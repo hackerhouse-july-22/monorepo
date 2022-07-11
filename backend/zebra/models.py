@@ -57,5 +57,14 @@ class UserWalletInfo(models.Model):
     def __str__(self):
         return f"User Wallet Address: {self.user_wallet_address}"
 
+class Rental(models.Model):
+    """
+    Model to hold rental information
+    """
+    renter = models.ForeignKey('UserWalletInfo', on_delete=models.CASCADE, related_name='renter_address')
+    nft = models.ForeignKey('ZebraNFT', on_delete=models.CASCADE, related_name='nft')
+    length = models.IntegerField(blank=False, null=False)
+
+
 
     

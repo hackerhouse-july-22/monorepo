@@ -2,7 +2,8 @@ from rest_framework import serializers
 
 from .models import (
     ZebraNFT,
-    UserWalletInfo
+    UserWalletInfo,
+    Rental
     # Supplier,
     # Offers
 )
@@ -29,13 +30,12 @@ class CreateZebraNFTSerializer(serializers.ModelSerializer):
     """
     Serializer for ZebraNFT model
     """
+
     class Meta:
         model = ZebraNFT
         fields = [
-            'supplierAddress','nftAddress','nftImage', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at'
-        ]
-        # read_only_fields = ('user_wallet_address', 'gnosis_safe_address')
-    
+            'supplierAddress','nftAddress','nftImage', 'tokenId', 'pricePerSecond', 'maxRentDuration', 'nonce', 'created_at', 'updated_at'        ]
+
     def create(self, validated_data):
         """
         Override create method to create a new UserWalletInfo object
@@ -53,17 +53,51 @@ class CreateZebraNFTSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+# class RentNFTSerializer(serializers.ModelSerializer):
+#     """
+#     Serializer for ZebraNFT model
+#     """
+#     renterWalletInfo = UserWalletInfoSerializer()
+#     class Meta:
+#         model = ZebraNFT
+#         fields = [
+#             'id'
+#         ]
 
+class RentalSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Rental model
+    """
+    class Meta:
+        model = Rental
+        fields = [
+            'nft', 'length', 'renter'
+        ]
+
+class ReadRentalSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Rental model
+    """
+    nft = serializers.SerializerMethodField(read_only=True)
+    renter = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = Rental
+        fields = [
+            'id', 'nft', 'length', 'renter'
+        ]
+    
+    def get_nft(self, obj):
+        return obj.nft.nftAddress
+
+    def get_renter(self, obj):
+        return obj.renter.user_wallet_address
 
 class ZebraNFTSerializer(serializers.ModelSerializer):
     """
     Serializer for ZebraNFT model
     """
-
-    # serializer to grab data from UserWalletInfo model
-    # renterWalletInfo = serializers.SerializerMethodField(read_only=True)
-
-    renterWalletInfo = UserWalletInfoSerializer()
+    renterWalletInfo = serializers.SerializerMethodField(read_only=True)
+    rentalInfo = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = ZebraNFT
@@ -96,14 +130,28 @@ class ZebraNFTSerializer(serializers.ModelSerializer):
         instance.nonce = validated_data.get('nonce', instance.nonce)
         instance.save()
         return instance
-
-
+    
     def get_renterWalletInfo(self, obj):
         """
-        Get the renterWalletInfo for the ZebraNFT
+        Get renterWalletInfo data from UserWalletInfo model
         """
-        qs = UserWalletInfo.objects.get(address=obj.supplierAddress)
-        return UserWalletInfoSerializer(qs).data
+        return UserWalletInfoSerializer(obj.renterWalletInfo).data
+
+    def get_rentalInfo(self, obj):
+        """
+        Get rentalInfo data from Rental model
+        """
+        if Rental.objects.filter(nft=obj).exists():
+            return RentalSerializer(Rental.objects.get(nft=obj)).data
+        else:
+            return None
+
+    # def get_renterWalletInfo(self, obj):
+    #     """
+    #     Get the renterWalletInfo for the ZebraNFT
+    #     """
+    #     qs = UserWalletInfo.objects.get(address=obj.supplierAddress)
+    #     return UserWalletInfoSerializer(qs).data
 
 
     

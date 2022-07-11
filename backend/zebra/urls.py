@@ -24,4 +24,8 @@ urlpatterns = [
     path('wallet/read/<str:address>/', ReadUserWalletInfoView.as_view(), name='wallet-info-read'),
 
     #  Rent Endpoints
+    path('rent/start/', StartRentalView.as_view(), name='rent-nft-start'),
+    path('rent/stop/<int:id>/', StopRentalView.as_view(), name='rent-nft-stop'),
+    path('rent/list/', GetAllRentalsView.as_view(), name='rent-nft-list'),
+    path('rent/list/by-user/<str:address>/', GetRentalsByUserInfoView.as_view(), name='rent-nft-list-by-user'),
 ]

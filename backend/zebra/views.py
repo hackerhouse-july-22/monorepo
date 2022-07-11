@@ -8,11 +8,17 @@ import web3
 
 # from .utils import recoverAddress, isValidEthereumAddress
 
-from .models import ZebraNFT, UserWalletInfo
+from .models import (
+    ZebraNFT,
+    UserWalletInfo,
+    Rental,
+) 
 from .serializers import (
+    ReadRentalSerializer,
     ZebraNFTSerializer,
     CreateZebraNFTSerializer,
-    UserWalletInfoSerializer
+    UserWalletInfoSerializer,
+    RentalSerializer
 
 ) 
 from .abi import ZEBRA_TEST_ABI
@@ -534,6 +540,102 @@ class GetNFTsBySupplierAddress(generics.ListAPIView):
             serializer = ZebraNFTSerializer(nfts, many=True)
             return Response(
                 {"nfts": serializer.data},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+#############################
+# Rentals
+#############################
+
+class StartRentalView(generics.CreateAPIView):
+    serializer_class = RentalSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def post(self, request):
+        nftId = request.data['nft']
+        length = request.data['length']
+        renter = request.data['renter']
+
+        try:
+            renter = UserWalletInfo.objects.get(user_wallet_address=renter)
+        except Exception as e:
+            return Response(
+                {"error": f'Unable to find renter address: {str(e)}'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            nft = ZebraNFT.objects.get(id=nftId)
+        except Exception as e:
+            return Response(
+                {"error": f'Issue grabbing NFT instance to be rented: {str(e)}'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        try:
+            Rental.objects.create(
+                nft=nft,
+                length=length,
+                renter=renter
+            )
+            return Response(
+                {"message": "Rental created successfully"},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": f'Unable to create rental {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class StopRentalView(generics.DestroyAPIView):
+    serializer_class = RentalSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def delete(self, request, id):
+        try:
+            rental = Rental.objects.get(id=id)
+            rental.delete()
+            return Response(
+                {"message": "Rental deleted successfully"},
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+class GetAllRentalsView(generics.ListAPIView):
+    serializer_class = ReadRentalSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def get(self, request):
+        # return all rentals, with nft info instead of id
+        rentals = Rental.objects.all()
+        serializer = ReadRentalSerializer(rentals, many=True)
+        
+        return Response(
+            {"rentals": serializer.data},
+            status=status.HTTP_200_OK
+        )
+
+class GetRentalsByUserInfoView(generics.ListAPIView):
+    serializer_class = RentalSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def get(self, request, address):
+        try:
+            renter = UserWalletInfo.objects.get(user_wallet_address=address)
+            rentals = Rental.objects.filter(renter=renter)
+            serializer = ReadRentalSerializer(rentals, many=True)
+            return Response(
+                {"rentals": serializer.data},
                 status=status.HTTP_200_OK
             )
         except Exception as e:
